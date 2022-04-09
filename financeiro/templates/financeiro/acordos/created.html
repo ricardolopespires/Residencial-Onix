@@ -1,0 +1,117 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+<style>
+  .add-despesas i
+  {
+    font-size: 40px;
+  }
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Financeiro</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Acordos</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="far fa-handshake"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Lista de Acordos referente ao mês {{ data_atual }}</h2>
+        <p class="section-lead">
+          Lista dos moradores que fizeram acordos de pagamento para contas pendentes.
+        </p>
+     
+       <div class="row mb-5">                 
+    				
+        <div class="col-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="card-header">
+            <h4>Formulário</h4>
+            </div>
+            <div class="card-body">
+            <div class="alert alert-info">
+              <b>Nota!</b> lançamentos de novos acordos a ser elaborados.
+            </div>            
+            {# Display a form #}
+            <form style = "margin-left:36px; margin-right:36px;"  action="." method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+             <div style = "position:relative; right:40px;" class="card-header">
+              <h4>Validação do dados para os novos Acordos</h4>
+              </div>
+              <br>
+              <label class="form-label">Acordo com qual unidades?</label>
+              <div class="row gutters-sm">
+                {% if acordos %}
+                <div class="item-input dependencias">                								
+                  <button type="button" class="btn btn-xs btn-primary ativar-pre-requisitos">Sim</button>
+                  <button type="button" class="btn btn-success btn-icon icon-left">
+                    <i class="far fa-handshake"></i> Tem Unidade para fazer Acordos <span class="badge badge-transparent">{{ tarefas.count }}</span>
+                  </button>
+                  <br>
+                  <div class="pre-requisitos mt-2">	          							
+                    <div class="form-group">
+                      <label class="form-label">unidades</label>
+                      <div  class="selectgroup selectgroup-pills">
+                        {% for acordo in acordos %}											  
+                        <label class="selectgroup-item">
+                        <input type="checkbox" name="colaboradores" value="{{ request.user }}" class="selectgroup-input">
+                        <span class="selectgroup-button">{{ acordo.unidade }} / {{ acordo.morador }} - {{ acordo.referente |date:"m"}}</span>
+                        </label>
+                        {% endfor %}   										
+                      </div>
+                      </div>                                        
+                  </div>
+                </div>
+                {% else %}
+                <div class="item-input dependencias">                								
+                  <button type="button" class="btn btn-xs btn-primary ativar-pre-requisitos">Não</button>
+                  <button type="button" class="btn btn-danger btn-icon icon-left">
+                    <i class="far fa-handshake"></i>Não tem Unidades para fazer Acordos <span class="badge badge-transparent">{{ tarefas.count }}</span>
+                  </button>
+                  <br>
+                  
+                </div>
+
+                {% endif %}								
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class=" form-group">
+                      <label>Data do Vencimento</label>
+                       <input name="vencimento" type="date" class="form-control">
+                    </div>                
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Valor Total</label>
+                      <input name="vencimento" type="text" class="form-control" placeholder="R$:">
+                    </div>
+                  
+                  </div>
+                </div>              
+                <div class="form-group">      
+                </div>
+                <div class="card-footer text-right">									
+                <button type="submit" class="btn btn-outline-secondary ">Criar Acordo<span class="ml-2 fa fa-paper-plane" aria-hidden="true"></span></button>									
+                </div>
+              </div>
+             </div>
+            </form>
+            
+        </div>	
+     
+       </div>
+       
+       
+    </div> 
+
+
+
+
+{% endblock %}

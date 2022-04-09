@@ -1,0 +1,169 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+
+<style>
+  .helptext
+  {
+    font-size: 10px;
+    color: #ccc;
+  }
+</style>
+
+<div class="section-header ">
+    <div class="slider-outer">
+      <div class="slider-inner">
+          <div class="  manager fron active" data-slider="1">
+              <div class="manager-title">Funcionario<i class="fas fa-server"></i> </div>
+              <h2 class="title-manager-h2">Adicionar</h2>               
+          </div>
+      </div>
+  </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Adicionar Novo Funcionario</h2>
+    <p class="section-lead">
+     Ao adicionar um novo funcionário todos os dados dever estar corretos para obter a atorizações.
+    </p>
+
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">         
+        <div class="card">
+          <div class="card-header">
+            <h4>Formulário de adição</h4>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-danger">
+              <b>Nota!</b> Os dados devem ser verdadeiro.
+            </div>
+            <form action="." method="POST"  enctype="multipart/form-data" >
+            {% csrf_token %}              
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <p><label for="id_morador">Morador:</label> 
+                    <select class="form-control" name="morador" required id="id_morador">
+                      <option value="" selected>---------</option>
+                      {% for morador in moradores %}
+                      <option value="{{ morador.id }}">{{ morador.nome }}</option>
+                       {% endfor %}     
+                  </select></p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">                           
+                  <p><label for="id_nome">Nome do Funcionário:</label> <input class="form-control" type="text" name="nome" maxlength="100" id="id_nome"> <span class="helptext">Nome do funcionário</span></p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <p><label for="id_cpf">CPF:</label> <input class="form-control" type="text" name="cpf" maxlength="150" id="id_cpf"> <span class="helptext">CPF do Funcionário</span></p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <p><label for="id_rg">RG:</label> <input class="form-control" type="text" name="rg" maxlength="150" id="id_rg"> <span class="helptext">RG do Funcionário</span></p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <p><label for="id_cargo">Cargo:</label> <input class="form-control" type="text" name="cargo" maxlength="150" id="id_cargo"> <span class="helptext">Cargo do Funcionário</span></p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <p><label for="id_Expediente">Expediente:</label> <input class="form-control" type="text" name="Expediente" maxlength="150" id="id_Expediente"> <span class="helptext">Horário do Expediente do Funcionário</span></p>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                    <p><label for="id_img">Img:</label> <input class="form-control" type="file" name="img" accept="image/*" id="id_img"> <span class="helptext">Image do funcionário do Morador</span></p>
+                </div>
+            </div>                      
+            </div>                
+            <div class="card-footer text-left">
+            <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
+
+            <br><br>
+            {% for key, value in form.errors.items %}
+            <span class="fieldWrapper">
+                <div class="alert alert-danger">
+                    <b>Nota!</b> {{ key }}:{{ value }}
+                  </div>
+               {% endfor %} 
+            </span>
+            </form>
+            </div>
+            </div>            
+            </div>            
+          </div>         
+</div>    
+  </div>    
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+
+<p><label for="id_administrador">Administrador:</label> <select name="administrador" required id="id_administrador">
+  <option value="" selected>---------</option>
+
+  <option value="1">RICARDO LOPES PIRES</option>
+
+</select></p>
+<p><label for="id_unidade">Unidade:</label> <input type="text" name="unidade" maxlength="150" required id="id_unidade"> <span class="helptext">Unidade</span></p>
+<p><label for="id_img">Img:</label> <input type="file" name="img" accept="image/*" id="id_img"></p>
+<p><label for="id_proprietario">Proprietario:</label> <input type="text" name="proprietario" maxlength="150" id="id_proprietario"></p>
+<p><label for="id_emergencia">Emergencia:</label> <input type="text" name="emergencia" maxlength="150" id="id_emergencia"></p>
+<p><label for="id_nome">Nome:</label> <input type="text" name="nome" maxlength="100" id="id_nome"></p>
+<p><label for="id_cpf">CPF:</label> <input type="text" name="cpf" maxlength="150" id="id_cpf"></p>
+<p><label for="id_rg">RG:</label> <input type="text" name="rg" maxlength="150" id="id_rg"></p>
+<p><label for="id_email">E-mail:</label> <input type="email" name="email" maxlength="254" id="id_email"></p>
+<p><label for="id_endereco">Endereço:</label> <input type="text" name="endereco" maxlength="190" id="id_endereco"></p>
+<p><label for="id_date_of_birth">Data de Nascimento:</label> <input type="text" name="date_of_birth" id="id_date_of_birth"></p>
+<p><label for="id_quantidade">Quantidade:</label> <input type="number" name="quantidade" value="0" required id="id_quantidade"> <span class="helptext">Quantidade de moradores fixo</span></p>
+<p><label for="id_estado">Estado:</label> <input type="text" name="estado" maxlength="100" id="id_estado"></p>
+<p><label for="id_financeiro">Financeiro:</label> <select name="financeiro" id="id_financeiro">
+  <option value="em dia" selected>Em dia</option>
+
+  <option value="atrasada">Atrasada</option>
+
+  <option value="inadinplente">Inadinplente</option>
+
+  <option value="paga">Paga</option>
+
+</select></p>
+<p><label for="id_status">Satus:</label> <select name="status" id="id_status">
+  <option value="proprietario" selected>Proprietario</option>
+
+  <option value="iquilino">Inquilino</option>
+
+</select></p>
+<p><label for="id_uf">Uf:</label> <input type="text" name="uf" maxlength="150" required id="id_uf"> <span class="helptext">UF do estado</span></p>
+<p><label for="id_genero">Genero:</label> <select name="genero" id="id_genero">
+  <option value="masculino" selected>Masculino</option>
+
+  <option value="feminino">Feminino</option>
+
+</select></p>
+<p><label for="id_city">Cidade:</label> <input type="text" name="city" maxlength="190" id="id_city"></p>
+
+<p><label for="id_telefone_0">Telefone:</label> <input type="text" name="telefone_0" size="13" id="id_telefone_0"><span class="phone-field-ext">&nbsp;&nbsp;ext.&nbsp;&nbsp;</span><input type="text" name="telefone_1" size="4" id="id_telefone_1"> <span class="helptext">Telefone para contato</span></p>
+<p><label for="id_is_active">Está ativo?</label> <input type="checkbox" name="is_active" id="id_is_active"></p>
+<p><label for="id_carro">Tem Veiculo:</label> <input type="checkbox" name="carro" id="id_carro"> <span class="helptext">O morador tem Carro</span></p>
+<p><label for="id_animais">Tem Animais:</label> <input type="checkbox" name="animais" id="id_animais"> <span class="helptext">Posssuidor de animais de Pequeno Porte</span></p>
+<p><label for="id_taxa">Taxa:</label> <input type="number" name="taxa" value="0" step="0.01" id="id_taxa"> <span class="helptext">Taxa Condominial</span></p>
+<p><label for="id_taxa_extra">Taxa extra:</label> <input type="number" name="taxa_extra" value="0" step="0.01" id="id_taxa_extra"> <span class="helptext">Taxa Exraordinaria</span></p>
+<p><label for="id_valor_total">Valor total:</label> <input type="number" name="valor_total" value="0" step="0.01" id="id_valor_total"> <span class="helptext">Valor Total</span></p>
+<p><label for="id_mudanca">Mudanca:</label> <input type="text" name="mudanca" id="id_mudanca"> <span class="helptext">Data que Morador mudou</span></p>
+<p><label for="id_saida">Saida:</label> <input type="text" name="saida" id="id_saida"> <span class="helptext">Data do Morador saiu</span></p>
+<p><label for="id_entrada">Data de Entrada:</label> <input type="text" name="entrada" id="id_entrada"></p>
+<p><label for="id_funcionario">Funcionario:</label> <input type="checkbox" name="funcionario" id="id_funcionario"> <span class="helptext">O morador tem funcionario</span></p>

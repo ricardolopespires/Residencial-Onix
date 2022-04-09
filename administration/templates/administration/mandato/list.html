@@ -1,0 +1,112 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+<link rel="stylesheet" href="{% static 'css/administration.css' %}">
+<style>
+  
+.img-area
+{
+  margin-left: 20%!important;
+}
+
+.text-success
+{
+  color: greenyellow !important;
+}
+
+
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Management</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Administração</h1>
+    <div class="section-header-breadcrumb">        
+        <i style="font-size: 70px; color: #000066;"  class="fas fa-sitemap"></i>
+    </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Lista dos Administradores</h2>
+    <p class="section-lead">
+        O principais administradores do condomínios e Fiscais da gestão condominial sobre trabalho do Síndico.
+    </p>
+    <div class="row">
+      {% if administradores %}
+      {% for administrador in administradores %}
+        <div class="col-4 col-md-4 col-lg-4">   
+            <div class="wrapper">
+                <div class="img-area text-center">
+                  <div class="inner-area">
+                    {% if administrador.img %}
+                   <a href="{% url 'administration:administrador_details' administrador.id %}"><img src="{{ administrador.img.url }}" alt=""></a> 
+                    {% else %}
+                    <a href="{% url 'administration:administrador_details' administrador.id %}"><img src="https://as1.ftcdn.net/v2/jpg/01/83/55/76/500_F_183557656_DRcvOesmfDl5BIyhPKrcWANFKy2964i9.jpg" alt=""></a>
+                    {% endif %}
+                  </div>
+                </div>               
+                <div class="name">{{ administrador.nome |truncatechars:24 }}</div>
+                <div class="about text-center">{{ administrador.status }}</div>
+                <div class="social-icons">
+                Mandato: {{ administrador.data_de_inicio |date:"d-m-Y" }} até {{ administrador.termino |date:"d-m-Y" }}
+                </div>
+                
+                <h5 class=" mt-4 mb-4">Tempo Restante</h5>
+                <div class="progress blue">
+                    <div class="progress-bar"  data-toggle="tooltip" data-placement="top" title="{{ porcentagem }}%" style="width:{{ porcentagem }}%; background:#1a4966;">
+                        <div class="progress-value"> {{ tempo.tempo_total }} dias </div>
+                    </div>
+                </div>
+                <div class="social-share">
+                  <div class="row">
+                    <i class="fas fa-home mr-2"></i>                   
+                    <span>{{ administrador.unidade }}</span>
+                  </div>
+                  <div class="row">
+                    <i class="fas fa-phone"></i>                   
+                    <span>{{ administrador.celular }}</span>
+                  </div>
+                  <div class="row">
+                    <i class="fas fa-calendar mr-2"></i>
+                    {% if administrador.is_active == True %}                    
+                   <span class="text-success">Ativo</span>
+                   {% else %}
+                   <span class="text-danger">Desativado</span>
+                   {% endif %} 
+                  </div>
+                </div>
+              </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-12 col-md-12 col-sm-12">                
+          <div class="card">
+            <div class="card-header">
+              <h4>Ops....</h4>
+            </div>
+            <div class="card-body">
+              <div class="empty-state" data-height="600">
+                <img class="img-fluid" width="400" src="{% static 'assets/img/drawkit/drawkit-full-stack-man-colour.svg' %}" alt="image">
+                <h2 class="mt-0">Não tem Síndico cadastrado para esta Mandato</h2>
+                <p class="lead">
+                  <strong>{{ user }}</strong> tem que cadastrar o <strong class="text-success"> novo Síndico</strong>  no sistema para começar a usar o sistema.
+                </p>
+                <a href="{% url 'administration:adicionar_membros' %}" class="btn btn-warning mt-4">Cadastrar</a>                      
+              </div>
+            </div>
+          </div>
+      </div> 
+        {% endif %}        
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

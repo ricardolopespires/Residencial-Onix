@@ -1,0 +1,33 @@
+{% extends 'initial/base.html' %}
+{% load static %}
+
+
+
+
+
+
+{% block index %}
+<section id="home" class="header-home">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-7 col-header-text lr-padding">
+				<h1>Condomínio <br> Residencial <span>Ônix </span></h1>
+				<p>Um condomínios para você morar com conforto</p>
+				<a href="{% url 'contato:formulario' %}" class="banner-btn btn-white">Mas Informações</a>
+				<a href="#" class="banner-btn btn-transparent btn-in">Regimento interno</a>
+			</div>
+			<div class="col-sm-5 col-md-offset-2 col-md-3 col-header-img right-padding">
+				<img src="{% static 'img/home-img.png' %}" alt="banner" class="img-header">
+			</div>
+		</div>
+	</div>
+</section>
+<!--text----------------------->
+ <!--if you have any project in your mind contact me-->
+ <div class="contact-me">
+	<p>Se você tem algum duvida em mente?</p>
+	<a href="{% url 'contato:formulario' %}"><button>Contate-nos</button></a>
+</div>
+
+ 
+{% endblock %}

@@ -1,0 +1,305 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+{% block dashboad %}
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Configurações Gerais</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Adicionar Dados</h1>
+    <div class="section-header-breadcrumb">        
+        <i style="font-size: 70px; color: #000066;"  class="fas fa-server"></i>
+    </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Adicionar Novo Funcionário</h2>
+    <p class="section-lead">
+        O novo  processo de rotinas de trabalho de funcionários se refere à integração e adaptação de novos colaboradores nas empresas. .
+    </p>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">         
+            <div class="card">
+          <div class="card-header">
+            <h4>Formulário de adição de dados</h4>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-danger">
+              <b>Nota!</b> Os dados devem ser verdadeiro.
+            </div>
+            <form action="{% url 'colaboradores:adicionar' %}" method="POST"  enctype="multipart/form-data" >
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_sindico">Administradores:</label>
+                            <select class="form-control" name="sindico" required id="id_sindico">
+                                <option value="" selected>---------</option>
+                                {% for administrador in administradores %}                          
+                                <option value="{{ administrador.id }}">{{ administrador.nome }}</option>                          
+                                {% endfor %}
+                          </select>
+                          <span class="helptext">Administradores</span>
+                        </p>
+                    </div>
+                </div>            
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_emprego">Emprego:</label>
+                            <select class="form-control" name="emprego" required id="id_emprego">
+                                <option value="" selected>---------</option>
+                                {% for condominio in condominios %}                          
+                                <option value="{{ condominio.id }}">{{ condominio.nome }}</option>                          
+                                {% endfor %}
+                          </select>
+                          <span class="helptext">Local do Trabalho do funcionário</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_status">Status:</label> 
+                            <select class="form-control" name="status" id="id_status">
+                                <option value="experiencia" selected>Experiencia</option>                          
+                                <option value="trabalhando">Trabalhando</option>                          
+                                <option value="afastado">Afastado</option>                          
+                                <option value="aviso">Aviso</option>                          
+                                <option value="demito">Demito</option>                          
+                          </select></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_img">Img:</label> <input class="form-control" type="file" name="img" accept="image/*" id="id_img"></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_nome">Nome:</label> <input class="form-control" type="text" name="nome" maxlength="150" required id="id_nome"> <span class="helptext">Nome do Funcionário do Condominio</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                    <p><label for="id_sexo">Sexo:</label>
+                        <select class="form-control" name="sexo" id="id_sexo">
+                    <option value="masculino" selected>Masculino</option>                  
+                    <option value="feminino">Feminino</option>                  
+                  </select> <span class="helptext">O Genero do Síndico </span></p>
+                    </div>
+                </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                    <p><label for="id_data_nascimento">Data nascimento:</label> <input class="form-control" type="text" name="data_nascimento" maxlength="150" id="id_data_nascimento"> <span class="helptext">Data de Nacimento do Pestador de Serviço</span></p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                    <p><label for="id_estado_civil">Estado civil:</label>
+                        <select class="form-control" name="estado_civil" id="id_estado_civil">
+                        <option value="solteiro" selected>Solteiro</option>                  
+                        <option value="solteira">Solteira</option>                  
+                        <option value="casado">Casado</option>                  
+                        <option value="casada">Casada</option>                  
+                        <option value="viuvo">Viuvo</option>                  
+                        <option value="viuva">viuva</option>                  
+                    </select> <span class="helptext">O Estado Civil do Funcionário</span></p>
+                    </div>
+                  </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_endereco">Endereco:</label> <input class="form-control" type="text" name="endereco" maxlength="150" required id="id_endereco"> <span class="helptext">Endereço da residencia do funcionário</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_bairro">Bairro:</label> <input class="form-control" type="text" name="bairro" maxlength="150" required id="id_bairro"> <span class="helptext">Bairro onde o Funcionário Reside</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_cep">Cep:</label> <input class="form-control" type="text" name="cep" maxlength="150" required id="id_cep"> <span class="helptext">CEP do Endereço do Funcionário do Condominio</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_cidade">Cidade:</label> <input class="form-control" type="text" name="cidade" maxlength="150" required id="id_cidade"> <span class="helptext">cidade onde do Funcionário do Condominio Reside</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_UF">UF:</label> <input class="form-control" type="text" name="UF" maxlength="150" required id="id_UF"> <span class="helptext">Cdigo UF da localidade do Funcionário do Condominio</span></p>
+                    </div>
+                </div>  
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_celular_0">Celular:</label> <input class="form-control" type="text" name="celular_0" size="13" id="id_celular_0"><span class="helptext">Numero do celular do funcionário do condominio</span></p>
+                    </div>
+                </div>            
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label class="phone-field-ext">&nbsp;&nbsp;ext.&nbsp;&nbsp;</label><input class="form-control" type="text" name="celular_1" size="4" id="id_celular_1"> </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_email">Email:</label> <input class="form-control" type="email" name="email" maxlength="254" required id="id_email"> <span class="helptext">Email do funcionário</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_endereço_do_trabalho">Endereço do trabalho:</label> <input class="form-control" type="text" name="endereço_do_trabalho" maxlength="150" required id="id_endereço_do_trabalho"> <span class="helptext">Endereço do local de trabalho</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_telefone_0">Telefone:</label> <input class="form-control" type="text" name="telefone_0" size="13" id="id_telefone_0"> <span class="helptext">Numero do telefone do loca de trabalho</span></p>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label class="phone-field-ext">&nbsp;&nbsp;ext.&nbsp;&nbsp;</label><input class="form-control" type="text" name="telefone_1" size="4" id="id_telefone_1"></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_funcao">Funcao:</label> 
+                            <select class="form-control" name="funcao" id="id_funcao">
+                                <option value="sindico">Sindico</option>                                
+                                <option value="subsindico">Subsindico</option>                  
+                                <option value="zelador" selected>Zelador</option>                  
+                                <option value="gerente predial">Gerente predial</option>                  
+                                <option value="auxiliar de service gerais">Auxiliar de serviços gerais</option>                  
+                                <option value="auxiliar administrativo">Auxiliar administrativo</option>                  
+                                <option value="recepcionista">Recepcionista</option>                  
+                                <option value="porteiro">Porteiro</option>                  
+                                <option value="vigias">Vigias</option>                  
+                            </select>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_horario_de_trabalho">Horario de trabalho:</label> <input class="form-control" type="text" name="horario_de_trabalho" maxlength="150" required id="id_horario_de_trabalho"> <span class="helptext">O horário de trabalho</span></p>
+                    </div>
+                </div> 
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <p><label for="id_admitido">Admitido:</label> <input class="form-control" type="date" name="admitido" id="id_admitido"> <span class="helptext">Data da Adimição do funcionario</span></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="from-group">
+                        <p><label for="id_demitido">Demitido:</label> <input class="form-control" type="date" name="demitido" id="id_demitido"> <span class="helptext">Data da demição do funcionario</span></p>
+                    </div>
+                </div>
+                  
+                  
+                  
+            </div>
+            <div>
+                {% for key, value in form.errors.items %}
+                <span class="fieldWrapper">
+                    <div class="alert alert-danger">
+                        <b>Nota!</b> {{ key }}:{{ value }}
+                      </div>
+                    
+                </span>
+            {% endfor %}
+            </div>         
+            <div class="card-footer text-left">
+            <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
+            </form>
+            </div>
+            </div>            
+        </div>            
+    </div>         
+</div> 
+{% endblock %}
+
+
+
+
+<p><label for="id_sindico">Sindico:</label> <select name="sindico" required id="id_sindico">
+    <option value="" selected>---------</option>
+  
+    <option value="1">RICARDO LOPES PIRES</option>
+  
+  </select></p>
+  <p><label for="id_emprego">Emprego:</label> <select name="emprego" required id="id_emprego">
+    <option value="" selected>---------</option>
+  
+    <option value="1">Residencial Ônix</option>
+  
+  </select></p>
+  <p><label for="id_status">Status:</label> <select name="status" id="id_status">
+    <option value="experiencia" selected>Experiencia</option>
+  
+    <option value="trabalhando">Trabalhando</option>
+  
+    <option value="afastado">Afastado</option>
+  
+    <option value="aviso">Aviso</option>
+  
+    <option value="demitido">Demitido</option>
+  
+  </select></p>
+  <p><label for="id_img">Img:</label> <input type="file" name="img" accept="image/*" id="id_img"></p>
+  <p><label for="id_nome">Nome:</label> <input type="text" name="nome" maxlength="150" required id="id_nome"> <span class="helptext">Nome do Funcionário do Condominio</span></p>
+  <p><label for="id_sexo">Sexo:</label> <select name="sexo" id="id_sexo">
+    <option value="masculino" selected>Masculino</option>
+  
+    <option value="feminino">Feminino</option>
+  
+  </select> <span class="helptext">O Genero do Síndico </span></p>
+  <p><label for="id_data_nascimento">Data nascimento:</label> <input type="text" name="data_nascimento" maxlength="150" id="id_data_nascimento"> <span class="helptext">Data de Nacimento do Pestador de Serviço</span></p>
+  <p><label for="id_estado_civil">Estado civil:</label> <select name="estado_civil" id="id_estado_civil">
+    <option value="solteiro" selected>Solteiro</option>
+  
+    <option value="solteira">Solteira</option>
+  
+    <option value="casado">Casado</option>
+  
+    <option value="casada">Casada</option>
+  
+    <option value="viuvo">Viuvo</option>
+  
+    <option value="viuva">viuva</option>
+  
+  </select> <span class="helptext">O Estado Civil do Funcionário</span></p>
+  <p><label for="id_cpf">Cpf:</label> <input type="text" name="cpf" maxlength="150" id="id_cpf"> <span class="helptext">Documento CPF do do Funcinário </span></p>
+  <p><label for="id_rg">RG:</label> <input type="text" name="rg" maxlength="150" id="id_rg"> <span class="helptext">Documento RG do Funcionário </span></p>
+  <p><label for="id_endereco">Endereco:</label> <input type="text" name="endereco" maxlength="150" required id="id_endereco"> <span class="helptext">Endereço da residencia do Funcionário</span></p>
+  <p><label for="id_bairro">Bairro:</label> <input type="text" name="bairro" maxlength="150" required id="id_bairro"> <span class="helptext">Bairro onde o Funcionário Reside</span></p>
+  <p><label for="id_cep">Cep:</label> <input type="text" name="cep" maxlength="150" required id="id_cep"> <span class="helptext">CEP do Endereço do Funcionário do Condominio</span></p>
+  <p><label for="id_cidade">Cidade:</label> <input type="text" name="cidade" maxlength="150" required id="id_cidade"> <span class="helptext">cidade onde do Funcionário do Condominio Reside</span></p>
+  <p><label for="id_UF">UF:</label> <input type="text" name="UF" maxlength="150" required id="id_UF"> <span class="helptext">Cdigo UF da localidade do Funcionário do Condominio</span></p>
+  <p><label for="id_telefone_0">Telefone:</label> <input type="text" name="telefone_0" size="13" id="id_telefone_0"><span class="phone-field-ext">&nbsp;&nbsp;ext.&nbsp;&nbsp;</span><input type="text" name="telefone_1" size="4" id="id_telefone_1"> <span class="helptext">Numero do telefone do funcionário</span></p>
+  <p><label for="id_celular_0">Celular:</label> <input type="text" name="celular_0" size="13" id="id_celular_0"><span class="phone-field-ext">&nbsp;&nbsp;ext.&nbsp;&nbsp;</span><input type="text" name="celular_1" size="4" id="id_celular_1"> <span class="helptext">Numero do celular do funcionário do condominio</span></p>
+  <p><label for="id_email">Email:</label> <input type="email" name="email" maxlength="254" required id="id_email"> <span class="helptext">Email do funcionário</span></p>
+  <p><label for="id_endereço_do_trabalho">Endereço do trabalho:</label> <input type="text" name="endereço_do_trabalho" maxlength="150" required id="id_endereço_do_trabalho"> <span class="helptext">Endereço do local de trabalho</span></p>
+  <p><label for="id_telefone_do_servico_0">Telefone do servico:</label> <input type="text" name="telefone_do_servico_0" size="13" id="id_telefone_do_servico_0"><span class="phone-field-ext">&nbsp;&nbsp;ext.&nbsp;&nbsp;</span><input type="text" name="telefone_do_servico_1" size="4" id="id_telefone_do_servico_1"> <span class="helptext">Numero do telefone do loca de trabalho</span></p>
+  <p><label for="id_funcao">Funcao:</label> <select name="funcao" id="id_funcao">
+    <option value="sindico">Sindico</option>
+  
+    <option value="subsindico">Subsindico</option>
+  
+    <option value="zelador" selected>Zelador</option>
+  
+    <option value="gerente predial">Gerente predial</option>
+  
+    <option value="auxiliar de service gerais">Auxiliar de serviços gerais</option>
+  
+    <option value="auxiliar administrativo">Auxiliar administrativo</option>
+  
+    <option value="recepcionista">Recepcionista</option>
+  
+    <option value="porteiro">Porteiro</option>
+  
+    <option value="vigias">Vigias</option>
+  
+  </select></p>
+  <p><label for="id_horario_de_trabalho">Horario de trabalho:</label> <input type="text" name="horario_de_trabalho" maxlength="150" required id="id_horario_de_trabalho"> <span class="helptext">O horário de trabalho</span></p>
+  <p><label for="id_admitido">Admitido:</label> <input type="text" name="admitido" id="id_admitido"> <span class="helptext">data da Adimição do funcionario</span></p>
+  <p><label for="id_demitido">Demitido:</label> 
+

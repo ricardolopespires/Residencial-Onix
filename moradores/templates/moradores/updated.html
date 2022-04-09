@@ -1,0 +1,74 @@
+{% extends 'management/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+
+
+
+{% block dashboad %}
+
+<style>
+  .helptext
+  {
+    font-size: 10px;
+    color: #ccc;
+  }
+</style>
+
+<div class="section-header ">
+    <div class="slider-outer">
+      <div class="slider-inner">
+          <div class="  manager fron active" data-slider="1">
+              <div class="manager-title">Moradores<i class="fas fa-user-plus"></i> </div>
+              <h2 class="title-manager-h2">Updated</h2>               
+          </div>
+      </div>
+  </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Atualizar os dados do Morador</h2>
+    <p class="section-lead">
+      Examples and usage guidelines for form control styles, layout options, and custom components for creating a wide variety of forms.
+    </p>
+
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">         
+        <div class="card">
+          <div class="card-header">
+            <h4>Formulário de adição</h4>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-danger">
+              <b>Nota!</b> Os dados devem ser verdadeiro.
+            </div>
+            <form action="." method="POST"  enctype="multipart/form-data" >
+            {% csrf_token %}              
+            {% bootstrap_form form %}       
+            <div class="card-footer text-left">
+            <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
+            {% buttons %}
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          {% endbuttons %}
+
+            <br><br>
+            {% for key, value in form.errors.items %}
+            <span class="fieldWrapper">
+                <div class="alert alert-danger">
+                    <b>Nota!</b> {{ key }}:{{ value }}
+                  </div>
+               {% endfor %} 
+            </span>
+            </form>
+            </div>
+            </div>            
+            </div>            
+          </div>         
+</div>    
+  </div>    
+  </div>
+</div>
+
+
+
+{% endblock %}

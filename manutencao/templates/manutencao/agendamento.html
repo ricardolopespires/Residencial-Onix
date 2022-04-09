@@ -1,0 +1,332 @@
+{% extends 'management/base.html' %}
+{% load static %}
+<div>Ícones feitos por <a href="https://www.flaticon.com/br/autores/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a></div>
+
+
+
+{% block dashboad %}
+
+<style>
+.helptext
+  {
+    font-size: 11px;
+    color: #85838396;
+  }
+    .card {
+    background-color: #fff;
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    margin-bottom: 30px;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
+}
+.l-bg-cherry {
+    background: linear-gradient(to right, #493240, #ff0000) !important;
+    color: #fff;
+}
+
+.l-bg-blue-dark {
+    background: linear-gradient(to right, #373b44, #4286f4) !important;
+    color: #fff;
+}
+
+.l-bg-green-dark {
+    background: linear-gradient(to right, #0a504a, #38ef7d) !important;
+    color: #fff;
+}
+
+.l-bg-orange-dark {
+    background: linear-gradient(to right, #a86008, #ffba56) !important;
+    color: #fff;
+}
+
+.card .card-statistic-3 .card-icon-large .fas, .card .card-statistic-3 .card-icon-large .far, .card .card-statistic-3 .card-icon-large .fab, .card .card-statistic-3 .card-icon-large .fal {
+    font-size: 110px;
+}
+
+.card .card-statistic-3 .card-icon {
+    text-align: center;
+    line-height: 50px;
+    margin-left: 15px;
+    color: #000;
+    position: absolute;
+    right: -5px;
+    top: 20px;
+    opacity: 0.1;
+}
+
+.l-bg-cyan {
+    background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+    color: #fff;
+}
+
+.l-bg-green {
+    background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
+    color: #fff;
+}
+
+.l-bg-orange {
+    background: linear-gradient(to right, #f9900e, #ffba56) !important;
+    color: #fff;
+}
+
+.l-bg-cyan {
+    background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+    color: #fff;
+}
+
+.text-right span
+{
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.icon-top i
+{
+    font-size: 40px;
+}
+
+.add-despesas:hover
+{
+    color: #38ef7d!important;
+}
+th,td
+{
+  text-align: center;
+}
+
+
+.nav-link:hover
+{
+
+  background: none!important;
+
+}
+
+.total:hover
+{
+  background: #fff!important;
+}
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Manutenção</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Agendamentos</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="far fa-clock-o"></i>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <h2 class="section-title">Lista de Itens para manutenção do referente ao mês {{ data_atual }}</h2>
+            <p class="section-lead">
+                Lista de progressão dos itens de manutenção períodica.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">         
+            <div class="card">
+          <div class="card-header">
+            <h4>Formulário de adição de dados</h4>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-danger">
+              <b>Nota!</b> Os dados devem ser verdadeiro.
+            </div>
+            <form action="." method="POST"  enctype="multipart/form-data" >
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_status">Status:</label>
+                             <select class="form-control" name="status" id="id_status">
+                                <option value="" selected>Selecionar o Status</option> 
+                                <option value="não realizada">Não Realizada</option>                          
+                                <option value="realizada">Realizada</option>                          
+                                <option value="pendente">Pedente</option>                          
+                            </select> <span class="helptext">Status da Manutenção</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">      
+                        <p><label for="id_tipo">Tipo:</label> 
+                            <select class="form-control" name="tipo" id="id_tipo">
+                            <option value="" selected>Selecionar o Tipo</option> 
+                            <option value="preventiva" >Preventiva</option>                  
+                            <option value="preditiva">Preditiva</option>                  
+                            <option value="corretiva">Corretiva</option>                  
+                            </select> <span class="helptext">O tipo de Manutenção a ser realizada</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_item">Item:</label> 
+                            <select class="form-control" name="item" required id="id_item">
+                            <option value="" selected>Selecionar o Item</option>   
+                            {% for item in itens %}                                                 
+                            <option value="{{ item.id }}">{{ item.nome }}</option>                       
+                            {% endfor %}
+                            </select>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">  
+                        <p><label for="id_periodicidade">Periodicidade:</label>
+                             <select class="form-control" name="periodicidade" id="id_periodicidade">
+                            <option value="" selected>Selecione o Periodo</option>
+                            <option value="semanal">Semanal</option>                        
+                            <option value="quizenal">Quinzenal</option>                        
+                            <option value="mensal">Mensal</option>                        
+                            <option value="bimestral">Bimestral</option>                        
+                            <option value="trimestral">Trimestral</option>                        
+                            <option value="anual">Anual</option>
+                        
+                            </select> <span class="helptext">Periodo da manutenção</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group"> 
+                        <p><label for="id_fornecedor">Fornecedor:</label> <input class="form-control" type="text" name="fornecedor" maxlength="150" required id="id_fornecedor"> <span class="helptext">fornecedor do material para manutencao</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group"> 
+                        <p><label for="id_responsavel">Responsavel:</label> <input class="form-control" type="text" name="responsavel" maxlength="150" required id="id_responsavel"> <span class="helptext">A Pessoa Responsável pela manutenção</span></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"> 
+                        <p><label for="id_data_inicial">Data inicial:</label> <input class="form-control" type="date" name="data_inicial" required id="id_data_inicial"> <span class="helptext">Data de Inicio da Manutenção </span></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"> 
+                        <p><label for="id_data_previsao">Data previsao:</label> <input class="form-control" type="date" name="data_previsao" required id="id_data_previsao"> <span class="helptext">Data da Previsão do Termino da Manutenção</span></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"> 
+                        <p><label for="id_descricao">Descricao:</label>
+                            <textarea class="form-control" name="descricao " cols="40" rows="10" required id="id_descricao">
+                            </textarea> <span class="helptext">Descrição da Manutenção</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"> 
+                        <p><label for="id_valor_total">Valor total:</label> <input class="form-control" type="number" name="valor_total" value="0" step="0.01" required id="id_valor_total"> <span class="helptext">O valor Total da Manutenção</span></p>
+                    </div>
+                </div>
+            </div>
+           
+            <div>
+                {% for key, value in form.errors.items %}
+                <span class="fieldWrapper">
+                    <div class="alert alert-danger">
+                        <b>Nota!</b> {{ key }}:{{ value }}
+                      </div>
+                    
+                </span>
+            {% endfor %}
+            </div>         
+            <div class="card-footer text-left">
+            <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
+            </form>
+            </div>
+            </div>            
+        </div>            
+    </div>
+
+
+
+
+{% endblock %}
+
+<p><label for="id_status">Status:</label> <select name="status" id="id_status">
+    <option value="não realizada" selected>Não Realizada</option>
+  
+    <option value="realizada">Realizada</option>
+  
+    <option value="pendente">Pedente</option>
+  
+  </select> <span class="helptext">Status da Manutenção</span></p>
+  <p><label for="id_tipo">Tipo:</label> <select name="tipo" id="id_tipo">
+    <option value="preventiva" selected>Preventiva</option>
+  
+    <option value="preditiva">Preditiva</option>
+  
+    <option value="corretiva">Corretiva</option>
+  
+  </select> <span class="helptext">O tipo de Manutenção a ser realizada</span></p>
+  <p><label for="id_item">Item:</label> <select name="item" required id="id_item">
+    <option value="" selected>---------</option>
+  
+    <option value="1">Item object (1)</option>
+  
+    <option value="2">Item object (2)</option>
+  
+    <option value="3">Item object (3)</option>
+  
+    <option value="4">Item object (4)</option>
+  
+    <option value="5">Item object (5)</option>
+  
+    <option value="6">Item object (6)</option>
+  
+    <option value="7">Item object (7)</option>
+  
+    <option value="8">Item object (8)</option>
+  
+    <option value="9">Item object (9)</option>
+  
+    <option value="10">Item object (10)</option>
+  
+    <option value="11">Item object (11)</option>
+  
+    <option value="12">Item object (12)</option>
+  
+    <option value="13">Item object (13)</option>
+  
+    <option value="14">Item object (14)</option>
+  
+    <option value="15">Item object (15)</option>
+  
+    <option value="16">Item object (16)</option>
+  
+    <option value="17">Item object (17)</option>
+  
+    <option value="18">Item object (18)</option>
+  
+    <option value="19">Item object (19)</option>
+  
+  </select></p>
+  <p><label for="id_periodicidade">Periodicidade:</label> <select name="periodicidade" id="id_periodicidade">
+    <option value="semanal" selected>Semanal</option>
+  
+    <option value="quizenal">Quinzenal</option>
+  
+    <option value="mensal">Mensal</option>
+  
+    <option value="bimestral">Bimestral</option>
+  
+    <option value="trimestral">Trimestral</option>
+  
+    <option value="anual">Anual</option>
+  
+  </select> <span class="helptext">Periodo da manutenção</span></p>
+  <p><label for="id_fornecedor">Fornecedor:</label> <input type="text" name="fornecedor" maxlength="150" required id="id_fornecedor"> <span class="helptext">fornecedor do material para manutencao</span></p>
+  <p><label for="id_responsavel">Responsavel:</label> <input type="text" name="responsavel" maxlength="150" required id="id_responsavel"> <span class="helptext">A Pessoa Responsável pela manutenção</span></p>
+  <p><label for="id_data_inicial">Data inicial:</label> <input type="text" name="data_inicial" required id="id_data_inicial"> <span class="helptext">Data de Inicio da Manutenção </span></p>
+  <p><label for="id_data_termino">Data termino:</label> <input type="text" name="data_termino" id="id_data_termino"> <span class="helptext">Data do Termino da Manutenção</span></p>
+  <p><label for="id_data_previsao">Data previsao:</label> <input type="text" name="data_previsao" required id="id_data_previsao"> <span class="helptext">Data da Previsão do Termino da Manutenção</span></p>
+  <p><label for="id_descricao">Descricao:</label> <textarea name="descricao" cols="40" rows="10" required id="id_descricao">
+  </textarea> <span class="helptext">Descrição da Manutenção</span></p>
+  <p><label for="id_valor_total">Valor total:</label> <input type="number" name="valor_total" value="0" step="0.01" required id="id_valor_total"> <span class="helptext">O valor Total da Manutenção</span></p>
+  

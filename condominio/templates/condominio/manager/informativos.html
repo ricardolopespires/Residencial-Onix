@@ -1,0 +1,163 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+<link rel="stylesheet" href="{% static 'assets/css/recurso.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Administrativo</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Informativos</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas  fa-search"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Lista de informações </h2>
+        <p class="section-lead">
+          Lista de informações repassada aos moradores do condominío.
+        </p>        
+        <div class="row ">
+          <div class="col-md-12">
+            <div class="container">
+               <div class="row ">
+              <div class="col-sm-6 col-md-6 col-lg-4 mb-4">
+                <div class="wrapper">
+                  <div class="d-flex justify-content-between mb-4">
+                    <div class="user-info">
+                      <div class="user-info__img">
+                        <div class="unidade text-center"><span class="fas fa-search"></span> </div>
+                      </div>
+                      
+                      <div class="user-info__basic">                     
+                        <h5 class="mb-0">Kiran Acharya</h5>
+                        <p class="text-muted mb-0">Unidade: 700, </p>
+                      </div>
+                    </div>
+                    <div class="dropdown open">
+                      <a href="#!" class="px-2" id="triggerId1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-ellipsis-v"></i>
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="triggerId1" >
+                        <a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i> Edit</a>
+                        <a class="dropdown-item text-danger" href="#"><i class="fa fa-trash mr-1"></i> Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                  <h6 class="mb-0">Recurso</h6>
+                  <p class="number"  ><small class="">Nº: 234501</small></p>
+                  <h6 class="mb-0">Descrição</h6>
+                  <a href="#!"><small class="text-danger">O cahorro michou na porta</small></a>
+                  <div class="d-flex justify-content-between mt-4">
+                    <div>
+                      <h5 class="mb-0"> 06:00 PM
+                        <small class="ml-1">2 Fevereiro 2021</small>
+                      </h5>
+                    </div>
+                    <span class="text-danger font-weight-bold">Negado</span>
+                  </div>
+                  <h5 class=" mt-4 mb-4">Tempo Restante</h5>
+                  <div class="progress blue">
+                      <div class="progress-bar" style="width:20%; background:#1a4966;">
+                          <div class="progress-value"> 0 dias </div>
+                      </div>
+                  </div>
+                </div>       
+              </div> 
+              <div class="col-sm-6 col-md-6 col-lg-4 mb-4">
+                <div class="wrapper">
+                  <div class="d-flex justify-content-between mb-4">
+                    <div class="user-info">
+                      <div class="user-info__img">
+                        <div class="unidade text-center"><span class="fas fa-search"></span> </div>
+                      </div>
+                      <div class="user-info__basic">
+                        <h5 class="mb-0">Kiran Acharya</h5>
+                        <p class="text-muted mb-0">Unidade: 700, </p>
+                      </div>
+                    </div>
+                    <div class="dropdown open">
+                      <a href="#!" class="px-2" id="triggerId1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-ellipsis-v"></i>
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="triggerId1" >
+                        <a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i> Edit</a>
+                        <a class="dropdown-item text-danger" href="#"><i class="fa fa-trash mr-1"></i> Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                  <h6 class="mb-0">Recurso</h6>
+                  <p class="number"  ><small class="">Nº: 234501</small></p>
+                  <h6 class="mb-0">Descrição</h6>
+                  <a href="#!"><small class="text-danger">O cahorro michou na porta</small></a>
+                  <div class="d-flex justify-content-between mt-4">
+                    <div>
+                      <h5 class="mb-0"> 06:00 PM
+                        <small class="ml-1">2 Fevereiro 2021</small>
+                      </h5>
+                    </div>
+                    <span class="text-success font-weight-bold">Aprovado</span>
+                  </div>
+                  <h5 class=" mt-4 mb-4">Tempo Restante</h5>
+                  <div class="progress blue">
+                      <div class="progress-bar" style="width:70%; background:#1a4966;">
+                          <div class="progress-value"> 14 dias </div>
+                      </div>
+                  </div>
+                </div>       
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-4 mb-4">
+                <div class="wrapper">
+                  <div class="d-flex justify-content-between mb-4">
+                    <div class="user-info">
+                      <div class="user-info__img">
+                        <div class="unidade text-center"><span class="fas fa-search"></span> </div>
+                      </div>
+                      <div class="user-info__basic">
+                        <h5 class="mb-0">Kiran Acharya</h5>
+                        <p class="text-muted mb-0">Unidade: 700, </p>
+                      </div>
+                    </div>
+                    <div class="dropdown open">
+                      <a href="#!" class="px-2" id="triggerId1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-ellipsis-v"></i>
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="triggerId1" >
+                        <a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i> Edit</a>
+                        <a class="dropdown-item text-danger" href="#"><i class="fa fa-trash mr-1"></i> Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                  <h6 class="mb-0">Recurso</h6>
+                  <p class="number"  ><small class="">Nº: 234501</small></p>
+                  <h6 class="mb-0">Descrição</h6>
+                  <a href="#!"><small class="text-danger">O cahorro michou na porta</small></a>
+                  <div class="d-flex justify-content-between mt-4">
+                    <div>
+                      <h5 class="mb-0"> 06:00 PM
+                        <small class="ml-1">2 Fevereiro 2021</small>
+                      </h5>
+                    </div>
+                    <span class="text-warning font-weight-bold">Analizando</span>
+                  </div>
+                  <h5 class=" mt-4 mb-4">Tempo Restante</h5>
+                  <div class="progress blue">
+                      <div class="progress-bar" style="width:90%; background:#1a4966;">
+                          <div class="progress-value"> 19 dias </div>
+                      </div>
+                  </div>
+                </div>      
+              </div>                   
+            </div>
+            </div>         
+          </div>
+        </div>    
+    </div> 
+{% endblock %}

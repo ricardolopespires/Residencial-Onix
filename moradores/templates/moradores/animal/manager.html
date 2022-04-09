@@ -1,0 +1,118 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+
+
+<style>
+  .add-despesas i
+  {
+    font-size: 40px;
+  }
+  
+  .add-despesas i:hover
+  {
+      color: yellowgreen;
+  }
+  </style>
+
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Moradores</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Animais</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas fa-dog"></i>
+    </div>
+</div>
+
+<div class="section-body">
+    <h2 class="section-title">Lista dos Animais</h2>
+    <p class="section-lead mb-5">
+        O Animais que estão registrado no condomínios para controle da gestão condominial.
+    </p>
+    {% if animais %}
+    <div class="col-md-12  mt-5 mb-5">
+      <div class="row">            
+          <div class="col-md-12">
+             <a href="{% url 'moradores:adicionar_animais' %}"><div class=" float-right icon-top text-dark add-despesas" data-toggle="tooltip" data-placement="top" title="Adicionar Animais"><i class="fas fa-plus"></i></div></a> 
+          </div>
+      </div>  
+      </div>
+      {% endif %}
+    <div class="row">
+      {% if animais %}     
+      <div class="col-md-12">
+        <div class="row mt-5">             
+            <div class="col-md-12">
+            
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Animais dos Moradores</h4>                     
+                  </div>
+                  <div class="card-body p-0">
+                    <div class="table-responsive table-invoice">
+                      <table class="table table-striped text-center">
+                        <tr>
+                          <th>Unidade</th>
+                          <th>Morador</th>
+                          <th>Nome do animal</th>                                                        
+                          <th>Tipo</th>
+                          <th>Raça</th>
+                          <th>Cor</th>                         
+                        </tr>                         
+                        <tr>
+                           
+                          {% for animal in animais %}                              
+                          <td>
+                            <a href="#">{{ animal.id }}</a>
+                          </td>
+                          <td>{{ animal.morador |truncatewords:2}}</td>
+                          <td >{{ animal.nome }}</td>                
+                          <td>{{ animal.tipo |title}} </td>
+                          <td>{{ animal.raca }}</td> 
+                          <td>{{ animal.cor }}</td>                                                   
+                          {% endfor %}
+                      </table>
+                    </div>
+                  </div>
+                </div>                 
+            </div>          
+          </div>
+    </div>    
+     
+        {% else %}
+        <div class="col-12 col-md-12 col-sm-12">                
+          <div class="card">
+            <div class="card-header">
+              <h4>Ops....</h4>
+            </div>
+            <div class="card-body">
+              <div class="empty-state" data-height="600">
+                <img class="img-fluid" width="400" src="{% static 'assets/img/drawkit/drawkit-full-stack-man-colour.svg' %}" alt="image">
+                <h2 class="mt-0">Não tem Animal cadastrado no sistema</h2>
+                <p class="lead">
+                  <strong>{{ user }}</strong> tem que cadastrar os <strong class="text-success"> novos animais </strong>  no sistema para começar a usar o sistema.
+                </p>
+                <a href="{% url 'moradores:adicionar_animais' %}" class="btn btn-warning mt-4">Cadastrar</a>                      
+              </div>
+            </div>
+          </div>
+      </div> 
+        {% endif %}        
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css">

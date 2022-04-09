@@ -1,0 +1,36 @@
+
+
+.primary-yellow
+{
+    color: #F2FF19;
+}
+
+
+
+.primary-green
+{
+    color: #23D100;
+}
+
+.secundary-green
+{
+    color: #40FF00;
+    
+}
+
+.link-login
+{
+    transition: all 0.5s ease;
+    padding: 14px 0 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    opacity: .8;
+    text-transform: uppercase;
+}
+
+.link-login-dark
+{
+    color: #3f3a64!important;
+}
+

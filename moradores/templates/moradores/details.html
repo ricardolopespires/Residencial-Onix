@@ -1,0 +1,274 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+
+
+<div style="height: 110px!important;" class="section-header">
+  <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Moradores</h5>
+  <br>
+  <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Details</h1>
+  <div class="section-header-breadcrumb">       
+      <i style="font-size: 70px; color: #000066;" class="fas fa-house-user"></i>
+  </div>
+</div>
+<div class="container">
+  <div class="section-body">
+ <div class="row">
+   <div class="col-md-12 mb-5">
+      <div class="wrapper">
+         <div class="row">
+            <div class="col-md-3">                  
+               <div class="img-area">
+                  <div class="inner-area">
+                     {% if morador.img %}
+                    <img src="{{ morador.img.url }}" alt="">
+                    {% else %}
+                    <img src="https://as1.ftcdn.net/v2/jpg/01/83/55/76/500_F_183557656_DRcvOesmfDl5BIyhPKrcWANFKy2964i9.jpg" alt="">
+                    {% endif %}
+                  </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-9 col-sm-8">         
+              <a href="{% url 'moradores:updated_view' moradores.id %}"><div class="icon dots float-right"><i class="fas fa-edit"></i></div></a> 
+               <div class="name ">{{moradores.proprietario }}</div>
+               <div class="about mb-2">Proprietário: {{ moradores.proprietario  }} </div>
+               <div class="about mb-2">Emergência: {{ moradores.unidade }} </div>
+               <div class="about mb-2">Status {% if moradores.is_active == True %}
+               <span class="text-success">Ativo</span>{% else %} <span class="text-danger">Não Ativo</span>{% endif %} </div> 
+               <div class="social-icons">
+               <a href="#" class="fb"><i class="fab fa-facebook-f"></i></a>
+               <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+               <a href="#" class="insta"><i class="fab fa-instagram"></i></a>
+               <a href="#" class="yt"><i class="fab fa-youtube"></i></a>
+               </div>                                                
+            </div>     
+            <br><br>
+            <div class="col-12 col-md-12 col-sm-12 mt-5">
+               <div class="name info-basic">Informações Basícas</div> 
+               <div class="row">
+                  <div class="col-6 col-md-6 col-sm-6">                       
+                     <div class="about mb-2">Nome: {{ moradores.nome}} </div>  
+                     <div class="about mb-2">Status: {{ moradores.status }} </div>  
+                     <div class="about mb-2">Sexo: {{ moradores.genero }} </div>  
+                     <div class="about mb-2">Data de Nascimento: {{ moradores.data_nascimento }} </div>                       
+                     <div class="about mb-2">CPF: {{ moradores.cpf }} </div> 
+                     <div class="about mb-2">RG: {{ moradores.rg }} </div> 
+                     <div class="about mb-2">Email: {{ moradores.email }} </div>                    
+                  </div>
+                  <div class="col-6 col-md-6 col-sm-6">                                               
+                     <div class="about mb-2">Telefone: {{ moradores.telefone }} </div>                                                               
+                     <div class="about mb-2">Endereço: {{ moradores.endereco }} </div>   
+                     <div class="about mb-2">Bairro: {{ moradores.bairro }} </div>
+                     <div class="about mb-2">Cidade: {{ moradores.city }} </div>
+                     <div class="about mb-2">CEP: {{ moradores.cep }} </div>
+                     
+               </div>          
+            </div>
+         </div>        
+       </div>
+      </div> 
+   </div>
+   <div class="col-md-12 mb-5">
+      <div class="wrapper">
+         <div class="row">
+           
+            <div class="col-12 col-md-12 col-sm-12 mt-5">
+               <div class="name info-basic">Os familiares do Morador</div> 
+               <div class="row">
+                  <div class="col-3 col-md-3 col-sm-3">                       
+                     <div class="about mb-2">Nome: {{ administrador.nome}} </div>              
+                  </div>
+                  <div class="col-4 col-md-4 col-sm-4">                                               
+                     <div class="about mb-2">Grau de Parentesco: {{ administrador.celular }} </div>                     
+                  </div>
+                  <div class="col-2 col-md-2 col-sm-2">                                               
+                     <div class="about mb-2">Idade: {{ administrador.celular }} </div>                     
+                  </div>
+                  <div class="col-3 col-md-3 col-sm-3">                                               
+                     <div class="about mb-2">RG: {{ administrador.celular }} </div>                     
+                  </div>          
+            </div>
+         </div>        
+       </div>
+      </div> 
+   </div>
+   <div class="col-md-12 mb-5">
+      <div class="wrapper">
+         <div class="row">           
+            <div class="col-12 col-md-12 col-sm-12 mt-5">
+               <div class="name info-basic mb-4">Veiculos do Morador</div> 
+               <div class="row">
+                  {% for  veiculo in veiculos %}                
+                  <div class="col-2 col-md-2 col-sm-2">                                               
+                     <div class="about mb-2">Modelo: <a href="#">{{ veiculo.modelo |title }} </a></div>                     
+                  </div>
+                  <div class="col-3 col-md-3 col-sm-3">                       
+                     <div class="about mb-2">Marca: {{ veiculo.marca |title }} </div>              
+                  </div>
+                  <div class="col-2 col-md-2 col-sm-2">                                               
+                     <div class="about mb-2">Cor: {{ veiculo.cor }} </div>                     
+                  </div>
+                  <div class="col-2 col-md-2 col-sm-2">                                               
+                     <div class="about mb-2">Placa: {{ veiculo.placa }} </div>                     
+                  </div>
+                  <div class="col-3 col-md-3 col-sm-3">                                               
+                     <div class="about mb-2">Condição: 
+                        {% if veiculo.status == 'autorizado' %}
+                        <div class="ml-2 badge badge-success"> Autorizado</div>
+                        {% elif veiculo.status == 'não autorizado' %}
+                        <div class="ml-1 badge badge-danger">Não Autorizado</div>
+                        {% else %}
+                        <div class="ml-1 badge badge-warning">Em Avaliação</div>
+                        {% endif %}
+                     </div>                     
+                  </div>
+                  {% endfor %}          
+            </div>
+         </div>        
+       </div>
+      </div> 
+   </div>
+   <div class="col-md-12 mb-5">
+      <div class="wrapper">
+         <div class="row">           
+            <div class="col-12 col-md-12 col-sm-12 mt-5">
+               <div class="name info-basic mb-4">Animais do Morador</div> 
+               <div class="row">                               
+                  <div class="col-3 col-md-3 col-sm-3">                                               
+                     <div class="about mb-2">Nome: <a href="#">{{ veiculo.modelo |title }} </a></div>                     
+                  </div>
+                  <div class="col-3 col-md-3 col-sm-3">                       
+                     <div class="about mb-2">Tipo: {{ veiculo.marca |title }} </div>              
+                  </div>
+                  <div class="col-3 col-md-3 col-sm-3">                                               
+                     <div class="about mb-2">Raça: {{ veiculo.cor }} </div>                     
+                  </div>
+                  <div class="col-3 col-md-3 col-sm-3">                                               
+                     <div class="about mb-2">Cor: {{ veiculo.placa }} </div>                     
+                  </div>                 
+            </div>
+         </div>        
+       </div>
+      </div> 
+   </div>
+   <div class="col-md-12 mb-5">
+      <div class="wrapper">
+         <div class="row">           
+            <div class="col-12 col-md-12 col-sm-12 mt-5">
+               <div class="name info-basic mb-4">Funcionários do Morador</div> 
+               <div class="row">                               
+                  <div class="col-3 col-md-3 col-sm-3">                                               
+                     <div class="about mb-2">Nome: <a href="#">{{ veiculo.modelo |title }} </a></div>                     
+                  </div>
+                  <div class="col-3 col-md-3 col-sm-3">                       
+                     <div class="about mb-2">RG: {{ veiculo.marca |title }} </div>              
+                  </div>
+                  <div class="col-3 col-md-3 col-sm-3">                                               
+                     <div class="about mb-2">Cargo: {{ veiculo.cor }} </div>                     
+                  </div>
+                  <div class="col-3 col-md-3 col-sm-3">                                               
+                     <div class="about mb-2">Expediente: {{ veiculo.placa }} </div>                     
+                  </div>                 
+            </div>
+         </div>        
+       </div>
+      </div> 
+   </div>
+   <div class="col-12 col-md-12 col-sm-12 ">
+      <div class="wrapper">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="name info-basic">Movimento Finaceiro do Morador</div>       
+               <div class="about mb-2">Nome do Condominios: {{ condominio.nome }} </div>  
+               <div class="social-share">
+                  <div class="row">               
+                  {% if moradores.taxa < 0 %}              
+                  R$ - <span class="text-danger">{{ moradores.taxa }}<span> Taxa Mensal</span></span>
+                  {% elif  moradores.taxa > 0 %}
+                  R$ + <span class="text-success">{{ moradores.taxa }}<span> Taxa Mensal </span></span>
+                  {% else %}
+                  R$ <span class="">{{ moradores.taxa }}<span> Taxa Mensal </span></span>
+                  {% endif %}
+                  </div>
+                  <div class="row"> 
+                  {% if moradores.taxa_extra < 0 %}              
+                  R$ - <span class="text-danger">{{ moradores.taxa_extra}}<span> Taxa Extra</span></span>
+                  {% elif  moradores.taxa_extra > 0 %}
+                  R$ + <span class="text-success">{{ moradores.taxa_extra }}<span> Taxa Extra </span></span>
+                  {% elif  moradores.taxa_extra  == None %}
+                  R$ <span class="text-dark">0,00 <span> Taxa Extra </span></span>
+                  {% else %}
+                  R$ <span class="text-dark">{{ moradores.taxa_extra }}<span> Taxa Extra </span></span>
+                  {% endif %}
+                  </div>
+                  <div class="row">              
+                  {% if moradores.valor_total < 0 %}              
+                  R$ - <span class="text-danger">{{ moradores.valor_total }}<span> valor total </span></span>
+                  {% elif  moradores.valor_total > 0 %}
+                  R$ + <span class="text-success">{{ moradores.valor_total }}<span> valor total  </span></span>
+                  {% elif  moradores.valor_total  == None %}
+                  R$ <span class="text-dark">0,00 <span> valor total  </span></span>
+                  {% else %}
+                  R$ <span class="">{{ moradores.valor_total}}<span> valor total </span></span>
+                  {% endif %}
+                  </div>
+               </div> 
+            </div>
+            <br><br><br><br>
+            <div class="col-12 mb-5">
+               <table class="table table-striped text-center mt-5">                        
+                  <tr class="table-title">
+                    <th>Morador</th>
+                    <th>Status</th>
+                    <th>Referente</th>
+                    <th>dia</th>
+                    <th>Boleto</th>
+                    <th>Juros</th>
+                    <th>Multas</th>                   
+                    <th>Total</th>
+                  </tr>
+                  {% if  inadinplencias %}
+                  {% for inadinplencia in  inadinplencias %}
+                  <tr class="text-center">
+                    {% if inadinplencia.status == 'atrasado' %}
+                    <td><a href="{% url 'financeiro:boleto_pagamento' inadinplencia.id %}">{{ inadinplencia.morador |truncatechars:11 }}</a></td>
+                    {% elif inadinplencia.status == 'inadinplente' %}
+                    <td><a href="{% url 'financeiro:boleto_pagamento' inadinplencia.id %}">{{ inadinplencia.morador |truncatechars:11 }}</a></td>
+                    {% elif inadinplencia.status == 'acordo' %}
+                    <td><a href="{% url 'financeiro:boleto_pagamento' inadinplencia.id %}">{{ inadinplencia.morador |truncatechars:11 }}</a></td>
+                    {% else %}
+                    <td><a href="" class="text-muted">{{ inadinplencia.morador |truncatechars:11 }}</a></td>
+                    {% endif %}
+                    {% if inadinplencia.status == 'atrasado' %}
+                    <td class="text-warning text-capitalize">{{ inadinplencia.status }}</td>
+                    {% elif inadinplencia.status == 'inadinplente' %}
+                    <td class="text-danger text-capitalize">{{ inadinplencia.status }}</td>
+                    {% elif inadinplencia.status == 'acordo' %}
+                    <td class="text-info text-capitalize">{{ inadinplencia.status }}</td>
+                    {% else %}
+                    <td class="text-success text-capitalize">{{ inadinplencia.status }}</td>
+                    {% endif %}
+                    <td>{{ inadinplencia.referente |date:'m-Y' }}</td>                         
+                    <td> {{ inadinplencia.dias }}</td>
+                    <td>{{ inadinplencia.boleto }}</td>
+                    <td>{{ inadinplencia.juros }}</td>
+                    <td>{{ inadinplencia.multa }}</td>         
+                    <td>{{ inadinplencia.valor_total }}</td>
+                  </tr> 
+                  {% endfor %}
+                  {% else %}
+
+                  {% endif %}
+                </table>
+            </div>
+         </div>
+      </div>     
+   </div>
+</div>   
+</div>
+{% endblock %}

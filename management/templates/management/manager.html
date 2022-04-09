@@ -1,0 +1,789 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+    
+<style>
+.bg-warning
+{
+  background: #ffa426!important;
+}
+
+</style>
+
+        <section class="section">
+          <div class="row">
+            {% if condominios %}
+            {% for condominio in condominios %}          
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="card-stats">
+                  <div class="card-stats-title">Gerenciamento de Caixa
+                    <div class="dropdown d-inline">
+                      {% if month == '1' %}                      
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Janeiro</a>
+                      {% elif month == '2' %}
+                      <li><a href="#" class="font-weight-600 dropdown-toggle"> Fevereiro</a></li>
+                      {% elif month == '3' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Março</a>
+                      {% elif month == '4' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Abril</a>
+                      {% elif month == '5' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Maio</a>
+                      {% elif month == '6' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Junho</a>
+                      {% elif month == '7'  %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Julho</a>
+                      {% elif month == '8' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Agosto</a>
+                      {% elif month == '9' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Setembro</a>
+                      {% elif month == '10' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Outubro</a>
+                      {% elif month == '11' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Novembro</a>
+                      {% else %}
+                      <a href="#" class="font-weight-600 "> Dezembro</a>
+                      {% endif %}                      
+                    </div>
+                  </div>
+                  <div class="card-stats-items">
+                    <div class="card-stats-item">
+                      {% if condominio.caixa > 0%}
+                      <div class="card-stats-item-count">R$: {{ condominio.caixa  }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Caixa</div>
+                    </div>
+                    <div class="card-stats-item">
+                      {% if condominio.receitas > 0 %}
+                      <div class="card-stats-item-count text-su">R$: {{ condominio.receitas }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Receitas</div>
+                    </div>
+                    <div class="card-stats-item">
+                      {% if condominio.despesas > 0 %}
+                      <div class="card-stats-item-count">R$:{{ condominio.despesas }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Despesas</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-icon shadow-primary ">
+                  <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Valor Total</h4>
+                  </div> 
+                  {% if calculo_valor_total > 0%}               
+                  <div class="card-body">
+                   R$: <span class="text-success"> + {{ calculo_valor_total }}</span>
+                  </div>
+                  {% elif condominio.caixa < 0 %}
+                  <div class="card-body">
+                    R$: <span class="text-danger"> {{ calculo_valor_total }}</span> 
+                   </div> 
+                   {% else %}
+                   <div class="card-body">
+                    R$: 0,00 
+                   </div> 
+                   {% endif %}                  
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="card-stats">
+                  <div class="card-stats-title">Gerenciamento da Receita
+                    <div class="dropdown d-inline">
+                      {% if month == '1' %}                      
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Janeiro</a>
+                      {% elif month == '2' %}
+                      <li><a href="#" class="font-weight-600 dropdown-toggle"> Fevereiro</a></li>
+                      {% elif month == '3' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Março</a>
+                      {% elif month == '4' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Abril</a>
+                      {% elif month == '5' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Maio</a>
+                      {% elif month == '6' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Junho</a>
+                      {% elif month == '7'  %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Julho</a>
+                      {% elif month == '8' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Agosto</a>
+                      {% elif month == '9' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Setembro</a>
+                      {% elif month == '10' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Outubro</a>
+                      {% elif month == '11' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Novembro</a>
+                      {% else %}
+                      <a href="#" class="font-weight-600 "> Dezembro</a>
+                      {% endif %}                      
+                    </div>
+                  </div>
+                  <div class="card-stats-items">
+                    <div class="card-stats-item">
+                      {% if condominio.lancamento_futuro > 0%}
+                      <div class="card-stats-item-count">R$: {{ condominio.lancamento_futuro  }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Futuros</div>
+                    </div>
+                    <div class="card-stats-item">
+                      {% if condominio.receitas > 0 %}
+                      <div class="card-stats-item-count text-su">R$: {{ condominio.receitas }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Pagos</div>
+                    </div>
+                    <div class="card-stats-item">
+                      {% if condominio.inadinplencia > 0 %}
+                      <div class="card-stats-item-count">R$:{{ condominio.inadinplencia }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Inadiplências</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-icon shadow-primary ">
+                  <i class="fas fa-wallet"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Total das Receitas</h4>
+                  </div> 
+                  {% if receitas_valor_total > 0 %}               
+                  <div class="card-body">
+                   R$: <span class="text-success"> + {{ receitas_valor_total }}</span>
+                  </div>
+                  {% elif receitas_valor_total < 0 %}
+                  <div class="card-body">
+                    R$: <span class="text-danger"> {{ receitas_valor_total }}</span> 
+                   </div> 
+                   {% else %}
+                   <div class="card-body">
+                    R$: 0,00
+                   </div> 
+                   {% endif %}                  
+                </div>
+            </div>
+            </div> 
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="card-stats">
+                  <div class="card-stats-title">Gerenciamento da Despesa
+                    <div class="dropdown d-inline">
+                      {% if month == '1' %}                      
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Janeiro</a>
+                      {% elif month == '2' %}
+                      <li><a href="#" class="font-weight-600 dropdown-toggle"> Fevereiro</a></li>
+                      {% elif month == '3' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Março</a>
+                      {% elif month == '4' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Abril</a>
+                      {% elif month == '5' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Maio</a>
+                      {% elif month == '6' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Junho</a>
+                      {% elif month == '7'  %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Julho</a>
+                      {% elif month == '8' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Agosto</a>
+                      {% elif month == '9' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Setembro</a>
+                      {% elif month == '10' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Outubro</a>
+                      {% elif month == '11' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Novembro</a>
+                      {% else %}
+                      <a href="#" class="font-weight-600 "> Dezembro</a>
+                      {% endif %}                      
+                    </div>
+                  </div>
+                  <div class="card-stats-items">
+                    <div class="card-stats-item">
+                      {% if despesas_aberta > 0 %}
+                      <div class="card-stats-item-count">R$: {{ despesas_aberta  }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Abertas</div>
+                    </div>
+                    <div class="card-stats-item">
+                      {% if despesas_paga > 0 %}
+                      <div class="card-stats-item-count text-su">R$: {{ despesas_paga }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Pagas</div>
+                    </div>
+                    <div class="card-stats-item">
+                      {% if despesas_atrasadas > 0 %}
+                      <div class="card-stats-item-count">R$:{{ despesas_atrasadas }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Atrasadas</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-icon shadow-primary ">
+                  <i class="fas fa-screwdriver"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Total das Despesas</h4>
+                  </div> 
+                  {% if calculo_valor_total_despesas > 0 %}               
+                  <div class="card-body">
+                   R$: <span class="text-success"> + {{ calculo_valor_total_despesas }}</span>
+                  </div>
+                  {% elif calculo_valor_total_despesas < 0 %}
+                  <div class="card-body">
+                    R$: <span class="text-danger"> {{ calculo_valor_total_despesas }}</span> 
+                   </div> 
+                   {% else %}
+                   <div class="card-body">
+                    R$:0,00
+                   </div> 
+                   {% endif %}                  
+                </div>
+            </div>
+            </div>  
+                   
+            {% endfor %}
+            {% else %}  
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="card-stats">
+                  <div class="card-stats-title">Gerenciamento de Caixa
+                    <div class="dropdown d-inline">
+                      {% if month == '1' %}                      
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Janeiro</a>
+                      {% elif month == '2' %}
+                      <li><a href="#" class="font-weight-600 dropdown-toggle"> Fevereiro</a></li>
+                      {% elif month == '3' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Março</a>
+                      {% elif month == '4' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Abril</a>
+                      {% elif month == '5' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Maio</a>
+                      {% elif month == '6' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Junho</a>
+                      {% elif month == '7'  %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Julho</a>
+                      {% elif month == '8' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Agosto</a>
+                      {% elif month == '9' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Setembro</a>
+                      {% elif month == '10' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Outubro</a>
+                      {% elif month == '11' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Novembro</a>
+                      {% else %}
+                      <a href="#" class="font-weight-600 "> Dezembro</a>
+                      {% endif %}                      
+                    </div>
+                  </div>
+                  <div class="card-stats-items">
+                    <div class="card-stats-item">
+                      {% if condominio.caixa > 0%}
+                      <div class="card-stats-item-count">R$: {{ condominio.caixa  }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Caixa</div>
+                    </div>
+                    <div class="card-stats-item">
+                      {% if condominio.receitas > 0 %}
+                      <div class="card-stats-item-count text-su">R$: {{ condominio.receitas }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Receitas</div>
+                    </div>
+                    <div class="card-stats-item">
+                      {% if condominio.despesas > 0 %}
+                      <div class="card-stats-item-count">R$:{{ condominio.despesas }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Despesas</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-icon shadow-primary ">
+                  <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Valor Total</h4>
+                  </div> 
+                  {% if condominio.caixa > 0%}               
+                  <div class="card-body">
+                   R$: <span class="text-success"> + {{ condominio.caixa }}</span>
+                  </div>
+                  {% elif condominio.caixa < 0 %}
+                  <div class="card-body">
+                    R$: <span class="text-danger"> {{ condominio.caixa }}</span> 
+                   </div> 
+                   {% else %}
+                   <div class="card-body">
+                    R$: {{ condominio.caixa }}
+                   </div> 
+                   {% endif %}                  
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="card-stats">
+                  <div class="card-stats-title">Gerenciamento das Receitas
+                    <div class="dropdown d-inline">
+                      {% if month == '1' %}                      
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Janeiro</a>
+                      {% elif month == '2' %}
+                      <li><a href="#" class="font-weight-600 dropdown-toggle"> Fevereiro</a></li>
+                      {% elif month == '3' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Março</a>
+                      {% elif month == '4' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Abril</a>
+                      {% elif month == '5' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Maio</a>
+                      {% elif month == '6' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Junho</a>
+                      {% elif month == '7'  %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Julho</a>
+                      {% elif month == '8' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Agosto</a>
+                      {% elif month == '9' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Setembro</a>
+                      {% elif month == '10' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Outubro</a>
+                      {% elif month == '11' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Novembro</a>
+                      {% else %}
+                      <a href="#" class="font-weight-600 "> Dezembro</a>
+                      {% endif %}                      
+                    </div>
+                  </div>
+                  <div class="card-stats-items">
+                    <div class="card-stats-item">
+                      {% if condominio.lancamento_futuro > 0%}
+                      <div class="card-stats-item-count">R$: {{ condominio.lancamento_futuro  }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Futuros</div>
+                    </div>
+                    <div class="card-stats-item">
+                      {% if condominio.receitas > 0 %}
+                      <div class="card-stats-item-count text-su">R$: {{ condominio.receitas }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Pagos</div>
+                    </div>
+                    <div class="card-stats-item">
+                      {% if condominio.inadinplencia > 0 %}
+                      <div class="card-stats-item-count">R$:{{ condominio.inadinplencia }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Inadiplências</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-icon shadow-primary ">
+                  <i class="fas fa-wallet"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Total das Receitas</h4>
+                  </div> 
+                  {% if receitas_valor_total > 0 %}               
+                  <div class="card-body">
+                   R$: <span class="text-success"> + {{ receitas_valor_total }}</span>
+                  </div>
+                  {% elif receitas_valor_total < 0 %}
+                  <div class="card-body">
+                    R$: <span class="text-danger"> {{ receitas_valor_total }}</span> 
+                   </div> 
+                   {% else %}
+                   <div class="card-body">
+                    R$: 0,00
+                   </div> 
+                   {% endif %}                  
+                </div>
+            </div>
+            </div> 
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="card-stats">
+                  <div class="card-stats-title">Gerenciamento das Despesas
+                    <div class="dropdown d-inline">
+                      {% if month == '1' %}                      
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Janeiro</a>
+                      {% elif month == '2' %}
+                      <li><a href="#" class="font-weight-600 dropdown-toggle"> Fevereiro</a></li>
+                      {% elif month == '3' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Março</a>
+                      {% elif month == '4' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Abril</a>
+                      {% elif month == '5' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Maio</a>
+                      {% elif month == '6' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Junho</a>
+                      {% elif month == '7'  %}
+                      <a href="#" class="font-weight-600 dropdown-toggle"> Julho</a>
+                      {% elif month == '8' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Agosto</a>
+                      {% elif month == '9' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Setembro</a>
+                      {% elif month == '10' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Outubro</a>
+                      {% elif month == '11' %}
+                      <a href="#" class="font-weight-600 dropdown-toggle">Novembro</a>
+                      {% else %}
+                      <a href="#" class="font-weight-600 "> Dezembro</a>
+                      {% endif %}                      
+                    </div>
+                  </div>
+                  <div class="card-stats-items">
+                    <div class="card-stats-item">
+                      {% if despesas_aberta > 0 %}
+                      <div class="card-stats-item-count">R$: {{ despesas_aberta  }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Abertas</div>
+                    </div>
+                    <div class="card-stats-item">
+                      {% if despesas_paga > 0 %}
+                      <div class="card-stats-item-count text-su">R$: {{ despesas_paga }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Pagas</div>
+                    </div>
+                    <div class="card-stats-item">
+                      {% if despesas_atrasadas > 0 %}
+                      <div class="card-stats-item-count">R$:{{ despesas_atrasadas }}</div>
+                      {% else %}
+                      <div class="card-stats-item-count">R$: 0,00</div>
+                      {% endif %}
+                      <div class="card-stats-item-label">Atrasadas</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-icon shadow-primary ">
+                  <i class="fas fa-screwdriver"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Total das Despesas</h4>
+                  </div> 
+                  {% if condominio.despesas > 0 %}               
+                  <div class="card-body">
+                   R$: <span class="text-success"> + {{ condominio.despesas }}</span>
+                  </div>
+                  {% elif condominio.despesas < 0 %}
+                  <div class="card-body">
+                    R$: <span class="text-danger"> {{ condominio.despesas }}</span> 
+                   </div> 
+                   {% else %}
+                   <div class="card-body">
+                    R$:0,00
+                   </div> 
+                   {% endif %}                  
+                </div>
+            </div>
+            </div> 
+            {% endif %}
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Recitas vs Despesas</h4>
+                </div>
+                <div class="card-body">
+                  <canvas id="myChart4" height="158"></canvas>
+                  <div class="mb-4 mt-4">
+                    <div class="text-small float-right font-weight-bold text-muted">R$ {{ receitas_valor_total  }}</div>
+                    <div class="font-weight-bold mb-1">Receitas</div>
+                    <div class="progress" data-height="3" style="height: 3px;">
+                      <div class="progress-bar" role="progressbar" data-width="{{ porcentagem_receitas }}%" aria-valuenow="{{ porcentagem_receitas }}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_receitas }}%" style="width:{{ porcentagem_receitas }}%;"></div>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <div class="text-small float-right font-weight-bold text-muted">R$ {{ despesas_valor_total }}</div>
+                    <div class="font-weight-bold mb-1">Despesas</div>
+                    <div class="progress" data-height="3" style="height: 3px;">
+                      <div class="progress-bar" role="progressbar" data-width="{{ porcentagem_despesas }}%" aria-valuenow="{{ porcentagem_despesas }}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_despesas }}%"  style="width: {{ porcentagem_despesas }}%;"></div>
+                    </div>
+                  </div> 
+                  <div class="mb-4">
+                    <div class="text-small float-right font-weight-bold text-muted">R$ {{ calculo_valor_total  }}</div>
+                    <div class="font-weight-bold mb-1">Valor Total</div>
+                    <div class="progress" data-height="3"  style="height: 3px;">
+                      {% if porcentagem_calculo > 50  and porcentagem_calculo <  80 %}
+                      <div class="progress-bar bg-warning" role="progressbar" data-width="{{ porcentagem_calculo }}%" aria-valuenow="{{ porcentagem_calculo }}" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_calculo }}%" style="width: {{ porcentagem_calculo }}%;"></div>
+                      {% elif porcentagem_calculo > 80 %}
+                      <div class="progress-bar bg-danger" role="progressbar" data-width="{{ porcentagem_calculo }}%" aria-valuenow="{{ porcentagem_calculo }}" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_calculo }}%" style="width: {{ porcentagem_calculo }}%;"></div>
+                      {% else %}
+                      <div class="progress-bar badge-success" role="progressbar" data-width="{{ porcentagem_calculo }}%" aria-valuenow="{{ porcentagem_calculo }}" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_calculo }}%" style="width: {{ porcentagem_calculo }}%;"></div>
+                      {% endif %}
+                    </div>
+                  </div>                   
+                </div>
+              </div>
+            </div> 
+            <div class="col-12 col-sm-12 col-lg-6 mt-lg-0 mt-sm-4">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Despesas</h4>
+                </div>
+                <div class="card-body"><div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                  <canvas id="myChart3" style="display: block; width: 455px; height: 257px;" class="chartjs-render-monitor" width="455" height="257"></canvas>
+
+                  <div class="mb-4 mt-4">
+                    <div class="text-small float-right font-weight-bold text-muted">R$ {{ funcionario }}</div>
+                    <div class="font-weight-bold mb-1">Funcionario</div>
+                    <div class="progress" data-height="3" style="height: 3px;">
+                      <div class="progress-bar" role="progressbar" data-width="{{ porcentagem_funcionario }}%" aria-valuenow="{{ porcentagem_funcionario }}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_funcionario }}%" style="width: {{ porcentagem_funcionario }}%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <div class="text-small float-right font-weight-bold text-muted">R$ {{ manutencao }}</div>
+                    <div class="font-weight-bold mb-1">Manutenção</div>
+                    <div class="progress" data-height="3" style="height: 3px;">
+                      <div class="progress-bar" role="progressbar" data-width="{{ porcetagem_manutencao }}%" aria-valuenow="{{ porcetagem_manutencao }}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="{{ porcetagem_manutencao }}%" style="width: {{ porcetagem_manutencao }}%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <div class="text-small float-right font-weight-bold text-muted">R$ {{ consumo }}</div>
+                    <div class="font-weight-bold mb-1">Consumo</div>
+                    <div class="progress" data-height="3" style="height: 3px;">
+                      <div class="progress-bar" role="progressbar" data-width="{{ porcentagem_consumo }}%" aria-valuenow="{{ porcentagem_consumo }}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_consumo }}%" style="width: {{ porcentagem_consumo }}%;"></div>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <div class="text-small float-right font-weight-bold text-muted">R$ {{ outros}}</div>
+                    <div class="font-weight-bold mb-1">Outros</div>
+                    <div class="progress" data-height="3" style="height: 3px;">
+                      <div class="progress-bar" role="progressbar" data-width="{{ porcentagem_outros }}%" aria-valuenow="{{ porcentagem_outros }}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_outros }}%" style="width: {{ porcentagem_outros}}%;"></div>
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <div class="text-small float-right font-weight-bold text-muted">R$ {{ despesas_valor_total }}</div>
+                    <div class="font-weight-bold mb-1">Valor total das despesas</div>
+                    <div class="progress" data-height="3" style="height: 3px;">
+                      {% if porcentagem_despesas < 40  %}
+                      <div class="progress-bar bg-danger"  role="progressbar" data-width="{{ porcentagem_despesas }}%" aria-valuenow="{{ porcentagem_despesas }}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_despesas }}%"  style="width: {{ porcentagem_despesas }}%;"></div>
+                      {% elif porcentagem_despesas > 40 and porcentagem_despesas < 80 %}
+                      <div class="progress-bar bg-warning" role="progressbar" data-width="{{ porcentagem_despesas }}%" aria-valuenow="{{ porcentagem_despesas }}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_despesas }}%"  style="width: {{ porcentagem_despesas }}%;"></div>
+                      {% else %}
+                      <div class="progress-bar bg-success" role="progressbar" data-width="{{ porcentagem_despesas }}%" aria-valuenow="{{ porcentagem_despesas }}" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_despesas }}%"  style="width: {{ porcentagem_despesas }}%;"></div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>         
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Financeiro dos Moradores</h4>
+                  <div class="card-header-action">
+                    <a href="{% url 'moradores:manager' %}" class="btn btn-danger">Ver todos <i class="fas fa-chevron-right"></i></a>
+                  </div>
+                </div>
+                <div class="card-body p-0">
+                  <div class="table-responsive table-invoice">
+                    <table class="table table-striped text-center">
+                      <tr>
+                        <th>Apt</th>
+                        <th>Nome</th>
+                        <th>Status</th>
+                        <th>Dias Faltantes</th>
+                        <th>Informações</th>
+                      </tr>
+                      {% if boletos %}
+                      {% for morador in boletos %}
+                      <tr>
+                        <td><a href="#">{{ morador.unidade }}</a></td>
+                        <td class="font-weight-600">{{ morador.sacado_nome }}</td>
+                        {% if morador.status == 'aberto' %}
+                        <td><div class="badge badge-info">{{morador.status }}</div></td>
+                        {% elif morador.status == 'atrasado' %}
+                        <td><div class="badge badge-warning">{{morador.status }}</div></td>
+                        {% elif morador.status == 'pago' %}
+                        <td><div class="badge badge-success">{{ morador.status }}</div></td> 
+                        {% else %}                        
+                        <td><div class="badge badge-danger"> Inadimplente</div></td>
+                        {% endif %}
+                        
+                        <td>{{ data_restante.days }}</td>
+                        <td>
+                          <a href="{% url 'moradores:details'  morador.unidade %}" class="btn btn-outline-primary">Detail</a>
+                        </td>
+                      </tr> 
+                      {% endfor %}                 
+                      {% endif %}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>          
+          </div>
+          <div class ="row">
+            <div class="col-md-4">
+              <div class="card card-hero">
+                <div class="card-header">
+                  <div class="card-icon">
+                    <i class="far fa-question-circle"></i>
+                  </div>
+                  <h4>14</h4>
+                  <div class="card-description">Os Moradores precisam de ajuda</div>
+                </div>
+                <div class="card-body p-0">
+                  <div class="tickets-list">
+                    <a href="#" class="ticket-item">
+                      <div class="ticket-title">
+                        <h4>My order hasn't arrived yet</h4>
+                      </div>
+                      <div class="ticket-info">
+                        <div>Laila Tazkiah</div>
+                        <div class="bullet"></div>
+                        <div class="text-primary">1 min ago</div>
+                      </div>
+                    </a>
+                    <a href="#" class="ticket-item">
+                      <div class="ticket-title">
+                        <h4>Please cancel my order</h4>
+                      </div>
+                      <div class="ticket-info">
+                        <div>Rizal Fakhri</div>
+                        <div class="bullet"></div>
+                        <div>2 hours ago</div>
+                      </div>
+                    </a>
+                    <a href="#" class="ticket-item">
+                      <div class="ticket-title">
+                        <h4>Do you see my mother?</h4>
+                      </div>
+                      <div class="ticket-info">
+                        <div>Syahdan Ubaidillah</div>
+                        <div class="bullet"></div>
+                        <div>6 hours ago</div>
+                      </div>
+                    </a>
+                    <a href="features-tickets.html" class="ticket-item ticket-more">
+                      Ver tudo<i class="fas fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section-body">
+            <div class="row">
+              {% for prazo in prazos %}         
+              <div class="col-12">
+                <div class="courses-container">
+                  <div class="course">
+                    <div class="course-preview">                      
+                      <img class="img_calendar" src="{% static 'img/calendar.png' %}" alt="Data de vencimento">                    
+                    </div>
+                    <div class="course-info">
+                      <div class="progress-container">
+                        <div class="neon-bar">
+                          <progress class='bar' value='0' max='100'></progress>
+                          <span class='bar__value'>0%</span>
+                        </div>
+                          Prazo Total
+                        </span>
+                      </div>
+                      <h6>Vencimento: <span id="prazo_date" class="prazo_date">{{ prazo.due |date:'m/d/Y' }}</span> </h6>
+                      <h2 class="mt-4 mb-4">{{prazo.title }}</h2>
+                      <p class="descricao">Descrição: <span>{{ prazo.descricao }}</span> </p>
+                      <button class="btn  bg-danger">{{ prazo.due |timeuntil }}</button>
+                    </div>
+                  </div>
+                </div>                
+              </div>              
+              {% endfor %}
+            </div>
+            </div>
+        </section>
+    
+<!---->
+
+        <script>
+          
+        const progressBar = document.querySelector(".bar"),
+        progressBarValue = document.querySelector('.bar__value');
+
+
+        
+
+          var date1 = new Date();
+          var date3 = document.getElementById('prazo_date').innerHTML;
+          var date2 = new Date(date3);
+          var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+          var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+          
+          
+
+
+        let value = 0;
+        const max =  diffDays  ;
+
+        let anim = setInterval(() => {
+          if (value == max) {
+            clearInterval(anim);
+          } else {
+            value += 1;
+            progressBar.value = value;
+            progressBarValue.innerText = value + '%';
+          }
+        }, 80);
+
+
+        function progress(timeleft, timetotal, $element) {
+    var progressBarWidth = timeleft * $element.width() / timetotal;
+    $element.find('div').animate({
+      width: progressBarWidth
+    }, timeleft == timetotal ? 0 : 1000, "linear");
+    if (timeleft > 0) {
+      setTimeout(function() {
+        progress(timeleft - 1, timetotal, $element);
+      }, 1000);
+    }
+  };    
+</script>
+
+{% block script %}
+
+{% endblock %}
+{% endblock %}

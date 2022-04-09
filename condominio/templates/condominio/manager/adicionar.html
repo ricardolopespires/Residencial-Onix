@@ -1,0 +1,219 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+{% block dashboad %}
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Configurações Gerais</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Adicionar Dados</h1>
+    <div class="section-header-breadcrumb">        
+        <i style="font-size: 70px; color: #000066;"  class="fas fa-server"></i>
+    </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Adicionar Novo Condominio</h2>
+    <p class="section-lead">
+      Examples and usage guidelines for form control styles, layout options, and custom components for creating a wide variety of forms.
+    </p>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">         
+            <div class="card">
+          <div class="card-header">
+            <h4>Formulário de adição de dados</h4>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-danger">
+              <b>Nota!</b> Os dados devem ser verdadeiro.
+            </div>
+            <form action="." method="POST"  enctype="multipart/form-data" >
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_user">Administrador:</label>
+                            <select class="form-control" name="administradores" required id="id_user">
+                                <option value="" selected>---------</option> 
+                                {% for administrador in administradores %}               
+                                <option value="{{ administrador.id }}">{{ administrador.nome }}</option>                
+                                {% endfor %}
+                            </select>
+                        </p>                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_nome">Nome:</label> <input class="form-control" type="text" name="nome" maxlength="150" required id="id_nome"></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_user">user:</label>
+                            <select class="form-control" name="user" required id="id_user">
+                                <option value="" selected>---------</option> 
+                                {% for administrador in administradores %}               
+                                <option value="{{ administrador.id }}">{{ administrador.nome }}</option>                
+                                {% endfor %}
+                            </select>
+                        </p>                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_img">Img:</label> <input class="form-control" type="url" name="img" maxlength="200" required id="id_img"> <span class="helptext">Image do Condominio</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_descritpion">Descricao do condominio:</label> <textarea class="form-control" name="descritpion" cols="40" rows="10" required id="id_descritpion">
+                        </textarea></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_logo">Logotipo do condominio:</label> <input class="form-control" type="file" name="logo" accept="image/*" required id="id_logo"></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_google_analytics">Google Analytics Code:</label> <textarea class="form-control" name="google_analytics" cols="40" rows="10" required id="id_google_analytics">
+                        </textarea></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_cnpj">CNPJ:</label> <input class="form-control" type="text" name="cnpj" maxlength="150" id="id_cnpj"></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_inscricao_estatual">Inscricao estatual:</label> <input class="form-control" type="text" name="inscricao_estatual" maxlength="150" id="id_inscricao_estatual"></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_email">E-mail:</label> <input class="form-control" type="email" name="email" maxlength="254" required id="id_email"></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_address">Endereço:</label> <input class="form-control" type="text" name="address" maxlength="190" id="id_address"></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_cep">CEP da Localidade:</label> <input class="form-control" type="text" name="cep" maxlength="150" required id="id_cep"></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_state">Estado:</label> <input class="form-control" type="text" name="state" maxlength="100" id="id_state"></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_status">Status:</label>
+                            <select class="form-control" name="status" id="id_status">
+                                <option value="Positivo" selected>Positivo</option>
+                                <option value="negativo">Negativo</option>
+                                <option value="inadimplente">Inadimplente</option>
+                            </select>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_city">Cidade:</label> <input class="form-control" type="text" name="city" maxlength="190" id="id_city"></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_uf">UF:</label> <input class="form-control" type="text" name="uf" maxlength="190" id="id_city"></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_phone_0">Phone:</label> <input class="form-control" type="text" name="phone_0" size="13" id="id_phone_0"></p>
+                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label>ext.</label><input class="form-control" type="text" name="phone_1" size="4" id="id_phone_1"></p>
+                    </div>
+                </div>               
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_caixa">Caixa do condomino:</label> <input class="form-control" type="number" name="caixa" value="0" min="0" required id="id_caixa"></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_start_of_activities">Início das atividades:</label> <input class="form-control" type="date" name="start_of_activities" required id="id_start_of_activities"></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_periodo">Periodo Mensal:</label> <input class="form-control" type="date" name="periodo" required id="id_periodo"></p>
+                    </div>
+                </div>
+                                
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_main_activity">Main activity:</label> <input class="form-control" type="text" name="main_activity" value="Condomínios Prediais" maxlength="150" required id="id_main_activity"></p>
+                    </div>
+                </div> 
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_valor_taxa">Valor taxa:</label> <input class="form-control" type="number" name="valor_taxa" value="0" step="0.01" id="id_valor_taxa"> <span class="helptext">Valor da taxa mensal</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_taxa_extra_ordinaria">Taxa extra ordinaria:</label> <input class="form-control" type="number" name="taxa_extra_ordinaria" value="0" step="0.01" id="id_taxa_extra_ordinaria"> <span class="helptext">Valor da taxa Ordinária</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_fundo_de_reserva">Fundo de reserva:</label> <input class="form-control" type="number" name="fundo_de_reserva" value="0" step="0.01" id="id_fundo_de_reserva"> <span class="helptext">Valor da taxa Ordinária</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_valor_total">Valor total:</label> <input class="form-control" type="number" name="valor_total" value="0" step="0.01" id="id_fundo_de_reserva"> <span class="helptext">Valor da taxa Ordinária</span></p>
+                    </div>
+                </div>
+                
+                <div class="selectgroup selectgroup-pills ml-4">
+                    <label class="selectgroup-item">
+                        <input type="checkbox"    name="is_active" id="id_is_active" value="is_active" class="selectgroup-input">
+                        <span class="selectgroup-button">Está Ativo</span>
+                      </label>                      
+                </div>
+            </div> 
+            <div>
+                {% for key, value in form.errors.items %}
+                <span class="fieldWrapper">
+                    <div class="alert alert-danger">
+                        <b>Nota!</b> {{ key }}:{{ value }}
+                      </div>
+                    
+                </span>
+            {% endfor %}
+            </div>         
+            <div class="card-footer text-left">
+            <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
+            </form>
+            </div>
+            </div>            
+        </div>            
+    </div>         
+</div> 
+{% endblock %}
+
+
+
+
+
+

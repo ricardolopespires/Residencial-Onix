@@ -1,0 +1,105 @@
+{% extends 'management/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+
+
+
+{% block dashboad %}
+
+<style>
+  .helptext
+  {
+    font-size: 10px;
+    color: #ccc;
+  }
+</style>
+
+<div class="section-header ">
+    <div class="slider-outer">
+      <div class="slider-inner">
+          <div class="  manager fron active" data-slider="1">
+              <div class="manager-title">Moradores<i class="fas fa-user-plus"></i> </div>
+              <h2 class="title-manager-h2">Updated</h2>               
+          </div>
+      </div>
+  </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Atualizar os dados do Morador</h2>
+    <p class="section-lead">
+      Examples and usage guidelines for form control styles, layout options, and custom components for creating a wide variety of forms.
+    </p>
+
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">         
+        <div class="card">
+          <div class="card-header">
+            <h4>Formulário de adição</h4>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-danger">
+              <b>Nota!</b> Os dados devem ser verdadeiro.
+            </div>
+            <form action="." method="POST"  enctype="multipart/form-data" >
+            {% csrf_token %}              
+            {% bootstrap_form form %}       
+            <div class="card-footer text-left">
+            <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
+            {% buttons %}
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          {% endbuttons %}
+
+            <br><br>
+            {% for key, value in form.errors.items %}
+            <span class="fieldWrapper">
+                <div class="alert alert-danger">
+                    <b>Nota!</b> {{ key }}:{{ value }}
+                  </div>
+               {% endfor %} 
+            </span>
+            </form>
+            </div>
+            </div>            
+            </div>            
+          </div>         
+</div>    
+  </div>    
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+
+<p><label for="id_name">Nome:</label> <input type="text" name="name" maxlength="100" id="id_name"></p>
+<p><label for="id_cpf">CPF:</label> <input type="text" name="cpf" maxlength="150" id="id_cpf"></p>
+<p><label for="id_rg">RG:</label> <input type="text" name="rg" maxlength="150" id="id_rg"></p>
+<p><label for="id_email">E-mail:</label> <input type="email" name="email" maxlength="254" id="id_email"></p>
+<p><label for="id_address">Endereço:</label> <input type="text" name="address" maxlength="190" id="id_address"></p>
+<p><label for="id_date_of_birth">Data de Nascimento:</label> <input type="text" name="date_of_birth" id="id_date_of_birth"></p>
+<p><label for="id_moradores">Moradores:</label> <input type="number" name="moradores" value="0" required id="id_moradores"> <span class="helptext">Quantidade de moradores fixo</span></p>
+<p><label for="id_state">Estado:</label> <input type="text" name="state" maxlength="100" id="id_state"></p>
+<p><label for="id_status">Satus:</label> <select name="status" id="id_status">
+  <option value="propietário" selected>Protetário</option>
+
+  <option value="aluguel">Aluguel</option>
+
+</select></p>
+<p><label for="id_genre">Genero:</label> <select name="genre" id="id_genre">
+  <option value="masculino" selected>Masculino</option>
+
+  <option value="feminino">Feminino</option>
+
+</select></p>
+<p><label for="id_city">Cidade:</label> <input type="text" name="city" maxlength="190" id="id_city"></p>
+<p><label for="id_phone_0">Phone:</label> <input type="text" name="phone_0" size="13" id="id_phone_0"><span class="phone-field-ext">&nbsp;&nbsp;ext.&nbsp;&nbsp;</span><input type="text" name="phone_1" size="4" id="id_phone_1"> <span class="helptext">Telefone para contato</span></p>
+<p><label for="id_is_active">Está ativo?</label> <input type="checkbox" name="is_active" id="id_is_active"></p>
+<p><label for="id_is_staff">É da equipe?</label> <input type="checkbox" name="is_staff" id="id_is_staff"></p>
+
+<p><label for="id_condominium_fee">Taxa Condominial:</label> <input type="number" name="condominium_fee" value="0" min="0" id="id_condominium_fee"></p>
+<p><label for="id_extraordinary_fee">Taxa Exraordinaria:</label> <input type="number" name="extraordinary_fee" value="0" min="0" id="id_extraordinary_fee"></p>
+<p><label for="id_mudanca">Mudanca:</label> <input type="text" name="mudanca" id="id_mudanca"> <span class="helptext">Data que Morador mudou</span></p>
+<p><label for="id_saida">Saida:</label> <input type="text" name="saida" id="id_saida"> <span class="helptext">Data do Morador saiu</span></p>

@@ -1,0 +1,100 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+{% block dashboad %}
+<style>
+.helptext
+{
+    font-size: 11px;
+}
+
+.fa-reply-all
+{
+    font-size: 40px;
+    color: #000;
+}
+</style>
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Financeiro</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Taxas Extraordinárias</h1>
+    <div class="section-header-breadcrumb">        
+        <i style="font-size: 70px; color: #000066;"  class="fas fa-server"></i>
+    </div>
+</div>
+<div class="col-md-12 mb-5 mt-5">
+    <div class="row">            
+        <div class="col-md-12">
+           <a href="{% url 'condominio:manager' %}"><div class=" float-left icon-top text-dark add-despesas" title="Voltar"><i class="fas fa-reply-all"></i></div></a> 
+        </div>
+    </div>  
+</div>
+<div class="section-body">
+    <h2 class="section-title">Adicionar Taxas ExtraOrdinárias</h2>
+    <p class="section-lead">
+        Taxas Ordinárias: manutenção e pequenos reparos de emergência. - Extraordinárias: benfeitorias para o prédio.
+    </p>
+    <form action="{% url 'condominio:taxas_extraordinaria' %}" method="POST"  enctype="multipart/form-data" >
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <p><label for="id_administradores">Administradores:</label>
+                         <select class="form-control" name="administradores" required id="id_administradores">
+                        <option value="" selected>---------</option> 
+                        {% for administrador in administradores%}                     
+                        <option value="{{ administrador.id }}">{{ administrador.nome }}</option>
+                        {% endfor %}                      
+                      </select>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <p><label for="id_condominio">Condominio:</label> 
+                        <select class="form-control" name="condominio" required id="id_condominio">
+                            <option value="" selected>---------</option> 
+                            {% for condominio in condominios %}             
+                            <option value="{{ condominio.id}}">{{ condominio.nome }}</option>
+                            {% endfor %}             
+                      </select>
+                      <span class="helptext">O Condominio a ser Aplicado a Taxa</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <p><label for="id_valor">Valor:</label> <input class="form-control" type="number" name="valor" value="0" step="0.01" id="id_valor"> <span class="helptext">Valor das Taxas Extraordinária</span></p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <p><label for="id_inicio">Inicio:</label> <input class="form-control" type="date" name="inicio" required id="id_inicio"> <span class="helptext"> Inicio da Taxa CondominalExtraordinária</span></p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <p><label for="id_fim">Fim:</label> <input class="form-control" type="date" name="fim" required id="id_fim"> <span class="helptext">Fim da Taxa Condominal Extraordinária</span></p>
+                </div>
+            </div>
+        </div> 
+        <div>
+            {% for key, value in form.errors.items %}
+            <span class="fieldWrapper">
+                <div class="alert alert-danger">
+                    <b>Nota!</b> {{ key }}:{{ value }}
+                  </div>
+                
+            </span>
+        {% endfor %}
+        </div><button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+        <button class="btn btn-danger" type="reset">Cancelar</button>
+    </form>      
+</div>
+
+{% endblock %}
+
+
+
+

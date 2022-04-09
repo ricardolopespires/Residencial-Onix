@@ -1,0 +1,119 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+
+<style>
+  .helptext
+  {
+    font-size: 10px;
+    color: #ccc;
+  }
+</style>
+
+<div class="section-header ">
+    <div class="slider-outer">
+      <div class="slider-inner">
+          <div class="  manager fron active" data-slider="1">
+              <div class="manager-title">Animal<i class="fas fa-server"></i> </div>
+              <h2 class="title-manager-h2">Adicionar</h2>               
+          </div>
+      </div>
+  </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Adicionar Novo Animal</h2>
+    <p class="section-lead">
+      Adicionar um novo animal para ter permissão para estacionar na garragem do condomínio.
+    </p>
+
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">         
+        <div class="card">
+          <div class="card-header">
+            <h4>Formulário de adição</h4>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-danger">
+              <b>Nota!</b> Os dados devem ser verdadeiro.
+            </div>
+            <form action="." method="POST"  enctype="multipart/form-data" >
+            {% csrf_token %}              
+            <div class="row">  
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_id">Nº da Unidade:</label> <input class="form-control" type="text" name="id" maxlength="40" required id="id_id"> <span class="helptext">Numero da do apartamento</span></p>
+                    </div>
+                </div>
+                <p><label for="id_proprietario">Proprietario:</label>
+                    <select class="form-control" name="proprietario" required id="id_proprietario">
+                        <option value="" selected>---------</option>
+                        {% for morador in moradores%}
+                        <option value="{{ morador.id }}">{{ morador.nome }}</option>                
+                        {% endfor %}
+                    </select>
+                </p>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_nome">Nome:</label> <input class="form-control" type="text" name="nome" maxlength="150" id="id_nome"> <span class="helptext">O Nome do Animal</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_tipo">Tipo:</label>
+                            <select class="form-control" name="tipo" id="id_tipo">
+                                <option value="cães" selected>Cães</option>                        
+                                <option value="gatos">Gatos</option>                        
+                                <option value="pássaros">Pássaros</option>                        
+                                <option value="peixes">Peixes</option>                        
+                                <option value="hamster">Hamster</option>                        
+                                <option value="porquinho da ídia">Porquinho da Índia</option>                        
+                                <option value="coelho">Coelho</option>                        
+                            </select> <span class="helptext">O Tipo do Animal de Estimação</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_raca">Raça:</label> <input class="form-control" type="text" name="raca" maxlength="150" id="id_raca"> <span class="helptext">A Raça do Animal de Estimação</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_cor">Cor:</label> <input class="form-control" type="text" name="cor" maxlength="150" id="id_cor"> <span class="helptext">A Cor do Animal de Estimação</span></p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <p><label for="id_img">Img:</label> <input class="form-control" type="file" name="img" accept="image/*" id="id_img"> <span class="helptext">Imagem do Animal de Estimação</span></p>
+                    </div>
+                </div>
+            <div class="card-footer text-left">
+            <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
+
+            <br><br>
+            {% for key, value in form.errors.items %}
+            <span class="fieldWrapper">
+                <div class="alert alert-danger">
+                    <b>Nota!</b> {{ key }}:{{ value }}
+                  </div>
+               {% endfor %} 
+            </span>
+            </form>
+            </div>
+            </div>            
+            </div>            
+          </div>         
+        </div>    
+  </div>    
+  </div>
+</div>
+
+
+
+{% endblock %}

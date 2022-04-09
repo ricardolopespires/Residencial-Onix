@@ -1,0 +1,70 @@
+{% extends 'initial/base.html'%}
+{% load static %}
+
+
+{% block index %}
+
+<!--text------------->
+ <!--Pricing-Table---------------------------------->
+ <br><br><br><br><br><br>
+<section id="about" class="section-padding about-section">
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="section-title"><br>
+             <div class="section-subtitle">Contato</div>
+             <h2 class="section-main-title">Entre contato com <strong>Condomínio</strong></h2>
+            </div>
+            <div class="about-item">
+                <p><b>O Residencial Ônix</b>  entrar em contato com você no prazo maximo de 48 horas, para lhe prestar 
+                    todas informações necessarias</p>
+            </div>
+        </div>        
+    </div>
+    <br><br><br><br>
+    
+     <!-- Contact Us Section -->
+    <div class="row">
+        <div class="col-lg-7">
+            <form action="{% url 'contato:formulario' %}" class="mb-4 mb-lg-0" method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-6 form-group">
+                        <input type="text" name="nome" class="form-control" id="name" placeholder="Digite seu Nome" />
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Digite seu Email" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="assunto" id="subject" placeholder="Digite o Assunto" />
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" name="message" placeholder="Digite a Messagem"></textarea>
+                </div>               
+                <button type="submit" class="btn btn-light">Enviar</button>
+            </form>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3571289.733943155!2d76.08560099999998!3d29.058775699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390e4a4b98404f57%3A0x75ffae70833e8448!2sShahbad%2C%20Haryana%20136135!5e0!3m2!1sen!2sin!4v1594195370933!5m2!1sen!2sin" width="100%" height="350" frameborder="0" style="border: 0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+        </div>
+    </div>
+    <!-- End Contact Us Section -->
+    <!-- //contact-form -->
+
+
+  </div>
+</section>
+
+
+
+{% endblock %}
+<p><label for="id_nome">Nome:</label> <input type="text" name="nome" maxlength="150" required id="id_nome"> <span class="helptext">Digite seu Nome</span></p>
+<p><label for="id_phone_0">Phone:</label> <input type="text" name="phone_0" value="(00) 0000-0000" size="13" id="id_phone_0"><span class="phone-field-ext">&nbsp;&nbsp;ext.&nbsp;&nbsp;</span><input type="text" name="phone_1" size="4" id="id_phone_1"> <span class="helptext">Numero do Telefone</span></p>
+<p><label for="id_email">Email:</label> <input type="email" name="email" maxlength="254" required id="id_email"> <span class="helptext">Digite seu Email</span></p>
+<p><label for="id_assunto">Assunto:</label> <input type="text" name="assunto" maxlength="150" required id="id_assunto"> <span class="helptext">Digite o Assunto</span></p>
+<p><label for="id_message">Message:</label> <textarea name="message" cols="40" rows="10" required id="id_message">
+</textarea></p>

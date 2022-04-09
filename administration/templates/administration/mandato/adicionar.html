@@ -1,0 +1,268 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Adicionar</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Administradores</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas  fa-server"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Adicionar Novo Administrador</h2>
+        <p class="section-lead">
+          Adicionar os dados do novo membro do corpo administrativo  do Condomínio, todos os dados devem ser legitimo para a outorga do mandato.
+        </p>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">         
+                <div class="card">
+              <div class="card-header">
+                <h4>Formulário de adição de dados</h4>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-danger">
+                  <b>Nota!</b> Os dados devem ser verdadeiro.
+                </div>
+                <form action="." method="POST"  enctype="multipart/form-data" >
+                {% csrf_token %}
+               <div class="row">
+                <div class="col-md-4">
+                  <div class="fom-group">      
+                    <p><label for="unidade">unidade:</label> <input class="form-control" type="text" name="unidade" required id="unidade"> <span class="helptext"> Numero da Unidade se é morador</span></p>
+                  </div>
+                 </div>
+                 <div class="col-md-4">
+                   <div class="fom-group">
+                    <p><label for="id_user">Usuário condominio sindico:</label>
+                      <select class="form-control" name="user" id="id_user">
+                      <option value="" selected>---------</option>
+                      {% for usuario in usuarios %}                  
+                      <option value="{{ usuario.id }}">{{ usuario.name }}</option> 
+                      {% endfor %}                 
+                      </select>
+                    </p>
+                   </div>
+                 </div>
+                 <div class="col-md-4">
+                  <div class="fom-group">      
+                    <p><label for="id_data_de_inicio">Data de inicio:</label> <input class="form-control" type="date" name="data_de_inicio" required id="id_data_de_inicio"> <span class="helptext"> Data de Inicio do Mandato de Síndico</span></p>
+                  </div>
+                 </div>
+                 <div class="col-md-4">
+                    <div class="fom-group"> 
+                    <p><label for="id_termino">Termino:</label> <input class="form-control" type="date" name="termino" required id="id_termino"> <span class="helptext">O Fim do Mandato de Síndico</span></p>
+                    </div>
+                 </div>
+                 <div class="col-md-4">
+                  <div class="fom-group"> 
+                    <p><label for="id_mandato">Mandato:</label>
+                      <select class="form-control" name="mandato" id="id_mandato">
+                        <option value="">---------</option>
+                        <option value="vigente" selected>Vigente</option>                 
+                        <option value="não vigente">Não Vigente</option>
+                      </select>
+                    </p>
+                  </div>
+                 </div>
+                    <div class="col-md-4">
+                      <div class="fom-group"> 
+                        <p><label for="id_status">Status:</label> 
+                          <select class="form-control" name="status" id="id_status">
+                            <option value="">---------</option>                  
+                            <option value="sindico profissional">Sindico Profissional</option>
+                            <option value="administradora">Administradora</option>
+                            <option value="sindico">Sindico</option>
+                            <option value="presidente do conselho fiscal ">Presidente do Conselho Fiscal </option>
+                            <option value="1º membro">1º Membro</option>
+                            <option value="2º membro">2º Membro</option>
+                            <option value="3º membro">3º Membro</option>
+                            <option value="4º membro">4º Membro</option>
+                            <option value="5º membro">5º Membro</option>                      
+                          </select>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="fom-group">
+                        <p><label for="id_nome">Nome:</label> <input class="form-control" type="text" name="nome" maxlength="150" required id="id_nome"> <span class="helptext">Nome do sindico do mandato</span></p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="fom-group">
+                        <p><label for="id_img">Img:</label> <input class="form-control" type="file" name="img" accept="image/*" id="id_img"> <span class="helptext">Image do Síndico</span></p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="fom-group">
+                        <p><label for="id_sexo">Sexo:</label> 
+                          <select class="form-control" name="sexo" id="id_sexo">
+                          <option value="masculino" selected>Masculino</option>                        
+                          <option value="feminino">Feminino</option>                        
+                        </select> <span class="helptext">O Genero do Síndico </span>
+                      </p>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="fom-group">
+                          <p><label for="id_data_nascimento">Data nascimento:</label> <input class="form-control" type="date" name="data_nascimento" maxlength="150" id="id_data_nascimento"> <span class="helptext">Data de Nacimento do Pestador de Serviço</span></p>
+                      </div>
+                    </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                       <p><label for="id_estado_civil">Estado civil:</label> 
+                        <select class="form-control" name="estado_civil" id="id_estado_civil">
+                           <option value="solteiro" selected>Solteiro</option>                         
+                           <option value="solteira">Solteira</option>                         
+                           <option value="casado">Casado</option>                         
+                           <option value="casada">Casada</option>                         
+                           <option value="viuvo">Viuvo</option>                         
+                           <option value="viuva">viuva</option>                         
+                         </select> <span class="helptext">O Estado Civil do Síndico </span></p>                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="fom-group">
+                      <p><label for="id_cpf">CPF:</label> <input class="form-control" type="text" name="cpf" maxlength="150" id="id_cpf"> <span class="helptext">Documento CPF do do Síndico </span></p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                      <p><label for="id_rg">RG:</label> <input class="form-control" type="text" name="rg" maxlength="150" id="id_rg"> <span class="helptext">Documento RG do Síndico </span></p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                      <p><label for="id_mae">Mae:</label> <input class="form-control" type="text" name="mae" maxlength="150" id="id_mae"> <span class="helptext">O Nome da Mãe do Síndico </span></p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                  <p><label for="id_pai">Pai:</label> <input class="form-control" type="text" name="pai" maxlength="150" id="id_pai"> <span class="helptext">O Nome da Pai do Síndico </span></p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <p><label for="id_nacionalidade">Nacionalidade:</label> <input class="form-control" type="text" name="nacionalidade" maxlength="150" id="id_nacionalidade"> <span class="helptext">O pais que  Síndico  Nasceu</span></p>
+                    
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <p><label for="id_endereco">Endereco:</label> <input class="form-control" type="text" name="endereco" maxlength="150" id="id_endereco"> <span class="helptext">Endereço onde o Síndico Mora</span></p>
+                   
+                  </div>
+                </div>               
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <p><label for="id_numero">Numero:</label> <input class="form-control" type="number" name="numero" id="id_numero"> <span class="helptext">Numero da Casa do Síndico</span></p>
+                   
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <p><label for="id_complemento">Complemento:</label> <input class="form-control" type="text" name="complemento" maxlength="150" id="id_complemento"> <span class="helptext">Complemento de informações</span></p>
+                    
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <p><label for="id_bairro">Bairro:</label> <input class="form-control" type="text" name="bairro" maxlength="150" id="id_bairro"> <span class="helptext">Bairro onde o Síndico Mora</span></p>
+                    
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <p><label for="id_cidade">Cidade:</label> <input class="form-control" type="text" name="cidade" maxlength="150" id="id_cidade"> <span class="helptext">A Cidade onde o Síndico Mora</span></p>
+                   
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <p><label for="id_cep">Cep:</label> <input class="form-control" type="text" name="cep" maxlength="150" id="id_cep"> <span class="helptext">Numero Postal do Síndico </span></p>
+                    
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <p><label for="id_telefone_0">Telefone:</label> <input class="form-control" type="text" name="telefone_0" size="13" id="id_telefone_0"> <span class="helptext">Numero do Telefone do Síndico </span></p>
+                   
+                  </div>                 
+                </div>
+                <div class="col-md-3">
+                  <div class="fom-group">
+                   <p><label >ext</label><input class="form-control" type="text" name="telefone_1" size="4" id="id_telefone_1"></p>
+                  </div>
+                 </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <p><label for="id_celular_0">Celular:</label> <input class="form-control" type="text" name="celular_0" size="13" id="id_celular_0"> <span class="helptext">Numero do celular do Síndico </span></p>
+                   
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form_group">
+                   <p><label>&nbsp;&nbsp;ext.&nbsp;&nbsp;</label><input class="form-control" type="text" name="celular_1" size="4" id="id_celular_1"></p> 
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <p><label for="id_email">Email:</label> <input class="form-control" type="email" name="email" maxlength="254" id="id_email"> <span class="helptext">Email do Síndico </span></p>
+                   
+                  </div>
+                </div>               
+                <div class="selectgroup selectgroup-pills ml-4">
+                  <label class="selectgroup-item">
+                      <input type="checkbox"    name="is_active" id="id_is_active" value="is_active" class="selectgroup-input">
+                      <span class="selectgroup-button">Está Ativo </span>
+                    </label> 
+                    <label class="selectgroup-item">
+                      <input type="checkbox" name="is_staff" id="id_is_staff" value="is_staff" class="selectgroup-input">
+                      <span class="selectgroup-button">É da equipe </span>
+                    </label>
+                     
+                    <label class="selectgroup-item">
+                      <input type="checkbox" name="profissional" id="id_profissional"  value="profissional" class="selectgroup-input">
+                      <span class="selectgroup-button">Síndico profissional </span>
+                    </label> 
+                    <label class="selectgroup-item">
+                      <input type="checkbox" name="sindico" id="id_sindico" value="sindico" class="selectgroup-input">
+                      <span class="selectgroup-button">Síndico</span>
+                    </label>
+                    <label class="selectgroup-item">
+                      <input type="checkbox" name="morador" id="morador" value="morador" class="selectgroup-input">
+                      <span class="selectgroup-button">morador</span>
+                    </label>                                        
+              </div>                    
+               </div>
+                <div>
+                    {% for key, value in form.errors.items %}
+                    <span class="fieldWrapper">
+                        <div class="alert alert-danger">
+                            <b>Nota!</b> {{ key }}:{{ value }}
+                          </div>
+                        
+                    </span>
+                {% endfor %}
+                </div>         
+                <div class="card-footer text-left">
+                <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+                <button class="btn btn-danger" type="reset">Cancelar</button>
+                </form>
+                </div>
+                </div>            
+            </div>            
+        </div>         
+    </div> 
+
+
+
+{% endblock %}

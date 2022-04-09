@@ -1,0 +1,96 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+
+<section class="section">
+
+    <div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Administrador</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">{{ administrador.status }}</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas  fa-user-tie"></i>
+    </div>
+    </div>
+  
+</section>
+ <div class="section-body">
+    <div class="col-md-12">
+          <div class="wrapper">
+             <div class="row">
+                <div class="com-md-4">                  
+                   <div class="img-area">
+                      <div class="inner-area">
+                        {% if administrador.img %}
+                        <img src="{{ administrador.img.url }}" alt="">
+                        {% else %}
+                        <img src="https://as1.ftcdn.net/v2/jpg/01/83/55/76/500_F_183557656_DRcvOesmfDl5BIyhPKrcWANFKy2964i9.jpg"" alt="">
+                        {% endif %}
+                      </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-9 col-sm-8">         
+                  <a href="#"><div class="icon dots float-right"><i class="fas fa-edit"></i></div></a> 
+                   <div class="name ">{{ administrador.nome }}</div>
+                   <div class="about mb-2">Início do Mandato: {{ administrador.data_de_inicio |date}} </div>
+                   <div class="about mb-2">Fim do Mandato: {{ administrador.termino |date}} </div>
+                   <div class="about mb-2">Status {% if administrador.is_active == True %}
+                   <span class="text-success">Ativo</span>{% else %} <span class="text-danger">Não Ativo</span>{% endif %} </div> 
+                   <div class="social-icons">
+                   <a href="#" class="fb"><i class="fab fa-facebook-f"></i></a>
+                   <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                   <a href="#" class="insta"><i class="fab fa-instagram"></i></a>
+                   <a href="#" class="yt"><i class="fab fa-youtube"></i></a>
+                   </div>
+                   <div class="buttons">
+                   <button>Message</button>
+                   <button>Multas</button>
+                   </div>                                      
+                </div>
+                <div class="col-12 col-md-12 col-sm-12 mt-5">
+                   <div class="name info-basic">Movimento Finaceiro do {{ administrador.status }}</div>                                    
+                   <div class="row h6 font-weight-light mt-4">                      
+                       <div class="col-4">
+                        R$ <span class="">0,00<span> Saldo total do Valor</span></span>
+                       </div>                
+                   </div>                  
+                </div>
+                <br><br>
+                <div class="col-12 col-md-12 col-sm-12 mt-5">
+                   <div class="name info-basic">Informações Basícas</div> 
+                   <div class="row">
+                      <div class="col-6 col-md-6 col-sm-6">                       
+                         <div class="about mb-2">Nome: {{ administrador.nome}} </div>  
+                         <div class="about mb-2">Status: {{ administrador.status }} </div>  
+                         <div class="about mb-2">Sexo: {{ administrador.sexo }} </div>  
+                         <div class="about mb-2">Data de Nascimento: {{ administrador.data_nascimento }} </div>  
+                         <div class="about mb-2">Estado Civil: {{ administrador.estado_civil }} </div>  
+                         <div class="about mb-2">CPF: {{ administrador.cpf }} </div> 
+                         <div class="about mb-2">RG: {{ administrador.rg }} </div> 
+                         <div class="about mb-2">Email: {{ administrador.email }} </div>
+                          
+                      </div>
+                      <div class="col-6 col-md-6 col-sm-6">                                               
+                         <div class="about mb-2">Telefone: {{ administrador.celular }} </div>
+                         <div class="about mb-2">Naturalidade: {{ administrador.naturalidade }} </div>
+                         <div class="about mb-2">Nacionalidade: {{ administrador.nacionalidade }}</div>
+                         <div class="about mb-2">Nome da Mãe: {{ administrador.mae }} </div>   
+                         <div class="about mb-2">Nome da Pai: {{ administrador.pai }} </div>                        
+                         <div class="about mb-2">Endereço: {{ administrador.endereco }} </div>   
+                         <div class="about mb-2">Bairro: {{ administrador.bairro }} </div>
+                         <div class="about mb-2">Cidade: {{ administrador.cidade }} </div>
+                         <div class="about mb-2">CEP: {{ administrador.cep }} </div>
+                         
+                   </div>          
+                </div>
+             </div>        
+           </div>
+    </div> 
+  </div>
+ 
+{% endblock %}

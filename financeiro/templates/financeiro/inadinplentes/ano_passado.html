@@ -1,0 +1,231 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+<style>
+  .text-warning
+  {
+    color: orange!important;
+  }
+
+  .table-title
+{
+    font-size: 12px!important;
+}
+
+.add-despesas i
+{
+  font-size: 40px;
+}
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Financeiro</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Inadinplências Anual</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas  fa-money-check-alt"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Lista dos Inadinplentes referente ao ano de {{ year }}</h2>
+        <p class="section-lead">
+          Lista dos moradores que estão indinplentes para o calculo correto na contabilidade.
+        </p>
+        <div class="row mb-5">
+          <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+            <div class="row">
+              <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0"><link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">Valor total</h5>
+              <span class="h2 font-weight-bold mb-0">R$ {{ valor_total_mes_atual }}</span>
+              </div>
+              <div class="col-auto">
+              <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                <i class="fa fa-dollar"></i>
+              </div>
+              </div>
+            </div>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              {% if porcentagem_valor_total_anteriores > 0 %}
+              <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{ porcentagem_valor_total_anteriores }}%</span>
+              {% elif porcentagem_valor_total_anteriores == 0 %}
+              <span class="text-dark mr-2"> {{ porcentagem_valor_total_anteriores }}%</span>              
+              {% else %}
+              <span class="text-success mr-2"><i class="fa fa-arrow-down"></i> {{ porcentagem_valor_total_anteriores }}%</span>
+              {% endif %}
+              <span class="text-nowrap">Desde o último Ano</span>
+            </p>
+            </div>
+          </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+            <div class="row">
+              <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">unidades</h5>
+              <span class="h2 font-weight-bold mb-0">{{ inadinplencias.count }}</span>
+              </div>
+              <div class="col-auto">
+              <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                <i class="fas fa-home"></i>
+              </div>
+              </div>
+            </div>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              {% if porcentagem_unidade_anteriores > 0 %}
+              <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> {{ porcentagem_unidade_anteriores }}%</span>
+              {% elif porcentagem_unidade_anteriores  == 0 %}
+              <span class="text-dark mr-2"> {{ porcentagem_unidade_anteriores  }}%</span>   
+              {% else %}
+              <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> {{ porcentagem_unidade_anteriores }}%</span>
+              {% endif %}
+              <span class="text-nowrap"> Desde o último Ano</span>
+            </p>
+            </div>
+          </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+            <div class="row">
+              <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">Juros</h5>
+              <span class="h2 font-weight-bold mb-0">R$ {{ juros_year_atual }}</span>
+              </div>
+              <div class="col-auto">
+              <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              </div>
+            </div>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              {% if porcentagem_juros_year > 0  %}
+              <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> {{ porcentagem_juros_year }}%</span>
+              {% elif porcentagem_juros_year  == 0 %}
+              <span class="text-dark mr-2"> {{ porcentagem_juros_year  }}%</span>  
+              {% else %}
+              <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> {{ porcentagem_juros_year }}%</span>
+              {% endif %}
+              <span class="text-nowrap">Desde o último Ano</span>
+            </p>
+            </div>
+          </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+            <div class="row">
+              <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">Porcentagem</h5>
+              <span class="h2 font-weight-bold mb-0">{{ porcentagem_juros_year }}%</span>
+              </div>
+              <div class="col-auto">
+              <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                <i class="fas fa-percent"></i>
+              </div>
+              </div>
+            </div>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              {% if porcentagem_juros_year > 0 %}
+              <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>{{ porcentagem_juros_year  }}%</span>              
+              {% elif porcentagem_juros_year  == 0 %}
+              <span class="text-dark mr-2"> {{ porcentagem_juros_year  }}%</span>
+              {% else %}
+              <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>{{ porcentagem_juros_year  }}%</span> 
+              {% endif %}
+              <span class="text-nowrap">Desde o último Ano</span>
+            </p>
+            </div>
+          </div>
+          </div>         
+		   </div>
+       <div class="col-md-12 ">
+        <div class="row">            
+            <div class="col-md-12">
+               <a href="{% url 'financeiro:inadinplencias_anual' %}"><div class=" float-left icon-top text-dark add-despesas" title="Adicionar Despesas"><i class="fas fa-reply-all"></i></div></a> 
+            </div>
+        </div>  
+    </div>
+       <div class="row ">
+        <div class="col-md-12">
+          <div class="row mt-5">             
+              <div class="col-md-12">
+               
+                  <div class="card">
+                    <div class="card-header">
+                      <h4>Inadinplências</h4>                     
+                    </div>
+                    <div class="card-body p-0">
+                      <div class="table-responsive table-invoice">
+                        <table class="table table-striped">
+                          
+                          <tr>
+                            <th>Morador</th>
+                            <th>Status</th>                           
+                            <th>Referente</th>
+                            <th>dia</th>
+                            <th>Boleto</th>
+                            <th>Juros</th>
+                            <th>Multas</th>
+                            <th>Atualização</th>
+                            <th>Honorários</th>
+                            <th>Total</th>
+                          </tr>
+                          {% if inadinplencias %}
+                          {% for inadinplencia in inadinplencias %}
+                          <tr class="text-center">
+                            {% if inadinplencia.status == 'atrasado' %}
+                            <td><a href="{% url 'boletos:boleto_pagamento' inadinplencia.unidade %}">{{ inadinplencia.morador |truncatechars:11 }}</a></td>
+                            {% elif inadinplencia.status == 'inadinplente' %}
+                            <td><a href="{% url 'boletos:boleto_pagamento' inadinplencia.unidade %}">{{ inadinplencia.morador |truncatechars:11 }}</a></td>
+                            {% elif inadinplencia.status == 'acordo' %}
+                            <td><a href="{% url 'boletos:boleto_pagamento' inadinplencia.unidade %}">{{ inadinplencia.morador |truncatechars:11 }}</a></td>
+                            {% else %}
+                            <td><a href="" class="text-muted">{{ inadinplencia.morador |truncatechars:11 }}</a></td>
+                            {% endif %}
+                            {% if inadinplencia.status == 'atrasado' %}
+                            <td class="text-warning text-capitalize">{{ inadinplencia.status }}</td>
+                            {% elif inadinplencia.status == 'inadinplente' %}
+                            <td class="text-danger text-capitalize">{{ inadinplencia.status }}</td>
+                            {% elif inadinplencia.status == 'acordo' %}
+                            <td class="text-info text-capitalize">{{ inadinplencia.status }}</td>
+                            {% else %}
+                            <td class="text-success text-capitalize">{{ inadinplencia.status }}</td>
+                            {% endif %}
+                            <td>{{ inadinplencia.referente |date:'m-Y' }}</td>                         
+                            <td> {{ inadinplencia.dias }}</td>
+                            <td>{{ inadinplencia.boleto }}</td>
+                            <td>{{ inadinplencia.juros }}</td>
+                            <td>{{ inadinplencia.multa }}</td>
+                            <td>{{ inadinplencia.atualizacao }}</td>
+                            <td>{{ inadinplencia.honorarios }}</td>
+                            <td>{{ inadinplencia.valor_total }}</td>
+                          </tr> 
+                          {% endfor %}
+                          {% else %}
+
+                          {% endif %}
+                        </table>
+                      </div>
+                    </div>
+                  </div>                 
+                </div>          
+            </div>
+      </div>
+       </div>
+       
+       
+    </div> 
+
+
+
+
+{% endblock %}

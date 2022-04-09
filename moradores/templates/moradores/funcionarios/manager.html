@@ -1,0 +1,134 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+
+<style>
+.add-despesas i
+{
+  font-size: 40px;
+}
+
+.add-despesas i:hover
+{
+    color: yellowgreen;
+}
+</style>
+
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Moradores</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Funcionarios</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas fa-id-card-alt"></i>
+    </div>
+</div>
+
+<div class="section-body">
+    <h2 class="section-title">Lista dos funcionarios</h2>
+    <p class="section-lead mb-5">
+        Lista dos funcionarios autorizado a entrar no condomínio para trabalhar na unidade.
+    </p>
+    {% if funcionarios %}
+    <div class="col-md-12  mt-5 mb-5">
+      <div class="row">            
+          <div class="col-md-12">
+             <a href="{% url 'moradores:adicionar_veiculo' %}"><div class=" float-right icon-top text-dark add-despesas" data-toggle="tooltip" data-placement="top" title="Adicionar Funcionário"><i class="fas fa-plus"></i></div></a> 
+          </div>
+      </div>  
+      </div>
+      {% endif %}
+    <div class="row">
+      {% if veiculos %}
+      {% for veiculo in veiculos %}     
+       <div class="col-md-12">
+          <div class="row mt-5">             
+              <div class="col-md-12">
+              
+                  <div class="card">
+                    <div class="card-header">
+                      <h4>Veiculos dos Moradores</h4>                     
+                    </div>
+                    <div class="card-body p-0">
+                      <div class="table-responsive table-invoice">
+                        <table class="table table-striped text-center">
+                          <tr>
+                            <th>Garagem</th>
+                            <th>Morador</th>
+                            <th>Tipo</th>                                                        
+                            <th>Condição</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>cor</th>
+                            <th>Placa</th>
+                            <th>Status</th> 
+                          </tr>                         
+                          <tr>
+                              {% if veiculos %}
+                              {% for veiculo in veiculos %}                              
+                            <td>                             
+                              <a href="#">{{ veiculo.id }}</a>                                                             
+                            </td>
+                            <td>{{ veiculo.morador |truncatewords:2}}</td>
+                            <td >{{ veiculo.tipo }}</td>                
+                            <td>
+                             {{ veiculo.condicao |title}}
+                            </td>
+                            <td>{{ veiculo.marca }}</td> 
+                            <td>{{ veiculo.modelo }}</td> 
+                            <td>{{ veiculo.cor }}</td>
+                            <td>{{ veiculo.placa }}</td>
+                            {% if veiculo.status == 'avaliação' %}                      
+                            <td> <div class="badge badge-warning">Em Avaliação</div></td>
+                            {% elif veiculo.status == 'não autorizado' %}
+                            <td> <div class="badge badge-danger">Não Autorizado</div></td>
+                            {% elif veiculo.status == 'autorizado' %}
+                            <td> <div class="badge badge-success">Autorizado</div></td>
+                            {% endif %}                            
+                          </tr> 
+                          {% endfor %}
+                          {% endif %}
+                        </table>
+                      </div>
+                    </div>
+                  </div>                 
+              </div>          
+            </div>
+      </div>     
+        {% endfor %}
+        {% else %}
+        <div class="col-12 col-md-12 col-sm-12">                
+          <div class="card">
+            <div class="card-header">
+              <h4>Ops....</h4>
+            </div>
+            <div class="card-body">
+              <div class="empty-state" data-height="600">
+                <img class="img-fluid" width="400" src="{% static 'assets/img/drawkit/drawkit-full-stack-man-colour.svg' %}" alt="image">
+                <h2 class="mt-0">Não tem Funcionários cadastrado no sistema de Autorizações</h2>
+                <p class="lead">
+                  <strong>{{ user }}</strong>, veja como cadastrar um<strong class="text-success"> novo funcionário</strong>  no sistema para controle da autorizações no sistema.
+                </p>
+                <a href="{% url 'moradores:adicionar_funcionario' %}" class="btn btn-warning mt-4">Cadastrar</a>                      
+              </div>
+            </div>
+          </div>
+      </div> 
+      {% endif %}        
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css">

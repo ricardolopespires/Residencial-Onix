@@ -1,0 +1,165 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Financeiro</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Receitas</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas fa-hand-holding-usd"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Lista de receitas referente ao mês {{ month_atual }}</h2>
+        <p class="section-lead">
+          Lista financeira refente aos pagamentos das taxas mensais do condomínio.
+        </p>
+        <div class="row mb-5">
+          <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+            <div class="row">
+              <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0"><link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">Valor total</h5>
+              <span class="h2 font-weight-bold mb-0">R$ {{ valor_total_pagamento_mes_atual }}</span>
+              </div>
+              <div class="col-auto">
+              <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                <i class="fa fa-dollar"></i>
+              </div>
+              </div>
+            </div>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{ porcetagem_valor_total }}%</span>
+              <span class="text-nowrap">O último mês</span>
+            </p>
+            </div>
+          </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+            <div class="row">
+              <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">pagementos</h5>
+              <span class="h2 font-weight-bold mb-0">{{ quantidade_mes_atual }}</span>
+              </div>
+              <div class="col-auto">
+              <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                <i class="fas fa-hand-holding-usd"></i>
+              </div>
+              </div>
+            </div>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> {{ porcetagem_de_quantidade_mes_atual  }}%</span>
+              <span class="text-nowrap">O último mês</span>
+            </p>
+            </div>
+          </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+            <div class="row">
+              <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">Juros</h5>
+              <span class="h2 font-weight-bold mb-0">R$ {{ juros_mes_atual }}</span>
+              </div>
+              <div class="col-auto">
+              <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              </div>
+            </div>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> {{ porcetagem_valor_juros }}%</span>
+              <span class="text-nowrap">O último mês</span>
+            </p>
+            </div>
+          </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+            <div class="row">
+              <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">Porcentagem</h5>
+              <span class="h2 font-weight-bold mb-0">{{ porcetagem_de_unidades_mes_atual  }}%</span>
+              </div>
+              <div class="col-auto">
+              <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                <i class="fas fa-percent"></i>
+              </div>
+              </div>
+            </div>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> {{ porcetagem_de_quantidade_comparacao }}%</span>
+              <span class="text-nowrap">O último mês</span>
+            </p>
+            </div>
+          </div>
+          </div>         
+		   </div>   
+       <div class="row t-5 mb-5">
+        <div class="col-md-12">
+          <div class="row mt-5">             
+              <div class="col-md-12">
+               
+                  <div class="card">
+                    <div class="card-header">
+                      <h4>Taxa Mensal</h4>
+                      <div class="card-header-action">
+                        <a href="{% url 'financeiro:inadinplencias_anual' %}" class="btn btn-danger">Ver todos <i class="fas fa-chevron-right"></i></a>
+                      </div>
+                    </div>
+                    <div class="card-body p-0">
+                      <div class="table-responsive table-invoice">
+                        <table class="table table-striped text-center">
+                          
+                          <tr>                         
+                            <th>Morador</th>                           
+                            <th>Unidade</th>
+                            <th>Data do pagamento</th>
+                            <th>Data do Vencimento</th>
+                            <th>Juros</th>
+                            <th>Status</th>                         
+                            <th>Total</th>
+                          </tr>
+                          {% if receitas_mes_atual %}
+                          {% for pagamentos in receitas_mes_atual %}
+                          <tr class="text-center">                           
+                            <td>{{ pagamentos.unidade }}</td>
+                            <td><a href="#">{{ pagamentos.morador |truncatechars:11 }}</a></td>
+                            <td class="font-weight-600">{{ pagamentos.data_pagamento |date:'d-m-Y' }}</td>                          
+                            <td>{{ pagamentos.data_vencimento |date:'d-m-Y' }}</td>                                                     
+                            <td>{{ pagamentos.juros }}</td> 
+                            <td> <div class="badge badge-success">Pago</div></td>                          
+                            <td>{{ pagamentos.valor_total }}</td>
+                          </tr> 
+                          {% endfor %}
+                          {% else %}
+
+                          {% endif %}
+                        </table>
+                      </div>
+                    </div>
+                  </div>                 
+                </div>          
+            </div>
+      </div>
+       </div>
+       
+       
+    </div> 
+
+
+
+
+{% endblock %}

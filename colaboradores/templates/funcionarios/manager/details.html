@@ -1,0 +1,282 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+
+<style>
+
+.text-positivo
+{
+    color:#00e600!important ;
+}
+
+.rating-bar .progress-bar
+{
+    top: -5px; 
+    position: relative; 
+    height: 14px;
+    border-radius: 10px; 
+    background:#FBC02D;
+}
+
+</style>
+
+<link rel="stylesheet" href="{% static 'css/colaboradores.css' %}">
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Dashboard</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Details</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas fa-people-arrows"></i>
+    </div>
+</div>
+<div class="section-body">
+     <div class="col-md-12">
+        <div class="wrapper">          
+           <div class="row">
+              <div class="com-md-4">                  
+                 <div class="img-area">
+                    <div class="inner-area">
+                        {%if funcionario.img %}
+                      <img src="{{ funcionario.img.url }}" alt="">
+                      {% else %}
+                      <img src="http://ibaseminario.com.br/novo/wp-content/uploads/2013/09/default-avatar.png" alt="">
+                      {% endif %}
+                    </div>
+                  </div>
+              </div>
+              <div class="col-12 col-md-9 col-sm-8">        
+                 <div class="name ">{{ funcionario.nome }}</div>
+                 <div class="about mb-2">Data Admissão: {{ funcionario.admitido |date}} </div>
+                 <div class="about mb-2">Data Demissão: {{ funcionario.demitido |date}} </div>
+                 <div class="about mb-2">Status 
+                 {% if funcionario.status == 'experiencia' %}
+                 <span class="text-info">Experiência</span>
+                 {% elif funcionario.status == 'trabalhando' %}
+                 <span class="text-success">Trabalhando</span>
+                 {% elif funcionario.status == 'afastado' %}
+                 <span class="text-warning">Afastado</span>
+                 {% elif funcionario.status == 'aviso' %}
+                 <span class="text-warning">Aviso Prévio</span>
+                 {% else %}
+                 <span class="text-danger">Demitido</span>
+                 {% endif %} </div>
+                 {% for salario in salarios %}                  
+                 {% if salario.salario_bruto < 0 %}              
+                 Salário Liquido R$ <span style="color: #e62e00;"> - {{ salario.salario_bruto }}</span>
+                 {% elif  salario.salario_bruto > 0 %}
+                 Salário Liquido R$  <span style="color:#00e600!important ;"> + {{ salario.salario_bruto }}</span>
+                 {% else %}
+                 Salário Liquido R$ <span class="text-dark"> 0,00</span>
+                 {% endif %}
+                 {% endfor %}
+                  <br><br>
+                 <div class="social-icons">
+                 <a href="#" class="fb"><i class="fab fa-facebook-f"></i></a>
+                 <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                 <a href="#" class="insta"><i class="fab fa-instagram"></i></a>
+                 <a href="#" class="yt"><i class="fab fa-youtube"></i></a>
+                 </div>
+                 <div class="buttons">
+                 <a href=""><button>Messagens</button></a>
+                 <a href="{% url 'colaboradores:avaliacao_details' funcionario.id %}"><button>Avaliação Anual</button></a>
+                 </div>                                      
+              </div>
+              <div class="col-12 col-md-12 col-sm-12 mt-5">
+                 <div class="name info-basic">Salário</div>                 
+                 <div class="about mb-2">Valor Mensal Pago aos Funcionários até a data: <span id="data-atual"></span> </div>  
+                 <div class="social-share">
+                    <div class="row"> 
+                      {% for salario in salarios %}                  
+                      {% if salario.salario_bruto < 0 %}              
+                      R$ <span style="color: #e62e00;"> - {{ salario.salario_bruto }}<span> Saldo do Pagamento</span></span>
+                      {% elif  salario.salario_bruto > 0 %}
+                      R$ <span style="color:#00e600!important ;"> + {{ salario.salario_bruto }}<span> Saldo do Pagamento</span></span>
+                      {% else %}
+                      R$ <span class="text-dark">0,00<span> Saldo do Pagamento</span></span>
+                      {% endif %}
+               
+                    </div>
+                    <div class="row"> 
+                       {% if salario.vale_transporte < 0 %}              
+                       R$ <span style="color: #e62e00;"> - {{salario.vale_transporte }}<span> Saldo do Vale Transporte</span></span>
+                       {% elif  salario.vale_transporte > 0 %}
+                       R$ <span style="color:#00e600!important ;"> + {{ salario.vale_transporte }}<span> Saldo do Vale Transporte</span></span>
+                       {% else %}
+                       R$ <span class=" text-dark">0,00<span> Saldo do Vale Transporte</span></span>
+                       {% endif %}
+                    </div>
+                    <div class="row">
+                      {% if salario.vale_refeicao < 0 %} 
+                      R$ <span style="color: #e62e00;"> - {{ salario.vale_refeicao }}<span> Saldo do Vale refeição</span></span>
+                      {% elif salario.vale_refeicao > 0 %} 
+                      R$ <span style="color:#00e600!important ;"> + {{ salario.vale_refeicao }}<span> Saldo do Vale refeição</span></span>
+                      {% else %}
+                       R$ <span class="text-dark">0,00<span> Saldo do Vale refeição</span></span>
+                       {% endif %}
+                    </div>
+                    {% endfor %}
+                 </div> 
+                
+              </div>
+              <br><br>
+              <div class="col-12 col-md-12 col-sm-12 mt-5">
+                 <div class="name info-basic"><span class="">Informações Basícas</span> </div> 
+                 <br><br>
+                 <div class="row">
+                    <div class="col-6 col-md-6 col-sm-6">                       
+                       <div class="about mb-2">Nome: {{ funcionario.nome}} </div>  
+                       <div class="about mb-2">Status: {{ funcionario.status }} </div>  
+                       <div class="about mb-2">Sexo: {{ funcionario.sexo }} </div>  
+                       <div class="about mb-2">Data de Nascimento: {{ funcionario.data_nascimento }} </div>  
+                       <div class="about mb-2">CPF: {{ funcionario.cpf }} </div> 
+                       <div class="about mb-2">RG: {{ funcionario.rg }} </div>  
+                    </div>
+                    <div class="col-6 col-md-6 col-sm-6">
+                       <div class="about mb-2">Endereço: {{ funcionario.endereco }} </div>                       
+                       <div class="about mb-2">Bairro: {{ funcionario.bairro }} </div>
+                       <div class="about mb-2">CEP: {{ funcionario.cep }} </div> 
+                       <div class="about mb-2">Telefone: {{ funcionario.telefone }} </div>
+                       <div class="about mb-2">Celular: {{ funcionario.celular }} </div>
+                       <div class="about mb-2">Cidade: {{ funcionario.cidade }} </div>
+                       <div class="about mb-2">UF: {{ funcionario.UF }} </div>                                          
+                    </div>
+                 </div>          
+              </div>
+              <div class="col-12 col-md-12 col-sm-12 mt-5">
+                <div class="name info-basic">Informações do Serviço</div> 
+                <br>
+                <div class="row">
+                   <div class="col-6 col-md-6 col-sm-6"> 
+                    <div class="about mb-2">Local do Serviço: {{ funcionario.emprego }} </div>                       
+                      <div class="about mb-2">Endereço do Serviço: {{ funcionario.endereço_do_trabalho }} </div>  
+                      <div class="about mb-2">Telefone: {{ funcionario.telefone_do_servico  }} </div>  
+                      <div class="about mb-2">Função: {{ funcionario.funcao }} </div>                
+                   </div>
+                   <div class="col-6 col-md-6 col-sm-6">
+                      <div class="about mb-2">Horário do Serviço: {{ funcionario.horario_de_trabalho }} </div> 
+                      <div class="about mb-2">Data da Admissão: {{ funcionario.admitido }} </div>
+                      {% if funcionario.demitido == None %} 
+                      <div class="about mb-2">Data da Demisão: <span class="text-success">Está Trabalhando</span> </div> 
+                      {% else %}
+                      <div class="about mb-2">Data da Demisão: {{ funcionario.demitido }} </div>                         
+                      {% endif %}
+                   </div>
+                </div>          
+             </div>
+              <div class="col-12 col-md-12 col-sm-12 mt-5">
+                <div class="name info-basic"><span>Informações Bancárias</span> </div>
+                <br> 
+                <div class="row">
+                   <div class="col-6 col-md-6 col-sm-6">
+                    {% if salarios %} 
+                     {% for salario in salarios %}                      
+                      <div class="about mb-2">Banco: {{ salario.banco }} </div>
+                      <div class="about mb-2">Tipo: {{ salario.tipo }} </div>  
+                      <div class="about mb-2">Agencia: {{ salario.agencia }} </div>  
+                      <div class="about mb-2">Conta: {{ salario.conta }} </div>  
+                      <div class="about mb-2">Salario Liquido: R$ {{ salario.salario_liquido }} </div>  
+                      {% endfor %} 
+                      {% else %} 
+                      <h4>Os dados Bancários do funcionario não estão cadastrados </h4>
+                      {% endif %}
+                   </div>                 
+                </div>          
+             </div>
+             <div class="col-12 col-md-12 col-sm-12 mt-5">
+              <div class="name info-basic"><span> Avaliações Mensal</span></div> 
+              <br>
+              <div class="row justify-content-left d-flex">
+                <div class="col-md-4 d-flex flex-column">
+                    <div class="rating-box">
+                        {% if media_avaliacao == 'None' %}
+                        <h1 class="pt-4">{{ media_avaliacao }}</h1>
+                        {% else %}
+                        <h1 class="pt-4">0</h1>
+                        {% endif %}
+                        <p class=" text-white">avaliação 0/5</p>
+                    </div>
+                    <div> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-inactive mx-1"></span> </div>
+                </div>
+                <div class="col-md-8 justify-content-center">
+                    <div class="rating-bar0 justify-content-center">
+                        <table class="text-left mx-auto">
+                            <tr>
+                                <td class="rating-label">Excelente</td>
+                                <td class="rating-bar">
+                                    <div class="">
+                                        <div class="progress-bar" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_exelente  }}%" style="width:{{ porcentagem_exelente }}%; ">                                            
+                                        </div>
+                                    </div>                                   
+                                </td>
+                                <td class="text-right">{{ excelente_total }}</td>
+                            </tr>
+                            <tr>
+                                <td class="rating-label">Bom</td>
+                                <td class="rating-bar">
+                                    <div class="">
+                                        <div class="progress-bar" data-toggle="tooltip" data-placement="top" title="{{ porcentagem_bom }}%" style="width:{{ porcentagem_bom }}%;">                                            
+                                        </div>
+                                    </div> 
+                                </td>
+                                <td class="text-right">{{ bom_total }}</td>
+                            </tr>
+                            <tr>
+                                <td class="rating-label">Média</td>
+                                <td class="rating-bar">
+                                    <div class="">
+                                        <div class="progress-bar" data-placement="top" title="{{ porcentagem_media }}%"  style="width:{{ porcentagem_media }}%;">                                            
+                                        </div>
+                                    </div> 
+                                </td>
+                                <td class="text-right">{{ media_total }}</td>
+                            </tr>
+                            <tr>
+                                <td class="rating-label">Ruim</td>
+                                <td class="rating-bar">
+                                    <div class="">
+                                        <div class="progress-bar" data-placement="top" title="{{ porcentagem_ruim }}%"  style="width:{{ porcentagem_ruim }}%; ">                                            
+                                        </div>
+                                    </div> 
+                                </td>
+                                <td class="text-right">{{ ruim_total }}</td>
+                            </tr>
+                            <tr>
+                                <td class="rating-label">Péssimo</td>
+                                <td class="rating-bar">
+                                    <div class="">
+                                        <div class="progress-bar" data-placement="top" title="{{ porcentagem_pessimo }}%"  style="width:{{ porcentagem_pessimo }}%; ">                                            
+                                        </div>
+                                    </div> 
+                                </td>
+                                <td class="text-right">{{ pessimo_total }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>         
+           </div>
+           </div>        
+         </div>
+     </div> 
+</div>
+<script>
+  var data = new Date();
+
+   var dia = String(data.getDate()).padStart(2, '0');
+
+   var mes = String(data.getMonth() + 1).padStart(2, '0');
+
+   var ano = data.getFullYear();
+
+   data_Atual = dia + '/' + mes + '/' + ano;
+
+   document.getElementById("data-atual").innerHTML = data_Atual;
+</script>
+{% endblock %}
+

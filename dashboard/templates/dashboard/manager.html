@@ -1,0 +1,249 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+
+
+
+
+
+{% block index %}
+<div class=" ">
+  <div class="main-content banner-top">   
+    <div class="header dashboard-morador pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="col-lg-12  ">
+          <div class="section-title">
+            <div class="section-subtitle-saudacao mb-4">Bem Vindo</div>
+            <h2 class="section-main-title">{{ user }} </h2>            
+          </div>
+        <div class="header-body">
+          <div class="row">
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Total em Caixa</h5>
+                      <span class="h2 font-weight-bold mb-0">R$ {{ total_caixa_mes_atual }}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                        <i class="fas fa-dollar-sign"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    {% if total_caixa_mes_atual > total_caixa_mes_passado %}
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{ procentagem_total_caixa_mes_atual  }}%</span>
+                    {% elif total_caixa_mes_atual < total_caixa_mes_passado %}
+                    <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i>{{  procentagem_total_caixa_mes_atual }}%</span>
+                    {% else %}
+                    <span class="text-dark mr-2">0,00%</span>
+                    {% endif %}
+                    <span class="text-nowrap">O último mês</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Receitas</h5>
+                      <span class="h2 font-weight-bold mb-0">R$ {{ total_receita_mes_atual }}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                        <i class="fas fa-wallet"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    {% if total_receita_mes_atual > receitas_valor_total_mes_passado %}
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>{{ porcetagem_total_receita_mes_atual  }}%</span>
+                    {% elif total_receita_mes_atual < receitas_valor_total_mes_passado %}
+                    <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> {{  porcetagem_total_receita_mes_atual  }}%</span>
+                    {% else %}
+                    <span class="text-dark mr-2">0,00%</span>
+                    {% endif %}
+                    <span class="text-nowrap">O último mês</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Despesas</h5>
+                      <span class="h2 font-weight-bold mb-0">R$ {{ despesas_valor_total_mes_atual }}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                        <i class="fas fa-screwdriver"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    {% if despesas_valor_total_mes_atual > despesas_valor_total_mes_passado %}
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{ porcentagem_total_despesas_mes_atual }}%</span>
+                    {% elif despesas_valor_total_mes_atual < despesas_valor_total_mes_passado %}
+                    <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> {{ porcentagem_total_despesas_mes_atual }}%</span>
+                    {% else %}
+                    <span class="text-dark mr-2">0,00%</span>
+                    {% endif %}
+                    <span class="text-nowrap">O último mês</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Inadinplências</h5>
+                      <span class="h2 font-weight-bold mb-0">R$ {{ inadinplencias }}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                        <i class="fas fa-chart-pie"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    {% if total_inadinplencias_mes_atual > total_inadinplencias_mes_passado %}
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>{{ total_porcentagem_inadinplencias_mes_atual }}%</span>
+                    {% elif total_inadinplencias_mes_atual < total_inadinplencias_mes_passado %}
+                    <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i>{{ total_porcentagem_inadinplencias_mes_atual }}%</span>
+                    {% else %}
+                    <span class="text-dark mr-2">0,00%</span>
+                    {% endif %}
+                    <span class="text-nowrap">O último mês</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>   
+    <div class="container">
+      <div class="row">
+          <div class="col-lg-12 mb-5 mt-5 ">
+            <div class="section-title"><br><br><br><br>
+              <div class="section-subtitle mb-4">Serviços</div>
+              <h2 class="section-main-title">Nossa Área de <strong> Serviços</strong></h2>
+              
+            </div>           
+          </div>
+          <div class="col-lg-3 col-sm-6 mb-4">
+            <a href="{% url 'dashboard:financeiro_unidade' user.unidade %}">
+              <div class="card border-0 shadow rounded-xs pt-5">
+                  <div class="card-body"> <i class="fa fa-dollar icon-lg icon-primary icon-bg-primary icon-bg-circle mb-3"></i>
+                      <h4 class="mt-4 mb-3">Financeiro</h4>
+                      <p class="">Movimentação financeira da unidade como taxa ordinária, inadimplência etc.</p>
+                  </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-3 col-sm-6 mb-4">
+            <a href="{% url 'dashboard:ocorrencias' user.unidade %}">
+              <div class="card border-0 shadow rounded-xs pt-5">
+                  <div class="card-body"> <i class="fa fa-users icon-lg icon-yellow icon-bg-yellow icon-bg-circle mb-3"></i>
+                      <h4 class="mt-4 mb-3">Ocorrências</h4>
+                      <p>For what reason would it be advisable for me to think about business content?</p>
+                  </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-3 col-sm-6 mb-4">
+              <div class="card border-0 shadow rounded-xs pt-5">
+                  <div class="card-body"> <i class="fa fa-desktop icon-lg icon-purple icon-bg-purple icon-bg-circle mb-3"></i>
+                      <h4 class="mt-4 mb-3">Multas</h4>
+                      <p>For what reason would it be advisable for me to think about business content?</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-sm-6 mb-4">
+              <div class="card border-0 shadow rounded-xs pt-5">
+                  <div class="card-body"> <i class="fa fa-cloud icon-lg icon-cyan icon-bg-cyan icon-bg-circle mb-3"></i>
+                      <h4 class="mt-4 mb-3">Serviços</h4>
+                      <p>For what reason would it be advisable for me to think about business content?</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-sm-6 mb-4">
+              <div class="card border-0 shadow rounded-xs pt-5">
+                  <div class="card-body"> <i class="fa fa-comments icon-lg icon-red icon-bg-red icon-bg-circle mb-3"></i>
+                      <h4 class="mt-4 mb-3">Documentos</h4>
+                      <p>For what reason would it be advisable for me to think about business content?</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-sm-6 mb-4">
+              <div class="card border-0 shadow rounded-xs pt-5">
+                  <div class="card-body"> <i class="fa fa-search-plus icon-lg icon-green icon-bg-green icon-bg-circle mb-3"></i>
+                      <h4 class="mt-4 mb-3">Informativos</h4>
+                      <p>For what reason would it be advisable for me to think about business content?</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-sm-6 mb-4">
+              <div class="card border-0 shadow rounded-xs pt-5">
+                  <div class="card-body"> <i class="fa fa-user icon-lg icon-orange icon-bg-orange icon-bg-circle mb-3"></i>
+                      <h4 class="mt-4 mb-3">Advertências</h4>
+                      <p>For what reason would it be advisable for me to think about business content?</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-sm-6 mb-4">
+              <div class="card border-0 shadow rounded-xs pt-5">
+                  <div class="card-body"> <i class="fa fa-envelope icon-lg icon-blue icon-bg-blue icon-bg-circle mb-3"></i>
+                      <h4 class="mt-4 mb-3">Eleição</h4>
+                      <p>For what reason would it be advisable for me to think about business content?</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card border-0 shadow rounded-xs pt-5">
+                <div class="card-body"> <i class="fa fa-check icon-lg icon-green icon-bg-green icon-bg-circle mb-3"></i>
+                    <h4 class="mt-4 mb-3">Autorizações</h4>
+                    <p class="text-justify">Pedidos de autorizações para, entrega de móvies, pequena reforma, entrega de eletrodomesticos</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card border-0 shadow rounded-xs pt-5">
+                <div class="card-body"> <i class="fa fa-users icon-lg icon-yellow icon-bg-yellow icon-bg-circle mb-3"></i>
+                    <h4 class="mt-4 mb-3">Ocorrências</h4>
+                    <p>For what reason would it be advisable for me to think about business content?</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card border-0 shadow rounded-xs pt-5">
+                <div class="card-body"> <i class="fa fa-desktop icon-lg icon-purple icon-bg-purple icon-bg-circle mb-3"></i>
+                    <h4 class="mt-4 mb-3">Multas</h4>
+                    <p>For what reason would it be advisable for me to think about business content?</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+          <div class="card border-0 shadow rounded-xs pt-5">
+              <div class="card-body"> <i class="fa fa-comments icon-lg icon-red icon-bg-red icon-bg-circle mb-3"></i>
+                  <h4 class="mt-4 mb-3">Documentos</h4>
+                  <p>For what reason would it be advisable for me to think about business content?</p>
+              </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <br><br><br><br><br><br>
+{% endblock %}

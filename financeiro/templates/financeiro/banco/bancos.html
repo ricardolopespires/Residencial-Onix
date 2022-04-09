@@ -1,0 +1,78 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+
+<style></style>
+
+<link rel="stylesheet" href="{% static 'css/administration.css' %}">
+<section class="section">
+
+    <div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Financeiro</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Bancos</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fa fa-bank"></i>
+    </div>
+    </div>  
+</section>
+
+ <div class="section-body">
+    {% if bancos %}
+    {% for banco in bancos %}
+        <div class="col-md-12">
+        <div class="wrapper">
+           <div class="row">
+            <div class="icon dots float-right"><i class="fas fa-ellipsis-v"></i></div>
+              <div class="com-md-4">                  
+                 <div class="img-area">
+                    <div class="inner-area">
+                         {% if banco.img %}
+                        <img src="{{ banco.img }}" alt="">
+                        {% else %}
+                        <img src="https://img.icons8.com/emoji/452/bank-emoji.png" alt="">
+                        {% endif %}
+                    </div>
+                  </div>
+              </div>
+              <div class="col-12 col-md-9 col-sm-8">        
+                <div class="name ">{{ banco.nome }}</div>
+                <div class="about mb-2">Código do banco <span class="ml-2">{{ banco.id}}</span></div>
+                <div class="about mb-2"> Código do ISPB do Banco:<span class="ml-2">{{ banco.ispb }}</span> </div>            
+                <div class="about mb-2">Agência<spam class="ml-2">{{ banco.agencia }}</spam></div>
+                <div class="about mb-2">Endereço: <spam class="ml-2">{{ banco.endereco }}</spam></div>
+                <div class="about mb-4">Telefone: <spam class="ml-2">{{ banco.telefone }}</spam></div>
+                <div class="buttons">
+                 <a href="{% url 'financeiro:contas' banco.id %}"><button>Mais Informações</button>  </a>              
+                </div>                                      
+              </div>    
+           </div>        
+         </div>
+        </div>
+    {% endfor %}    
+    {% else %}
+    <div class="col-12 col-md-12 col-sm-12">                
+        <div class="card">
+          <div class="card-header">
+            <h4>Ops....</h4>
+          </div>
+          <div class="card-body">
+            <div class="empty-state" data-height="600">
+              <img class="img-fluid" width="400" src="{% static 'assets/img/drawkit/drawkit-full-stack-man-colour.svg' %}" alt="image">
+              <h2 class="mt-0">Não tem nenhum Banco cadastrado para este Condominio</h2>
+              <p class="lead">
+                <strong>{{ user }}</strong> tem que cadastrar o <strong class="text-success"> Banco </strong> e a <strong class="text-success">Conta</strong> para começar usar os recurso do sistema de gestão analytics de condominio.
+              </p>
+              <a href="{% url 'financeiro:adicionar_banco' %}" class="btn btn-warning mt-4">Cadastrar</a>                      
+            </div>
+          </div>
+        </div>
+    </div> 
+    {% endif %}
+ </div>
+{% endblock %}

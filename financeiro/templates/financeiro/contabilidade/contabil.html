@@ -1,0 +1,345 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+<link rel="stylesheet" href="{% static 'css/condominio.css' %}">
+
+<style>
+    .porcetagem span
+{
+  font-size: 11px;
+}
+</style>
+
+
+<section class="section">
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Financeiro</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Contabilidade</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fa fa-line-chart"></i>
+    </div>
+</div>
+</section>
+
+
+
+<section class="section-body">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+{% if condominios %}
+{% for condominio in condominios %}
+    <div class="col-md-12 ">
+        <div class="row ">
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card  l-bg-orange-dark">
+                    <div class="card-statistic-3 p-4">
+                        <div class="card-icon card-icon-large"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title text-white mb-0">Total no Caixa</h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h4 class="d-flex align-items-center mb-0">
+                                    R$ <span class="ml-2">{{ condominio.caixa }}</span>                                        
+                                </h4>
+                            </div>
+                            <div class="col-4 text-right porcetagem">
+                                <span>2.5% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                            <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>             
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card l-bg-green-dark ">
+                    <div class="card-statistic-3 p-4">
+                        <div class="card-icon card-icon-large"><i class="fas fa-wallet"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title text-white  mb-0">Receitas</h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h4 class="d-flex align-items-center mb-0">
+                                    R$ <span class="ml-2">{{ condominio.receitas }}</span>  
+                                </h4>
+                            </div>
+                            <div class="col-4 text-right porcetagem">
+                                <span>2.5% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                            <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>          
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card l-bg-blue-dark">
+                    <div class="card-statistic-3 p-4">
+                        <div class="card-icon card-icon-large"><i class="fas fa-screwdriver"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title text-white  mb-0">Despesas</h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h4 class="d-flex align-items-center mb-0">
+                                   R$ <span class="ml-2">{{ condominio.despesas }}</span>  
+                                </h4>
+                            </div>
+                            <div class="col-4 text-right porcetagem">
+                                <span>10% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                            <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card l-bg-cherry ">
+                    <div class="card-statistic-3 p-4">
+                        <div class="card-icon card-icon-large"><i class="fas fa-chart-pie"></i></div>
+                        <div class="mb-4">
+                            <h5 class="card-title text-white  mb-0">Inadiplências</h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h4 class="d-flex align-items-center mb-0">
+                                    R$ <span class="ml-2">{{ condominio.inadinplencia }}</span>  
+                            </div>
+                            <div class="col-4 text-right porcetagem">
+                                <span>2.5% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                            <div class="progress-bar ll-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+                      
+        </div>
+    </div>
+    {% endfor %}
+ 
+    <div class="col-md-12 mt-5">
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Recitas</h4>
+                  <div class="card-header-action">
+                    <a href="#" class="btn btn-danger">Ver todos <i class="fas fa-chevron-right"></i></a>
+                  </div>
+                </div>
+                <div class="card-body p-0">
+                  <div class="table-responsive table-invoice">
+                    <table class="table table-striped text-center">
+                      <tr>
+                        <th>Unidade</th>
+                        <th>Morador</th>                        
+                        <th>Data de vencimento</th>
+                        <th>Data do Pagamento </th>
+                        <th>Status</th>                        
+                        <th>Valor</th>
+                      </tr>
+                      {% if receitas %}
+                      {% for pagamentos in receitas %}
+                      <tr>
+                        <td><a href="#">{{ pagamentos.unidade }}</a></td>
+                        <td class="font-weight-600">{{ pagamentos.morador |truncatewords:2 }}</td>                        
+                        <td>{{ pagamentos.data_vencimento | date:'d-m-Y'}}</td>
+                        <td>{{ pagamentos.data_pagamento | date:'d-m-Y' }}</td>
+                        {% if project.status == 'elaboração' %}
+                        <td><div class="badge badge-secondary">{{ project.status }}</div></td>
+                        {% elif project.status == 'aberto' %}
+                        <td><div class="badge badge-warning">{{ project.status }}</div></td>
+                         {% elif project.status == 'inadimplentes' %}
+                        <td><div class="badge badge-danger">{{ project.status }}</div></td>
+                        {% else %}
+                        <td><div class="badge badge-success">Pago </div></td>
+                        {% endif %}                        
+                        <td>
+                          R$: {{ pagamentos.valor_total }}
+                        </td>
+                      </tr> 
+                      {% endfor %}                 
+                      {% endif %}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Despesas</h4>
+                    <div class="card-header-action">
+                      <a href="#" class="btn btn-danger">Ver todos <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                  </div>
+                  <div class="card-body p-0">
+                    <div class="table-responsive table-invoice">
+                      <table class="table table-striped text-center">
+                        <tr>
+                          <th>ID</th>
+                          <th>Empresa</th>
+                          <th>Seviço</th>
+                          <th>Vencimento</th>
+                          <th>Status</th>
+                          <th>valor</th>
+                        </tr>
+                       
+                        <tr>
+                            {% if despesas %}
+                            {% for despesa in despesas %}
+                          <td>
+                            {% if despesa.status == 'paga' %}
+                            {{ despesa.id }}
+                            {% else %}
+                            <a href="{% url 'financeiro:despesas_details' despesa.id %}">{{ despesa.id }}</a>
+                            {% endif %}     
+                          </td>
+                          <td class="font-weight-600">{{ despesa.beneficiario |truncatewords:2 }}</td>                          
+                          <td> {{ despesa.categoria |truncatewords:1 }} </td>  
+                          <td>{{ despesa.vencimento |date:'d-m-Y'}}</td> 
+                          {% if despesa.status == 'aberta' %}                      
+                          <td> <div class="badge badge-warning">Em Aberto </div></td>
+                          {% elif despesa.statu == 'atrasado' %}
+                          <td> <div class="badge badge-danger">Em Atraso </div></td>
+                          {% else %}
+                          <td> <div class="badge badge-success">Paga </div></td>
+                          {% endif %}
+                          <td>
+                           R$ {{ despesa.valor_total }}
+                          </td>                         
+                        </tr> 
+                        {% endfor %}
+                          {% endif %}
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>          
+          </div>
+    </div>
+
+{% else %}
+
+<div class="col-md-12 ">
+    <div class="row ">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card  l-bg-orange-dark">
+                <div class="card-statistic-3 p-4">
+                    <div class="card-icon card-icon-large"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="mb-4">
+                        <h5 class="card-title mb-0">Total no Caixa</h5>
+                    </div>
+                    <div class="row align-items-center mb-2 d-flex">
+                        <div class="col-8">
+                            <h4 class="d-flex align-items-center mb-0">
+                                R$ <span class="ml-2">0,00</span>                                        
+                            </h4>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span>2.5% <i class="fa fa-arrow-up"></i></span>
+                        </div>
+                    </div>
+                    <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                        <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>             
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card l-bg-green-dark ">
+                <div class="card-statistic-3 p-4">
+                    <div class="card-icon card-icon-large"><i class="fas fa-wallet"></i></div>
+                    <div class="mb-4">
+                        <h5 class="card-title mb-0">Receitas</h5>
+                    </div>
+                    <div class="row align-items-center mb-2 d-flex">
+                        <div class="col-8">
+                            <h4 class="d-flex align-items-center mb-0">
+                                R$ <span class="ml-2">0,00</span>  
+                            </h4>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span>2.5% <i class="fa fa-arrow-up"></i></span>
+                        </div>
+                    </div>
+                    <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                        <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>          
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card l-bg-blue-dark">
+                <div class="card-statistic-3 p-4">
+                    <div class="card-icon card-icon-large"><i class="fas fa-screwdriver"></i></div>
+                    <div class="mb-4">
+                        <h5 class="card-title mb-0">Despesas</h5>
+                    </div>
+                    <div class="row align-items-center mb-2 d-flex">
+                        <div class="col-8">
+                            <h4 class="d-flex align-items-center mb-0">
+                               R$ <span class="ml-2">0,00</span>  
+                            </h4>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span>10% <i class="fa fa-arrow-up"></i></span>
+                        </div>
+                    </div>
+                    <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                        <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="card l-bg-cherry ">
+                <div class="card-statistic-3 p-4">
+                    <div class="card-icon card-icon-large"><i class="fas fa-chart-pie"></i></div>
+                    <div class="mb-4">
+                        <h5 class="card-title mb-0">Inadimplências</h5>
+                    </div>
+                    <div class="row align-items-center mb-2 d-flex">
+                        <div class="col-8">
+                            <h4 class="d-flex align-items-center mb-0">
+                                R$ <span class="ml-2">0,00</span>  
+                        </div>
+                        <div class="col-4 text-right">
+                            <span>2.5% <i class="fa fa-arrow-up"></i></span>
+                        </div>
+                    </div>
+                    <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                        <div class="progress-bar ll-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+                  
+    </div>
+</div>
+<div class="col-md-12 mb-5 mt-5">
+    <div class="row">            
+        <div class="col-md-12">
+           <a href="{% url 'financeiro:adicionar_despesas' %}"><div class=" float-right icon-top text-dark add-despesas" title="Adicionar Despesas"><i class="fas fa-plus"></i></div></a> 
+        </div>
+    </div>  
+</div>
+{% endif %}
+</div>
+</section>
+{% endblock %}

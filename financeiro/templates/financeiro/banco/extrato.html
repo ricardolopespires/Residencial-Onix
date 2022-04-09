@@ -1,0 +1,267 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+<section class="section">
+
+    <div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Contas</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Extrato</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fa fa-receipt"></i>
+    </div>
+    </div>  
+</section>
+
+<div class="section-body">
+  
+        <div class="col-md-12">
+        <div class="wrapper">
+           <div class="row">
+            <div class="icon dots float-right"><i class="fas fa-ellipsis-v"></i></div>
+              <div class="com-md-4">                  
+                 <div class="img-area">
+                    <div class="inner-area">
+                         {% if conta.agencia.img %}
+                        <img src="{{ conta.agencia.img }}" alt="">
+                        {% else %}
+                        <img src="https://img.icons8.com/emoji/452/bank-emoji.png" alt="">
+                        {% endif %}
+                    </div>
+                  </div>
+              </div>
+              <div class="col-12 col-md-9 col-sm-8">        
+                <div class="name ">{{ conta.agencia }}</div>
+                <div class="about mb-2">Código do banco <span class="ml-2">{{ conta.agencia.id }}</span></div>
+                <div class="about mb-2"> Código do ISPB do Banco:<span class="ml-2">{{ conta.agencia.ispb }}</span> </div>            
+                <div class="about mb-2">Agência<spam class="ml-2">{{ conta.agencia.agencia }}</spam></div>
+                <div class="about mb-2">Numero da Conta:<spam class="ml-2">{{ conta.id }}</spam></div>
+                <div class="about mb-2">Tipo de Conta: <spam class="ml-2">{{ conta.tipo }}</spam></div>
+                <div class="about mb-2">Data da Abertura: <spam class="ml-2">{{ conta.criada |date }}</spam></div>
+                <div class="about mb-4">Estilo da Conta: <spam class="ml-2">{{ conta.estilo |title}}</spam></div>                                                  
+              </div>
+              <div class="col-12 col-md-12 col-sm-12 mt-5">
+                <div class="social-share">
+                  <div class="row"> 
+                    {% if conta.debitos > 0 %}              
+                    R$ + <span class="text-success">{{ conta.debitos }}<span> Débitos</span></span>
+                    {% elif conta.debitos < 0 %} 
+                    R$ <span class="text-danger">{{ conta.debitos }}<span> Débitos</span></span>
+                    {% else %}
+                    R$ <span class="text-dark">{{ conta.debitos }}<span> Débitos</span></span>
+                    {% endif %}
+                 </div>
+                 <div class="row">
+                  {% if conta.creditos > 0 %}              
+                  R$ +<span class="text-success">{{ conta.creditos }}<span>Créditos</span></span>
+                  {% elif conta.creditos < 0 %}
+                  R$ <span class="text-danger">{{ conta.creditos }}<span>Créditos</span></span>
+                  {% else %}
+                  R$ <span class="text-dark">{{ conta.creditos }}<span>Créditos</span></span>
+                  {% endif %}
+
+               </div>                   
+                   <div class="row">  
+                    {% if conta.saldo > 0 %}                                                       
+                    R$ + <span class="text-success"> {{ conta.saldo }}<span> Saldo em <span id="data_atual"></span></span></span>
+                    {% elif conta.saldo < 0 %}
+                    R$<span class="text-danger"> {{ conta.saldo }}<span> Saldo em <span id="data_atual"></span></span></span>
+                    {% else %}
+                    R$<span class="text-dark"> {{ conta.saldo }}<span> Saldo em <span id="data_atual"></span></span></span>
+
+                    {% endif %}
+                   </div>                   
+                   </div> 
+                   <br><br>
+                   <div class="col-12 col-md-12 col-sm-12 mt-5">
+                      <div class="name info-basic mb-5">Movimentação Bancária</div> 
+                      <div class="row">
+                         <div class="col-2 col-md-2 col-sm-2">                       
+                            <div class="about mb-2">Data:</div>                                                    
+                         </div>
+                         <div class="col-4 col-md-4 col-sm-4">
+                            <div class="about mb-2">Descrição</div>                                                    
+                         </div>
+                         <div class="col-2 col-md-2 col-sm-2">                       
+                            <div class="about mb-2">Débito/Crédito</div>                                                    
+                         </div>
+                         <div class="col-2 col-md-2 col-sm-2">                       
+                            <div class="about mb-2">Valor</div>                                                    
+                         </div>
+                         <div class="col-2 col-md-2 col-sm-2">                       
+                            <div class="about mb-2">Saldo</div>                                                    
+                         </div>
+                      </div>          
+                   </div>
+                   <hr>
+                   <div class="col-12 col-md-12 col-sm-12">
+                    <div class="row">
+                       {% for saldo_anterior in saldo_anteriores %}
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2">{{ saldo_anterior.data |date:"d/m/Y"}}</div>                                                    
+                        </div>
+                        <div class="col-4 col-md-4 col-sm-4">
+                           <div class="about mb-2">Saldo Anterior</div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2"></div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2"></div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2"> 
+                           {% if saldo_anterior.valor > 0 %}                       
+                           <div class="about mb-2 text-success">{{ saldo_anterior.valor }}</div>
+                           {% elif saldo_anterior.valor < 0 %} 
+                           <div class="about mb-2 text-danger">{{ saldo_anterior.valor }}</div>
+                           {% else %}
+                           <div class="about mb-2">{{ saldo_anterior.valor }}</div>
+                           {% endif %}
+                        </div>
+                        {% endfor %}
+                     </div>    
+                   </div>
+                  
+                   <hr> 
+                   <div class="col-12 col-md-12 col-sm-12">
+                    <div class="row ">
+                       {% for movimentacao in movimentacoes %}
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2 ">{{ movimentacao.data |date:"d/m/Y"}}</div>                                                    
+                        </div>
+                        <div class="col-4 col-md-4 col-sm-4">
+                           <div class="about mb-2 ">{{ movimentacao.descricao }}</div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">
+                           {% if movimentacao.tipo == 'D' %}                       
+                           <div class="about mb-2 text-danger">D</div>
+                           {% else %}
+                           <div class="about mb-2 text-success">C</div>
+                           {% endif %}
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">
+                           {% if movimentacao.tipo == 'D' %}                        
+                           <div class="about mb-2 text-danger">R$ - {{ movimentacao.valor }} </div>
+                           {% else %}
+                           <div class="about mb-2 text-success">+ {{ movimentacao.valor }}</div>
+                           {% endif %}
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2 mb-5">                       
+                           <div class="about mb-2 ">{{ movimentacao.saldo }}</div>                                                    
+                        </div>
+                        {% endfor %}
+                       <div class="mt-2">
+                          <br>
+                          <br>
+                       </div>
+                     </div>    
+                   </div>
+                   <hr>
+                   <br><br><br><br>
+                   <div class="about mb-2">Resumo</div>
+                   <hr>
+                   <div class="col-12 col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-sm-6">                       
+                           <div class="about mb-2">Saldo em <span id="saldo_resume"></span></div>                                                    
+                        </div>                       
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2"></div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2"></div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2">{{ conta.saldo }}</div>                                                    
+                        </div>
+                     </div>    
+                   </div>
+                   <hr> 
+                   <div class="col-12 col-md-12 col-sm-12">
+                    <div class="row ">
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2 ">Crédito (+)</div>                                                    
+                        </div>
+                        <div class="col-4 col-md-4 col-sm-4">
+                           <div class="about mb-2 "></div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2 "></div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2 "></div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2 ">{{ creditos }}</div>                                                    
+                        </div>
+                     </div>    
+                   </div>
+                   <hr> 
+                   <div class="col-12 col-md-12 col-sm-12">
+                    <div class="row ">
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2 ">Débitos (-)</div>                                                    
+                        </div>
+                        <div class="col-4 col-md-4 col-sm-4">
+                           <div class="about mb-2 "></div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2 "></div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2 "></div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2 ">{{ debitos}}</div>                                                    
+                        </div>
+                     </div>    
+                   </div>
+                   <hr>
+                   <div class="col-12 col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-sm-6">                       
+                           <div class="about mb-2">Saldo em <span id="saldo_total"></span></div>                                                    
+                        </div>                      
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2"></div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2"></div>                                                    
+                        </div>
+                        <div class="col-2 col-md-2 col-sm-2">                       
+                           <div class="about mb-2">{{ conta.saldo }}</div>                                                    
+                        </div>
+                     </div>    
+                   </div> 
+
+                   
+             </div>    
+           </div>        
+         </div>
+        </div>
+   
+ </div>
+
+
+
+ <script>
+   var data = new Date();
+
+    var dia = String(data.getDate()).padStart(2, '0');
+
+    var mes = String(data.getMonth() + 1).padStart(2, '0');
+
+    var ano = data.getFullYear();
+
+    data_Atual = dia + '/' + mes + '/' + ano;
+
+    document.getElementById("data_atual").innerHTML = data_Atual;
+    document.getElementById("saldo_resume").innerHTML = data_Atual;
+    document.getElementById("saldo_total").innerHTML = data_Atual;
+ </script>
+{% endblock %}

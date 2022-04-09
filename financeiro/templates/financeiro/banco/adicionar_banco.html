@@ -1,0 +1,119 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+
+<style>
+
+.helptext
+{
+    font-size: 11px;
+    color: #cccccc;
+}
+
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Adicionar</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Banco</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas fa-server"></i>
+    </div>
+</div>
+
+    <div class="section-body">
+        <h2 class="section-title">Adicionar Novo Banco</h2>
+        <p class="section-lead">
+          Adicionar os dados do novo banco para o usar todos os recurso do sistema analytics condominial. Todos os dados devem ser corretos.
+        </p>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">         
+                <div class="card">
+              <div class="card-header">
+                <h4>Formulário de adição de dados</h4>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-danger">
+                  <b>Nota!</b> Os dados devem ser verdadeiro.
+                </div>
+                <form action="." method="POST"  enctype="multipart/form-data" >
+                {% csrf_token %}
+               <div class="row">
+                   <div class="col-md-4">
+                       <div class="form-group">
+                        <p><label for="id_id">Id:</label> <input class="form-control" type="text" name="id" maxlength="150" id="id_id"> <span class="helptext">Código do banco</span></p>
+                       </div>
+                   </div>
+                   <div class="col-md-4">
+                       <div class="form-group">
+                        <p><label for="id_ispb">Ispb:</label> <input class="form-control" type="number" name="ispb" id="id_ispb"> <span class="helptext">ISPB (Identificador do Sistema de Pagamento Brasileiro)</span></p>
+                       </div>
+                   </div>
+                   <div class="col-md-4">
+                        <div class="form-group">
+                            <p><label for="id_img">Img:</label> <input class="form-control" type="url" name="img" maxlength="200" id="id_img"> <span class="helptext">Logo do banco</span></p>
+                        </div>
+                   </div>
+                   <div class="col-md-4">
+                        <div class="form-group">
+                            <p><label for="id_nome">Nome:</label> <input  class="form-control" type="text" name="nome" maxlength="150" id="id_nome"> <span class="helptext">Nome do Banco onde está a conta</span></p>
+                        </div>
+                   </div>
+                   <div class="col-md-6">
+                        <div class="form-group">
+                            <p><label for="id_agencia">Agencia:</label> <input class="form-control" type="text" name="agencia" maxlength="150" id="id_agencia"> <span class="helptext">O numero da agência onde está a conta</span></p>
+                        </div>
+                   </div>
+                   <div class="col-md-6">
+                        <div class="form-group">
+                            <p><label for="id_endereco">Endereco:</label> <input class="form-control" type="text" name="endereco" maxlength="150" id="id_endereco"> <span class="helptext">Endereço onde está localizada a Agência</span></p>
+                        </div>
+                   </div>
+                   <div class="col-md-4">
+                        <div class="form-group">
+                            <p><label for="id_telefone_0">Telefone:</label> <input class="form-control" type="text" name="telefone_0" size="13" id="id_telefone_0"><span class="helptext">Numero do Telefone da Agência</span> </p>
+                        </div>
+                   </div> 
+                   <div class="col-md-4">
+                       <div class="form-group">
+                        <p><label class="phone-field-ext">&nbsp;&nbsp;ext.&nbsp;&nbsp;</label><input class="form-control" type="text" name="telefone_1" size="4" id="id_telefone_1"> </p>
+                       </div>
+                   </div>     
+               </div>
+                    {% for key, value in form.errors.items %}
+                    <span class="fieldWrapper">
+                        <div class="alert alert-danger">
+                            <b>Nota!</b> {{ key }}:{{ value }}
+                          </div>
+                        
+                    </span>
+                {% endfor %}
+                </div>         
+                <div class="card-footer text-left">
+                <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+                <button class="btn btn-danger" type="reset">Cancelar</button>
+                </form>
+                </div>
+                </div>            
+            </div>            
+        </div>         
+    </div> 
+
+
+
+{% endblock %}
+
+
+
+
+<p><label for="id_id">Id:</label> <input type="text" name="id" maxlength="150" id="id_id"> <span class="helptext">Código do banco</span></p>
+
+<p><label for="id_img">Img:</label> <input type="url" name="img" maxlength="200" id="id_img"> <span class="helptext">Logo do banco</span></p>
+<p><label for="id_nome">Nome:</label> <input type="text" name="nome" maxlength="150" id="id_nome"> <span class="helptext">Nome do Banco onde está a conta</span></p>
+<p><label for="id_agencia">Agencia:</label> <input type="text" name="agencia" maxlength="150" id="id_agencia"> <span class="helptext">O numero da agência onde está a conta</span></p>
+<p><label for="id_endereco">Endereco:</label> <input type="text" name="endereco" maxlength="150" id="id_endereco"> <span class="helptext">Endereço onde está localizada a Agência</span></p>
+<p><label for="id_telefone_0">Telefone:</label> <input type="text" name="telefone_0" size="13" id="id_telefone_0"><span class="phone-field-ext">&nbsp;&nbsp;ext.&nbsp;&nbsp;</span><input type="text" name="telefone_1" size="4" id="id_telefone_1"> <span class="helptext">Numero do Telefone do Síndico </span></p>

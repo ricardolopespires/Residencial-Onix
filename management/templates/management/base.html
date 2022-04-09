@@ -1,0 +1,1242 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}">
+  <title>Residencial Ônix Gama | Dashboard de Gerenciamento do condominios </title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link href="https://cdn.materialdesignicons.com/4.4.95/css/materialdesignicons.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/Charts.js/2.8.0/Chart.min.css" rel="stylesheet" />
+  <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqvmap/1.5.1/jqvmap.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+  <!-- CSS Libraries -->
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="{% static 'node_modules/jqvmap/dist/jqvmap.min.css'%}">
+  <link rel="stylesheet" href="{% static 'node_modules/summernote/dist/summernote-bs4.css'%}">
+  <link rel="stylesheet" href="{% static 'node_modules/owl.carousel/dist/assets/owl.carousel.min.css'%}">
+  <link rel="stylesheet" href="{% static 'node_modules/owl.carousel/dist/assets/owl.theme.default.min.css'%}">
+  <link href="{% static 'assets/plugins/nprogress/nprogress.css" rel="stylesheet' %}" />
+
+  <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/administration.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/analytics.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/management.css' %}"> 
+    <link rel="stylesheet" href="{% static 'assets/css/financeiro.css' %}">    
+    <link rel="stylesheet" href="{% static 'css/administration.css' %}">
+    <link rel="stylesheet" href="{% static 'css/apartamentos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/projetcs.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
+    <link id="sleek-css" rel="stylesheet" href="{% static 'assets/css/sleek.css' %}" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
+    <script src="https://kit.fontawesome.com/55bcbae4d6.js" crossorigin="anonymous"></script>
+
+    <style>
+    .border-info
+    {
+      border-left: 10px solid #007bff ;    
+    }
+
+    .border-info .info i
+    {
+      color: #007bff;
+      font-size: 70px;
+      margin-top: -10px;
+    }
+    </style>
+
+
+</head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper">
+      <div class="navbar-bg bg-background"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto"  method='GET' class='' action='.'>
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+          </ul>          
+        </form>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="fas fa-people-arrows"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+              <div class="dropdown-header">Colaboradores
+                <div class="float-right">
+                  
+                </div>
+              </div>
+              <div class="dropdown-list-content dropdown-list-message">
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <div class="dropdown-item-avatar">
+                    <img alt="image" src="{% static 'assets/img/avatar/avatar-1.png' %}" class="rounded-circle">
+                    <div class="is-online"></div>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <b>Kusnaedi</b>
+                    <p>Hello, Bro!</p>
+                    <div class="time">10 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <div class="dropdown-item-avatar">
+                    <img alt="image" src="{% static 'assets/img/avatar/avatar-2.png' %}" class="rounded-circle">
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <b>Dedik Sugiharto</b>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <div class="dropdown-item-avatar">
+                    <img alt="image" src="{% static 'assets/img/avatar/avatar-3.png' %}" class="rounded-circle">
+                    <div class="is-online"></div>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <b>Agung Ardiansyah</b>
+                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-avatar">
+                    <img alt="image" src="{% static 'assets/img/avatar/avatar-4.png' %}" class="rounded-circle">
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <b>Ardian Rahardiansyah</b>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit ess</p>
+                    <div class="time">16 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-avatar">
+                    <img alt="image" src="{% static 'assets/img/avatar/avatar-5.png' %}" class="rounded-circle">
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <b>Alfa Zulkarnain</b>
+                    <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
+                    <div class="time">Yesterday</div>
+                  </div>
+                </a>
+              </div>
+              <div class="dropdown-footer text-center">
+                <a href="#">Ver todos <i class="fas fa-chevron-right"></i></a>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+              <div class="dropdown-header">Notificações
+                <div class="float-right">
+                  <a href="#">Mark All As Read</a>
+                </div>
+              </div>
+              <div class="dropdown-list-content dropdown-list-icons">
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <div class="dropdown-item-icon bg-primary text-white">
+                    <i class="fas fa-code"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    Template update is available now!
+                    <div class="time text-primary">2 Min Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-info text-white">
+                    <i class="far fa-user"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <b>You</b> and <b>Dedik Sugiharto</b> are now friends
+                    <div class="time">10 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-success text-white">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-danger text-white">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    Low disk space. Let's clean it!
+                    <div class="time">17 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <div class="dropdown-item-icon bg-info text-white">
+                    <i class="fas fa-bell"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    Welcome to Stisla template!
+                    <div class="time">Yesterday</div>
+                  </div>
+                </a>
+              </div>
+              <div class="dropdown-footer text-center">
+                <a href="#">Ver todas <i class="fas fa-chevron-right"></i></a>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            {% if user.is_authenticated %}
+            {% if user.img  %}
+              <img alt="image" src="{{ user.img.url }}" class="online rounded-circle mr-1">
+            {% else %}
+              <img alt="image " src="{% static 'assets/img/avatar/avatar-5.png' %}" class="off rounded-circle mr-1">
+            {% endif %}
+            {% endif %}
+            {% if user.is_authenticated %}
+            <div class="d-sm-none d-lg-inline-block">{{ user }}</div></a>
+            {% else %}
+            <div class="d-sm-none d-lg-inline-block"> Desconetado</div></a>
+            {% endif %}
+            <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-title"> Conectou: <span >{{ user.last_login |date:"f" }}</span> Min</div>
+              <a href="#" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> {{ user }}</a>
+              <a href="features-activities.html" class="dropdown-item has-icon">
+              {% if user.is_authenticated %}
+                <i style = "color:#00ff00" class="fas fa-bolt"></i> Ativo
+              {% else %}
+                 <i class="fas fa-bolt"></i> Activities
+              {% endif %}
+              </a>
+              <a href="#" class="dropdown-item has-icon">
+                <i class="fas fa-cog"></i> Settings
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="{% url 'logout' %}" class="dropdown-item has-icon text-danger">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="{% url 'index' %}">
+              <img width="200" class="logo-dashboard " src="{% static 'img/logotipo7.png' %}" alt="logotipo">
+            </a>
+            <hr>
+          </div>        
+          <div class="sidebar-brand sidebar-brand-sm mt-2">
+            <a href="{% url 'index' %}">
+              <img width="40" class="logo-icon" src="{% static 'img/favicon.ico' %}" alt="logo-icon">
+            </a>
+            <hr>
+          </div>
+          <ul class="sidebar-menu mt-3">
+            <li class="menu-header">Dashboard</li>
+            <li class="nav-item dropdown active">
+              <a href="{% url 'management:manager' %}" class="nav-link "><i class="fas fa-desktop"></i><span>Manager</span></a>
+            </li>             
+              <li class="menu-header">Gerenciemanto </li> 
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Administração</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="{% url 'administration:mandato' %}">Mandato</a></li>
+                  <li><a class="nav-link" href="{% url 'administration:adicionar_membros' %}">Adicionar Membros</a></li>
+                  <li><a class="nav-link" href="{% url 'administration:documentos' %}">Documentos</a></li>
+                  <li><a class="nav-link" href="{% url 'administration:checklist' %}">Checklist </a></li>
+                  <li><a class="nav-link" href="{% url 'administration:votacao' %}">Votação</a></li> 
+                  <li><a class="nav-link" href="{% url 'administration:autorizacao_moradores' %}">Autorização</a></li>                                                                                                     
+                </ul>
+              </li>  
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="far fa-building"></i> <span>Condominio</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="{% url 'condominio:manager' %}">Manager</a></li>
+                  <li><a class="nav-link" href="{% url 'condominio:adicionar' %}">Adicionar</a></li>
+                  <li><a class="nav-link" href="{% url 'boletos:manager' %}">Boletos</a></li>
+                  <li><a class="nav-link" href="{% url 'condominio:contratos' %}">Contratos</a></li>
+                  <li><a class="nav-link" href="{% url 'condominio:advertencias' %}">Advertências</a></li>
+                  <li><a class="nav-link" href="{% url 'condominio:multas' %}">Multas</a></li>
+                  <li><a class="nav-link" href="{% url 'condominio:recurso' %}">Recursos</a></li>
+                  <li><a class="nav-link" href="{% url 'condominio:ocorrencias' %}">Ocorrências</a></li>
+                  <li><a class="nav-link" href="{% url 'condominio:autorizacoes' %}">Autorizações</a></li>
+                  <li><a class="nav-link" href="{% url 'condominio:informativos' %}">Informativos</a></li>
+                  <li><a class="nav-link" href="{% url 'condominio:analytics' %}">Analytics</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-pencil-ruler"></i><span>Projetos</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="#">Manager</a></li>                 
+                  <li><a class="nav-link" href="#">Orçamentos</a></li>                               
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="far fa-clock"></i><span>Manuntenção</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="{% url 'manutencao:manager' %}">Manager</a></li>                 
+                  <li><a class="nav-link" href="#">Orçamentos</a></li>
+                  <li><a class="nav-link" href="#">Inspeção</a></li>
+                  <li><a class="nav-link" href="#">Pendências</a></li>                                   
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-people-arrows"></i> <span>Colaboradores</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="{% url 'colaboradores:manager' %}">Manager</a></li>
+                  <li><a class="nav-link" href="{% url 'colaboradores:adicionar' %}">adicionar</a></li>                 
+                                                                                                        
+                </ul>
+              </li>  
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-people-carry"></i> <span>Fornecedores</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="#">Manager</a></li>
+                  <li><a class="nav-link" href="#">adicionar</a></li>                 
+                                                                                                        
+                </ul>
+              </li>                       
+              <li class="menu-header">Condominos</li>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-house-user"></i><span>Moradores</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="{% url 'moradores:manager' %}">Manager</a></li>
+                  <li><a class="nav-link" href="{% url 'moradores:funcionario' %}">Funcionários</a></li>
+                  <li><a class="nav-link" href="{% url 'moradores:veiculos' %}">Veiculos</a></li>
+                  <li><a class="nav-link" href="{% url 'moradores:animais' %}">Animais</a></li>                  
+                  <li><a class="nav-link" href="{% url 'moradores:analytics' %}">Analytics</a></li>                                               
+                </ul>
+              </li>
+              <li class="menu-header">Financeiro</li>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fa fa-line-chart"></i> <span>Contabilidade</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="{% url 'financeiro:contabilidade' %}">Manager</a></li>
+                  <li><a class="nav-link" href="{% url 'financeiro:receitas' %}">Receitas</a></li>
+                  <li><a class="nav-link" href="{% url 'financeiro:despesas_manager' %}">Despesas</a></li> 
+                  <li><a class="nav-link" href="{% url 'financeiro:multas' %}">Multas</a></li>
+                  <li><a class="nav-link" href="{% url 'financeiro:inadinplencias_mes_atual' %}">Inadinplências</a></li>
+                  <li><a class="nav-link" href="{% url 'financeiro:acordo_manager' %}">Acordos</a></li>
+                  <li><a class="nav-link" href="{% url 'financeiro:juridicos' %}">Jurídico</a></li>
+                  <li><a class="nav-link" href="#">Cobranças</a></li>
+
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fa fa-bank"></i> <span>Banco</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="{% url 'financeiro:bancos' %}">Manager</a></li>
+                  <li><a class="nav-link" href="{% url 'financeiro:adicionar_contas' %}">Adicionar conta</a></li>
+                  <li><a class="nav-link" href="">Despesas</a></li>                                                              
+                </ul>
+              </li>
+            </ul>
+
+            <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+              <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
+                <i class="fas fa-rocket"></i> Documentation
+              </a>
+            </div>
+        </aside>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          {% if messages %}
+          <div style="top: 110px; position: relative; z-index: 999;" class="container">
+            <div class="row">
+              <div class="col-sm-12 col-sm-offset-3">      
+                  <div class="card-body">
+                    {% for message in messages %} 
+                    {% if message.tags == 'error' %}    
+                    <div id="messages" class="messages">
+                      <div class="card-messages border-error">
+                        <div class="content">
+                          <div class="icon error"><i class="fas fa-exclamation"></i></div>
+                          <div class="details">
+                            <span class="text-dark">Ops, error.... {{ user|title }}</span>
+                            <p  class="text-dark">{{ message }}</p>
+                          </div>
+                        </div>
+                        <div class="close" onclick="hide()" class="close-icon"><i class="uil uil-times"></i></div>
+                      </div>
+                    </div>           
+                    {% elif message.tags == 'success' %}
+                    <div id="messages" class="messages">
+                      <div class="card-messages border-success">
+                        <div class="content">
+                          <div class="icon success"><i class="fas fa-check"></i></div>
+                          <div class="details">
+                            <span class="text-dark">Parabéns..... {{ user|title }}</span>
+                            <p  class="text-dark">{{ message }}</p>
+                          </div>
+                        </div>
+                        <div class="close" onclick="hide()" class="close-icon"><i class="uil uil-times"></i></div>
+                      </div>
+                    </div>
+                    {% elif message.tags == 'info' %}
+                    <div id="messages" class="messages">
+                      <div class="card-messages border-info">
+                        <div class="content">
+                          <div class="icon info"><i class="fas fa-info"></i></div>
+                          <div class="details">
+                            <span class="text-dark">Atenção..... {{ user|title }}</span>
+                            <p  class="text-dark">{{ message }}</p>
+                          </div>
+                        </div>
+                        <div class="close" onclick="hide()" class="close-icon"><i class="uil uil-times"></i></div>
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}    
+                  </div>      
+                </div>
+              </div>
+          </div>  
+          {% endif %}
+          
+        {% block dashboad %}
+
+
+
+
+
+
+        {% endblock %}  
+        
+        
+        </section>
+      </div>
+<div>
+<footer class="main-footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+  </div>
+  <div class="footer-right">
+    2.3.0
+  </div>
+</footer>
+</div>
+</div>
+
+<!-- General JS Scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/Charts.js/2.8.0/Chart.min.css"></script>
+
+
+
+<script src="{% static 'assets/js/stisla.js' %}"></script>
+<script src="{% static 'assets/js/circle-progress.min.js' %}"></script>
+
+<!-- JS Libraies -->
+<script src="{% static 'node_modules/jquery-sparkline/jquery.sparkline.min.js' %}"></script> 
+<script src="{% static 'node_modules/owl.carousel/dist/owl.carousel.min.js' %}"></script>
+<script src="{% static 'node_modules/charts/dist/Chart.min.js' %}"></script>
+
+<script src="{% static 'node_modules/summernote/dist/summernote-bs4.js' %}"></script>
+<script src="{% static 'node_modules/chocolat/dist/js/jquery.chocolat.min.js' %}"></script>
+<script src="{% static 'plugins/nprogress/nprogress.js' %}"></script>
+<script src="{% static 'assets/plugins/circle-progress/circle-progress.js' %}"></script>  
+<script src="{% static 'node_modules/jqvmap/dist/jquery.vmap.min.js' %}"></script>
+<script src="{% static 'node_modules/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+<script src="{% static 'node_modules/jqvmap/dist/maps/jquery.vmap.indonesia.js' %}"></script>
+
+
+
+
+
+
+<!-- Template JS File -->
+<script src="{% static 'assets/js/scripts.js' %}"></script>
+<script src="{% static 'assets/js/script-dashboard.js' %}"></script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script><!-- jQuery -->
+
+<!-- Page Specific JS File -->
+<script src="{% static 'js/circliful.js' %}"></script>
+
+<script src="{% static 'assets/plugins/data-tables/jquery.datatables.min.js' %}"></script>
+<script src="{% static 'assets/plugins/data-tables/datatables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'assets/plugins/data-tables/datatables.responsive.min.js' %}"></script>
+<script src="{% static 'node_modules/charts/dist/Chart.min.js' %}"></script>
+
+
+<!-- Page Specific JS File -->
+<script src="{% static 'assets/js/page/index-0.js' %}"></script>
+<script src="{% static 'assets/js/page/index.js' %}"></script>
+<script src="{% static 'assets/js/page/components-statistic.js' %}"></script>
+<script src="{% static 'js/circle-progress.min.js' %}"></script>
+
+
+   
+  <!-- Additional Plugins and JavaScript -->
+  <script src="{% static 'js/navigation.js' %}" defer></script><!-- Header Navigation JS Plugin -->
+  <script src="{% static 'js/jquery.flexslider-min.js' %}" defer></script><!-- FlexSlider JS Plugin -->
+  <script src="{% static 'js/jquery-asRange.min.js' %}" defer></script><!-- Range Slider JS Plugin -->
+  <script src="{% static 'js/circle-progress.min.js' %}" defer></script><!-- Circle Progress JS Plugin -->
+  <script src="{% static 'js/afterglow.min.js' %}" defer></script><!-- Video Player JS Plugin -->
+  <script src="{% static 'js/script.js' %}" defer></script><!-- Custom Document Ready JS -->
+  <script src="{% static 'js/script-dashboard.js' %}" defer></script><!-- Custom Document Ready for Dashboard Only JS -->
+  
+  <script> 
+
+    setTimeout(function () {
+      document.getElementById("messages").style.display = "none";
+    }, 4000);
+    function hide(){
+    document.getElementById("messages").style.display = "none";
+    }
+  </script>
+<!-- Created By CodingNepal - www.codingnepalweb.com -->
+{% block scripts %}
+ <script>
+
+$(document).ready(function(){
+
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: [{% for despesa in despesas %} '{{ despesa.pagamento |date:"d/m/Y" }}',{% endfor %}],
+    datasets: [{
+      label: 'Receitas',
+      data: [{% for receita in receitas %} {{ receita.valor_total }},{% endfor %}],
+      borderWidth: 2,
+      backgroundColor: 'rgba(63,82,227,.8)',
+      borderWidth: 0,
+      borderColor: 'transparent',
+      pointBorderWidth: 0,
+      pointRadius: 3.5,
+      pointBackgroundColor: 'transparent',
+      pointHoverBackgroundColor: 'rgba(63,82,227,.8)',
+    },
+    {
+      label: 'Despesas',
+      data: [{% for despesa in despesas %} {{ despesa.valor }},{% endfor %}],
+      borderWidth: 2,
+      backgroundColor: 'rgba(254,86,83,.7)',
+      borderWidth: 0,
+      borderColor: 'transparent',
+      pointBorderWidth: 0 ,
+      pointRadius: 3.5,
+      pointBackgroundColor: 'transparent',
+      pointHoverBackgroundColor: 'rgba(254,86,83,.8)',
+    }]
+  },
+  options: {
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        gridLines: {
+          // display: false,
+          drawBorder: false,
+          color: '#f2f2f2',
+        },
+        ticks: {
+          beginAtZero: true,
+          stepSize: 1500,
+          callback: function(value, index, values) {
+            return 'R$ ' + value;
+          }
+        }
+      }],
+      xAxes: [{
+        gridLines: {
+          display: false,
+          tickMarkLength: 15,
+        }
+      }]
+    },
+  }
+});
+});
+
+
+
+
+
+$(document).ready(function(){
+  var ctx = document.getElementById("myChart3").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    datasets: [{
+      data: [
+        {{ funcionario }},
+        {{ manutencao }},
+        {{ consumo }},
+        {{ outros }},
+       
+      ],
+      backgroundColor: [
+        '#191d21',
+        '#63ed7a',
+        '#ffa426',
+        '#fc544b',
+        '#6777ef',
+      ],
+      label: 'Dataset 1'
+    }],
+    labels: [
+      'Fincionario',
+      'Manutenção',
+      'Consumo',
+      'Outros',      
+    ],
+  },
+  options: {
+    responsive: true,
+    legend: {
+      position: 'bottom',
+    },
+  }
+});
+
+});
+
+
+$(document).ready(function(){
+var ctx = document.getElementById("myChart4").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: [{% for despesa in despesas %} '{{ despesa.pagamento |date:"d/m/Y" }}',{% endfor %}],
+    datasets: [{
+      label: 'Receitas',
+      data: [{% for receita in receitas %} {{ receita.valor_total }},{% endfor %}],
+      borderWidth: 2,
+      backgroundColor: 'transparent',
+      borderColor: 'rgba(254,86,83,.7)',
+      borderWidth: 2.5,
+      pointBackgroundColor: 'transparent',
+      pointBorderColor: 'transparent',
+      pointRadius: 4
+    },
+    {
+      label: 'Despesas',
+      data: [{% for despesa in despesas %} {{ despesa.valor }},{% endfor %}],
+      borderWidth: 2,
+      backgroundColor: 'transparent',
+      borderColor: 'rgba(63,82,227,.8)',
+      borderWidth: 0,
+      pointBackgroundColor: 'transparent',
+      pointBorderColor: 'transparent',
+      pointRadius: 4
+    },
+    ]
+  },
+  options: {
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        gridLines: {
+          drawBorder: false,
+          color: '#f2f2f2',
+        },
+        ticks: {
+          beginAtZero: true,
+          stepSize: 200
+        }
+      }],
+      xAxes: [{
+        gridLines: {
+          display: false
+        }
+      }]
+    },
+  }
+});
+});
+
+</script>
+
+<script>
+
+var balance_chart = document.getElementById("balance-chart").getContext('2d');
+
+var balance_chart_bg_color = balance_chart.createLinearGradient(0, 0, 0, 70);
+balance_chart_bg_color.addColorStop(0, 'rgba(63,82,227,.2)');
+balance_chart_bg_color.addColorStop(1, 'rgba(63,82,227,0)');
+
+var balance_chart = new Chart(balance_chart, {
+  type: 'line',
+  data: {
+    labels: [{% for receita in receitas %} '{{ receita.data_pagamento |date:"d/m/Y" }}',{% endfor %}],
+    datasets: [{
+      label: 'Receitas R$',
+      data: [{% for receita in receitas %} {{ receita.valor_total }},{% endfor %}],
+      backgroundColor: balance_chart_bg_color,
+      borderWidth: 3,
+      borderColor: 'rgba(63,82,227,1)',
+      pointBorderWidth: 0,
+      pointBorderColor: 'transparent',
+      pointRadius: 3,
+      pointBackgroundColor: 'transparent',
+      pointHoverBackgroundColor: 'rgba(63,82,227,1)',
+    }]
+  },
+  options: {
+    layout: {
+      padding: {
+        bottom: -1,
+        left: -1
+      }
+    },
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        gridLines: {
+          display: false,
+          drawBorder: false,
+        },
+        ticks: {
+          beginAtZero: true,
+          display: false
+        }
+      }],
+      xAxes: [{
+        gridLines: {
+          drawBorder: false,
+          display: false,
+        },
+        ticks: {
+          display: false
+        }
+      }]
+    },
+  }
+});
+
+
+
+
+var sales_chart = document.getElementById("sales-chart").getContext('2d');
+
+var sales_chart_bg_color = sales_chart.createLinearGradient(0, 0, 0, 80);
+balance_chart_bg_color.addColorStop(0, 'rgba(63,82,227,.2)');
+balance_chart_bg_color.addColorStop(1, 'rgba(63,82,227,0)');
+
+var sales_chart = new Chart(sales_chart, {
+  type: 'line',
+  data: {
+    labels: ['16-07-2018', '17-07-2018', '18-07-2018', '19-07-2018', '20-07-2018', '21-07-2018', '22-07-2018', '23-07-2018', '24-07-2018', '25-07-2018', '26-07-2018', '27-07-2018', '28-07-2018', '29-07-2018', '30-07-2018', '31-07-2018'],
+    datasets: [{
+      label: 'Despesas',
+      data: [70, 62, 44, 40, 21, 63, 82, 52, 50, 31, 70, 50, 91, 63, 51, 60],
+      borderWidth: 2,
+      backgroundColor: balance_chart_bg_color,
+      borderWidth: 3,
+      borderColor: 'rgba(63,82,227,1)',
+      pointBorderWidth: 0,
+      pointBorderColor: 'transparent',
+      pointRadius: 3,
+      pointBackgroundColor: 'transparent',
+      pointHoverBackgroundColor: 'rgba(63,82,227,1)',
+    }]
+  },
+  options: {
+    layout: {
+      padding: {
+        bottom: -1,
+        left: -1
+      }
+    },
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        gridLines: {
+          display: false,
+          drawBorder: false,
+        },
+        ticks: {
+          beginAtZero: true,
+          display: false
+        }
+      }],
+      xAxes: [{
+        gridLines: {
+          drawBorder: false,
+          display: false,
+        },
+        ticks: {
+          display: false
+        }
+      }]
+    },
+  }
+});
+
+</script>
+
+<script>
+
+    // MAKE ROUNDED EDGES FOR PIE CHARTS
+Chart.defaults.RoundedDoughnut    = Chart.helpers.clone(Chart.defaults.doughnut);
+Chart.controllers.RoundedDoughnut = Chart.controllers.doughnut.extend({
+    draw: function(ease) {
+        var ctx           = this.chart.ctx;
+        var easingDecimal = ease || 1;
+        var arcs          = this.getMeta().data;
+        Chart.helpers.each(arcs, function(arc, i) {
+            arc.transition(easingDecimal).draw();
+
+            var pArc   = arcs[i === 0 ? arcs.length - 1 : i - 1];
+            var pColor = pArc._view.backgroundColor;
+
+            var vm         = arc._view;
+            var radius     = (vm.outerRadius + vm.innerRadius) / 2;
+            var thickness  = (vm.outerRadius - vm.innerRadius) / 2;
+            var startAngle = Math.PI - vm.startAngle - Math.PI / 2;
+            var angle      = Math.PI - vm.endAngle - Math.PI / 2;
+
+            ctx.save();
+            ctx.translate(vm.x, vm.y);
+
+            ctx.fillStyle = i === 0 ? vm.backgroundColor : pColor;
+            ctx.beginPath();
+            ctx.arc(radius * Math.sin(startAngle), radius * Math.cos(startAngle), thickness, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillStyle = vm.backgroundColor;
+            ctx.beginPath();
+            ctx.arc(radius * Math.sin(angle), radius * Math.cos(angle), thickness, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.restore();
+        });
+    }
+});
+
+
+// EXAMPLE 1
+var ctx1 = document.getElementById("pieChart1");
+var pieChart1 = new Chart(ctx1, {
+    type: 'RoundedDoughnut',
+    options: {
+        cutoutPercentage: 75,
+        legend: {
+            position: 'left',
+            labels: {
+                boxWidth: 10,
+                fontStyle: 'italic',
+                fontColor: '#aaa',
+                usePointStyle: true,
+            }
+        },
+
+    },
+    data: {
+        labels: [
+            "First",
+            "Second",
+            "Third",
+            "Fourth"
+        ],
+        datasets: [
+            {
+                data: [250, 100, 100, 200],
+                borderWidth: 0,
+                backgroundColor: [
+                    '#e63a54',
+                    '#d8f4ff',
+                    "#110f48",
+                    "#f8f8fa"
+                ],
+                hoverBackgroundColor: [
+                    '#e63a54',
+                    '#d8f4ff',
+                    "#110f48",
+                    "#f8f8fa"
+                ]
+            }]
+        }
+    });
+
+
+// EXAMPLE 2
+var ctx2 = document.getElementById("pieChart2");
+var pieChart2 = new Chart(ctx2, {
+    type: 'pie',
+    options: {
+        legend: {
+            position: 'left',
+            labels: {
+                boxWidth: 10,
+                fontStyle: 'italic',
+                fontColor: '#aaa',
+                usePointStyle: true,
+            }
+        },
+    },
+    data: {
+        labels: [
+            "First",
+            "Second",
+            "Third",
+            "Fourth"
+        ],
+        datasets: [
+            {
+                data: [300, 50, 100, 80],
+                borderWidth: 0,
+                backgroundColor: [
+                    '#44b2d7',
+                    "#59c2e6",
+                    "#71d1f2",
+                    "#96e5ff"
+                ],
+                hoverBackgroundColor: [
+                    '#44b2d7',
+                    "#59c2e6",
+                    "#71d1f2",
+                    "#96e5ff"
+                ]
+            }]
+        }
+    });
+
+
+
+// EXAMPLE 3
+var ctx3 = document.getElementById("pieChart3");
+var pieChart3 = new Chart(ctx3, {
+    type: 'pie',
+    options: {
+        legend: {
+            position: 'left',
+            labels: {
+                boxWidth: 10,
+                fontStyle: 'italic',
+                fontColor: '#aaa',
+                usePointStyle: true,
+            }
+        },
+    },
+    data: {
+        labels: [
+            "First",
+            "Second",
+            "Third"
+        ],
+        datasets: [
+            {
+                data: [300, 50, 100],
+                borderWidth: 7,
+                backgroundColor: [
+                    '#46d8d5',
+                    "#182390",
+                    "#f5e132",
+                ],
+                hoverBackgroundColor: [
+                    '#46d8d5',
+                    "#182390",
+                    "#f5e132",
+                ]
+            }]
+        }
+    });
+
+
+
+// EXAMPLE 4
+var ctx4 = document.getElementById("pieChart4");
+var pieChart4 = new Chart(ctx4, {
+    type: 'RoundedDoughnut',
+    options: {
+        cutoutPercentage: 70,
+        legend: {
+            position: 'left',
+            labels: {
+                boxWidth: 10,
+                fontStyle: 'italic',
+                fontColor: '#aaa',
+                usePointStyle: true,
+            }
+        },
+
+    },
+    data: {
+        labels: [
+            "First",
+            "Second",
+            "Third",
+            "Fourth"
+        ],
+        datasets: [
+            {
+                data: [250, 100, 100, 200],
+                borderWidth: 5,
+                backgroundColor: [
+                    '#615dff',
+                    '#ffb0d0',
+                    "#ff8bb9",
+                    "#f8f8fa"
+                    ],
+                    hoverBackgroundColor: [
+                        '#615dff',
+                        '#ffb0d0',
+                        "#ff8bb9",
+                        "#f8f8fa"
+                    ]
+                }]
+            }
+        });
+
+
+// EXAMPLE 5
+var ctx5 = document.getElementById("pieChart5");
+var pieChart5 = new Chart(ctx5, {
+    type: 'pie',
+    options: {
+        cutoutPercentage: 50,
+        legend: {
+            position: 'left',
+            labels: {
+                boxWidth: 10,
+                fontStyle: 'italic',
+                fontColor: '#aaa',
+                usePointStyle: true,
+            }
+        },
+    },
+    data: {
+        labels: [
+            "First",
+            "Second",
+        ],
+        datasets: [
+            {
+                data: [300, 50],
+                borderWidth: 2,
+                borderColor: [
+                    '#46d8d5',
+                    "#f5e132",
+                ],
+                backgroundColor: [
+                    'rgba(70, 215, 212, 0.22)',
+                    "rgba(245, 225, 50, 0.23)",
+                ],
+                hoverBackgroundColor: [
+                    '#46d8d5',
+                    "#f5e132",
+                ]
+            }]
+        }
+    });
+
+
+
+// EXAMPLE 6
+var ctx6 = document.getElementById("pieChart6");
+var pieChart6 = new Chart(ctx6, {
+    type: 'pie',
+    options: {
+        rotation: -20,
+        cutoutPercentage: 10,
+        animation: {
+            animateScale: true,
+        },
+        legend: {
+            position: 'left',
+            borderAlign: 'inner',
+            labels: {
+                boxWidth: 10,
+                fontStyle: 'italic',
+                fontColor: '#aaa',
+                usePointStyle: true,
+            }
+        },
+    },
+    data: {
+        labels: [
+            "First",
+            "Second",
+        ],
+        datasets: [
+            {
+                data: [300, 120],
+                borderWidth: 2,
+                backgroundColor: [
+                    'rgba(70, 215, 212, 0.2)',
+                    "rgba(245, 225, 50, 0.2)",
+                ],
+                borderColor: [
+                    '#46d8d5',
+                    "#f5e132",
+                ],
+                hoverBackgroundColor: [
+                    '#46d8d5',
+                    "#f5e132",
+                ]
+            }]
+        }
+    });
+
+
+
+// EXAMPLE 7
+var ctx7 = document.getElementById("pieChart7").getContext('2d');
+    var pieChart7 = new Chart(ctx7, {
+    type: 'RoundedDoughnut',
+    options: {
+        cutoutPercentage: 92,
+        borderAlign: 'center',
+        animation: {
+            duration: 2000,
+            easing: 'linear'
+        },
+        legend: {
+            position: 'top',
+            labels: {
+                padding: 10,
+                fontStyle: 'italic',
+                fontColor: '#333',
+                usePointStyle: true,
+            }
+        },
+    },
+    data: {
+        labels: [
+            "First",
+            "Second",
+            "Third",
+            "Fourth",
+        ],
+        datasets: [
+            {
+                data: [120, 50, 80, 140],
+                borderWidth: 6,
+                borderColor: '#fff',
+                backgroundColor: [
+                    '#f9d65c',
+                    "#a9d876",
+                    "#39be83",
+                    "#0e8a73",
+                ],
+                hoverBackgroundColor: [
+                    '#f9d65c',
+                    "#a9d876",
+                    "#39be83",
+                    "#0e8a73",
+                ]
+            }]
+        },
+    });
+
+
+    
+
+// EXAMPLE 8
+var ctx7 = document.getElementById("pieChart8").getContext('2d');
+    var pieChart7 = new Chart(ctx7, {
+    type: 'RoundedDoughnut',
+    options: {
+        cutoutPercentage: 92,
+        borderAlign: 'center',
+        animation: {
+            duration: 2000,
+            easing: 'linear'
+        },
+        legend: {
+            position: 'top',
+            labels: {
+                padding: 10,
+                fontStyle: 'italic',
+                fontColor: '#333',
+                usePointStyle: true,
+            }
+        },
+    },
+    data: {
+        labels: [
+            "First",
+            "Second",
+            "Third",
+            "Fourth",
+        ],
+        datasets: [
+            {
+                data: [120, 50, 80, 140],
+                borderWidth: 6,
+                borderColor: '#fff',
+                backgroundColor: [
+                    '#f9d65c',
+                    "#a9d876",
+                    "#39be83",
+                    "#0e8a73",
+                ],
+                hoverBackgroundColor: [
+                    '#f9d65c',
+                    "#a9d876",
+                    "#39be83",
+                    "#0e8a73",
+                ]
+            }]
+        },
+    });
+
+
+    
+</script>
+
+<script>
+    $(function() {
+
+$(".progresss").each(function() {
+
+  var value = $(this).attr('data-value');
+  var left = $(this).find('.progress-left .progress-bar');
+  var right = $(this).find('.progress-right .progress-bar');
+
+  if (value > 0) {
+    if (value <= 50) {
+      right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+    } else {
+      right.css('transform', 'rotate(180deg)')
+      left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+    }
+  }
+
+})
+
+function percentageToDegrees(percentage) {
+
+  return percentage / 100 * 360
+
+}
+
+});
+
+
+</script>
+{% endblock %}
+</body>
+</html>

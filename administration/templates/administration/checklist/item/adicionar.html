@@ -1,0 +1,126 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+
+<style>
+  .helptext
+  {
+    font-size: 11px;
+  }
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Adicionar</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Itens</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas  fa-server"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Adicionar Novo Itens</h2>
+        <p class="section-lead">
+          Adicionar os novos itens no checklist para validação da transição do corpo administrativo do condomínio.
+        </p>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">         
+                <div class="card">
+              <div class="card-header">
+                <h4>Formulário de adição de dados</h4>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-danger">
+                  <b>Nota!</b> Os dados devem ser verdadeiro.
+                </div>
+                <form action="." method="POST"  enctype="multipart/form-data" >
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">                
+                    <p><label for="id_titulo">Titulo:</label> <input class="form-control" type="text" name="titulo" maxlength="150" required id="id_titulo"></p>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">  
+                    <p><label for="id_slug">Slug:</label> <input class="form-control" type="text" name="slug" maxlength="50" required id="id_slug"> <span class="helptext">Slug é um campo em modo de preenchimento automático, mas se você quiser, pode modificar seu conteúdo</span></p>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">  
+                    <p><label for="id_descricao">Descricao:</label> <input class="form-control" type="text" name="descricao" maxlength="100" required id="id_descricao"></p>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group"> 
+                    <p><label for="id_data_entrega">Data entrega:</label> <input class="form-control" type="date" name="data_entrega" id="id_data_entrega"> <span class="helptext">Estipular data para entrega dos documentos da gestão anterior</span></p>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group"> 
+                    <p><label for="id_data_entregou">Data entregou:</label> <input class="form-control" type="date" name="data_entregou" id="id_data_entregou"> <span class="helptext">Data que foi entregue os documentos da gestão anterior</span></p>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group"> 
+                  <p><label for="id_documentos">Documentos:</label>
+                    <select class="form-control" name="documentos" required id="id_documentos">
+                      <option value="" selected>---------</option>
+                      <option value="1">Na assembleia de eleição</option>
+                      <option value="2">Postura do síndico</option>
+                      <option value="3">Papel da administradora</option>
+                      <option value="4">Assuntos administrativos</option>
+                      <option value="5">Assuntos financeiros</option>
+                      <option value="6">Infraestrutura</option>
+                      <option value="7">Segurança</option>
+                      <option value="8">Convocar assembleia</option>
+                    </select>
+                  </p>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group"> 
+                  <p><label for="id_status">Status:</label>
+                      <select class="form-control" name="status" id="id_status">
+                        <option value="0" selected>ABERTA</option>
+                        <option value="1">TRABALHANDO</option>
+                        <option value="2">PAUSADA</option>
+                        <option value="3">CONCLUíDA</option>
+                      </select>
+                  </p>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group"> 
+                    <p><label for="id_complete_per">Complete per:</label> <input class="form-control" type="number" name="complete_per" required id="id_complete_per"></p>
+                  </div>
+                </div>
+                </div>
+                <div>
+                    {% for key, value in form.errors.items %}
+                    <span class="fieldWrapper">
+                        <div class="alert alert-danger">
+                            <b>Nota!</b> {{ key }}:{{ value }}
+                          </div>
+                        
+                    </span>
+                {% endfor %}
+                </div>         
+                <div class="card-footer text-left">
+                <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+                <button class="btn btn-danger" type="reset">Cancelar</button>
+                </form>
+                </div>
+                </div>            
+            </div>            
+        </div>         
+    </div> 
+
+
+
+{% endblock %}
+

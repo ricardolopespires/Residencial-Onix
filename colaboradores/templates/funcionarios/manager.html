@@ -1,0 +1,103 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+<link rel="stylesheet" href="{% static 'css/colaboradores.css' %}">
+
+
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Dashboard</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Colaboradores</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas fa-people-arrows"></i>
+    </div>
+</div>
+
+  <div class="section-body">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="row">
+            {% if funcionarios %}
+            {% for funcionario in funcionarios %}
+            <div class="col-4">
+                <!-- partial:index.partial.html -->
+              <div class="profile">
+                  <h1 class="title">Funcionário</h1>
+                  <div class="user-profile">
+                  <div class="avatar-container">
+                      {% if funcionario.img %}
+                     <a href="{% url 'colaboradores:details' funcionario.id %}"><img src="{{ funcionario.img.url }}" alt="" class="avatar" /></a> 
+                      {% else %}
+                      <a href="{% url 'colaboradores:details' funcionario.id %}"> <img src="{% static 'img/avatar-user.jpg' %}" alt="" class="avatar" /></a>
+                      {% endif %}
+                  </div>              
+                  <h2 class="user-name">{{  funcionario.nome }}</h2>
+                  <ul class="hobbies">
+                      <li class="hobby"><span>Função:</span></li>
+                      <li class="hobby">{{ funcionario.funcao }},</li>       
+                  </ul>
+                  </div>
+              
+                  <div class="user-info">
+                  <div class='followers'>
+                      <h3>R$ 1450,70</h3>
+                      <small>Sálario</small>
+                  </div>
+                  <div class="following">
+                      <h3>R$ 0,00</h3>
+                      <small>Transporte</small>
+                  </div>
+              
+                  <div class="number-of-posts">
+                      <h3>R$ 0,00</h3>
+                      <small>Refeição</small>
+                  </div>
+                  </div>
+              
+                  <div class="latest-tweet">
+                      <p class="tweet mb-2"><i class="fas fa-envelope-open mr-2"></i><span> Email</span> residencial@gmail.com</p>
+                  <p class="tweet mb-2"><i class="fas fa-mobile-alt mr-2"></i><span> Celular</span> {{ funcionario.celular }}</p>
+                  <p class="tweet"><i class="fas fa-tasks mr-2"></i><span> Avalição </span> <span  class="text-success">8</span></p>
+                  </div>
+              
+                  <button class="btn-comment"><i class="fas fa-comment"></i></button>
+              </div>
+              <!-- partial -->
+          </div>
+            {% endfor %}
+            {% else %}
+            <div class="col-12 col-md-12 col-sm-12">                
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Ops....</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="empty-state" data-height="600">
+                      <img class="img-fluid" width="400" src="{% static 'assets/img/drawkit/drawkit-full-stack-man-colour.svg' %}" alt="image">
+                      <h2 class="mt-0">Não tem funcionarios cadastrado</h2>
+                      <p class="lead">
+                        <strong>{{ user }}</strong> tem que cadastrar os funcionarios no sistema para começar a usar o sistema.
+                      </p>
+                      <a href="{% url 'colaboradores:adicionar' %}" class="btn btn-warning mt-4">Cadastrar</a>                      
+                    </div>
+                  </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>        
+    </div>
+
+  </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css">
+{% endblock %}
+

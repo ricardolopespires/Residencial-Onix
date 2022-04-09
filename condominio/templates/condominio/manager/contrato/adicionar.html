@@ -1,0 +1,185 @@
+
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+{% block dashboad %}
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Configurações Gerais</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Adicionar Dados</h1>
+    <div class="section-header-breadcrumb">        
+        <i style="font-size: 70px; color: #000066;"  class="fas fa-server"></i>
+    </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Adicionar Novo Contrato</h2>
+    <p class="section-lead">
+     Criar um novo contrato para poder acompanhar o percurso do contrato
+    </p>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">         
+            <div class="card">
+          <div class="card-header">
+            <h4>Formulário de adição de dados</h4>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-danger">
+              <b>Nota!</b> Os dados devem ser verdadeiro.
+            </div>
+            <form action="{% url 'condominio:adicionar_contratos' %}" method="POST"  enctype="multipart/form-data" >
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_id">Id:</label> <input class="form-control" type="text" name="id" maxlength="150" required id="id_id"> <span class="helptext">Numero do Contrato</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_categoria">Categoria:</label>
+                            <select class="form-control" name="categoria" required id="id_categoria">
+                                <option value="" selected>Selecionar</option>
+                                {% for categoria in categorias%}
+                                <option value="{{ categoria.id }}" >{{ categoria.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_subcategoria">Subcategoria:</label>
+                            <select class="form-control" name="subcategoria" required id="id_subcategoria">
+                                <option value="" selected>Selecionar</option>
+                                {% for subcategoria in subcategorias %}                                
+                                <option value="{{ subcategoria.id }}">{{ subcategoria.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </p>
+                    </div>
+                </div> 
+                <div class="col-md-4">
+                    <div class="form-group">   
+                        <p><label for="id_tipo">Tipo:</label> 
+                            <select class="form-control" name="tipo" id="id_tipo">
+                                <option value="aluguel" selected>Aluguel</option>
+                                <option value="seguro">Seguro</option>
+                                <option value="manutenção">Manutenção</option>
+                            </select>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_status">Status:</label> 
+                            <select class="form-control" name="status" id="id_status">
+                                <option value="ativo" selected>Ativo</option>
+                                <option value="concluido">Concluído</option>
+                             </select>
+                            </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_img">Img:</label> <input class="form-control" type="file" name="img" accept="image/*" required id="id_img"></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_empresa">Empresa:</label> <input class="form-control" type="text" name="empresa" maxlength="150" required id="id_empresa"> <span class="helptext">Nome da Empresa</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_descricao">Descricao:</label>
+                            <textarea class="form-control" name="descricao" cols="40" rows="10" required id="id_descricao">
+                            </textarea> <span class="helptext">Descrição</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_inicio">Inicio:</label> <input class="form-control" type="date" name="inicio" required id="id_inicio"> <span class="helptext">Data de Inicio do Contrato</span></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_termino">Termino:</label> <input class="form-control" type="date" name="termino" required id="id_termino"> <span class="helptext">Termino do Contrato</span></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_parcelas">Parcelas:</label> <input class="form-control" type="number" name="parcelas" required id="id_parcelas"> <span class="helptext">A quantidade de parcelas</span></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_valor_parcelas">Valor parcelas:</label> <input class="form-control" type="number" name="valor_parcelas" step="0.01" required id="id_valor_parcelas"> <span class="helptext"> Valor da Parcelas</span></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p><label for="id_valor_total">Valor total:</label> <input class="form-control" type="number" name="valor_total" step="0.01" required id="id_valor_total"> <span class="helptext">Valor total do Contratos</span></p>
+                    </div>
+                </div>
+                                
+            </div>
+            <div>
+                {% for key, value in form.errors.items %}
+                <span class="fieldWrapper">
+                    <div class="alert alert-danger">
+                        <b>Nota!</b> {{ key }}:{{ value }}
+                      </div>
+                    
+                </span>
+            {% endfor %}
+            </div>         
+            <div class="card-footer text-left">
+            <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
+            </form>
+            </div>
+            </div>            
+        </div>            
+    </div>         
+</div> 
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

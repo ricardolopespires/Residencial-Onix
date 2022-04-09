@@ -1,0 +1,214 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+<link rel="stylesheet" href="{% static 'css/administration.css' %}">
+<style>
+.container {
+    margin-top: 100px
+}
+
+.section-title {
+    margin-bottom: 38px
+}
+
+.shadow,
+.subscription-wrapper {
+    box-shadow: 0px 15px 39px 0px rgba(8, 18, 109, 0.1) !important
+}
+
+.icon-primary {
+    color: #062caf
+}
+
+.icon-bg-circle {
+    position: relative
+}
+
+.icon-lg {
+    font-size: 50px
+}
+
+.icon-bg-circle::before {
+    z-index: 1;
+    position: relative
+}
+
+.icon-bg-primary::after {
+    background: #062caf !important
+}
+
+.icon-bg-circle::after {
+    content: '';
+    position: absolute;
+    width: 68px;
+    height: 68px;
+    top: -35px;
+    left: 15px;
+    border-radius: 50%;
+    background: inherit;
+    opacity: .1
+}
+
+p,
+.paragraph {
+    font-weight: 400;
+    color: #8b8e93;
+    font-size: 15px;
+    line-height: 1.6;
+    font-family: "Open Sans", sans-serif
+}
+
+.icon-bg-yellow::after {
+    background: #f6a622 !important
+}
+
+.icon-bg-purple::after {
+    background: #7952f5
+}
+
+.icon-yellow {
+    color: #f6a622
+}
+
+.icon-purple {
+    color: #7952f5
+}
+
+.icon-cyan {
+    color: #02d0a1
+}
+
+.icon-bg-cyan::after {
+    background: #02d0a1
+}
+
+.icon-bg-red::after {
+    background: #ff4949
+}
+
+.icon-red {
+    color: #ff4949
+}
+
+.icon-bg-green::after {
+    background: #66cc33
+}
+
+.icon-green {
+    color: #66cc33
+}
+
+.icon-bg-orange::after {
+    background: #ff7c17
+}
+
+.icon-orange {
+    color: #ff7c17
+}
+
+.icon-bg-blue::after {
+    background: #3682ff
+}
+
+.icon-blue {
+    color: #3682ff
+}
+
+.capitulo
+{
+    font-size: 24px;
+    font-family: 'Cambria';
+}
+.subtitle
+{
+    font-size: 28px;
+    font-family:'Cambria' ;
+}
+
+.codigo
+{
+    font-size: 19px;
+    padding: 24px;
+    font-weight: 400;
+    font-family: 'Bookman Old Style';
+    text-align: justify;
+    color: #000;
+}
+
+.codigo span
+{
+    font-size: 19px;    
+    font-weight: 400;
+    font-family: 'Bookman Old Style';
+    text-align: justify;
+    color: #000;
+}
+
+
+.add-despesas i
+{
+    font-size: 28px;
+}
+.add-despesas:hover
+{
+    color: #38ef7d!important;
+}
+
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Documentos</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Regimento Interno</h1>
+    <div class="section-header-breadcrumb">        
+        <i style="font-size: 70px; color: #000066;"  class="fas fa-file-alt"></i>
+    </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Códigos do Regimento Interno</h2>
+    <p class="section-lead">
+        Códigos do regimento interno, documentos administrativos de normas do condomínios para uma boa gestão condominial.
+    </p>
+      
+    <div class="col-md-12 mb-5 mt-5">
+        <div class="row">            
+            <div class="col-md-12">
+               <a href="{% url 'administration:adicionar_capitulos' %}"><div class=" float-right icon-top text-dark add-despesas" title="Adicionar Os Capítulos do regimento Interno"><i class="fas fa-plus"></i></div></a> 
+            </div>
+        </div>  
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-sm-12">   
+          <div class="container">
+            <div class="row"> 
+                {% if capitulos %}
+                {% for capitulo in capitulos %}            
+                <div class="col-lg-4 col-sm-6 ">
+                    <div class="card border-0 shadow rounded-xs pt-5">
+                        <div class="card-body"> <i class="far fa-file-alt icon-lg icon-primary icon-bg-primary icon-bg-circle mb-3"></i>
+                           <a href="{% url 'administration:codigos' capitulo.title %}"><h4 class="mt-4 mb-3 card-title">{{ capitulo.title }}</h4></a> 
+                            <p>{{ capitulo.subtitle }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+               
+            </div>
+        </div>
+        </div>      
+      </div>
+
+</div>
+
+
+
+
+
+
+{% endblock %}

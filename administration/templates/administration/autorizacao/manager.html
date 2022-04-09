@@ -1,0 +1,149 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+<link rel="stylesheet" href="{% static 'css/administration.css' %}">
+<style>
+  
+.img-area
+{
+  margin-left: 20%!important;
+}
+
+.text-success
+{
+  color: #4dff4d !important;
+}
+
+.add-despesas i
+{
+    font-size: 40px;
+}
+
+.is_active
+{
+    background: #ecf0f3!important;
+    box-shadow: -3px -3px 7px #4dff4d, 3px 3px 5px #4dff4d!important;
+}
+
+.is_not_active
+{
+  box-shadow: -3px -3px 7px #ff471a, 3px 3px 5px #ff471a!important;
+}
+
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Management</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Autorizações dos Moradores</h1>
+    <div class="section-header-breadcrumb">        
+        <i style="font-size: 70px; color: #000066;"  class="fas fa-user-plus"></i>
+    </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Lista dos Moradores Autorizado</h2>
+    <p class="section-lead">
+        Lista dos moradores autorizados pela gestão condominial sobre trabalho do Síndico.
+    </p>
+    <div class="col-md-12 mb-5 mt-5">
+        <div class="row">            
+            <div class="col-md-12">
+               <a href="{% url 'register' %}"><div class=" float-right icon-top text-dark add-despesas" title="Adicionar Despesas"><i class="fas fa-plus"></i></div></a> 
+            </div>
+        </div>  
+        </div>
+    <div class="row">
+      {% if usuarios %}
+      {% for usuario in usuarios %}
+        <div class="col-4 col-md-4 col-lg-4">   
+            <div class="wrapper">
+              {% if usuario.is_active  == True %}
+                <div class="img-area text-center is_active">
+                  <div class="inner-area">
+                    {% if usuario.img %}
+                   <a href="#}"><img src="{{ usuario.img.url }}" alt=""></a> 
+                    {% else %}
+                    <a href="#"><img src="https://as1.ftcdn.net/v2/jpg/01/83/55/76/500_F_183557656_DRcvOesmfDl5BIyhPKrcWANFKy2964i9.jpg" alt=""></a>
+                    {% endif %}
+                  </div>
+                </div> 
+                {% else %}
+                <div class="img-area text-center is_not_active">
+                  <div class="inner-area ">
+                    {% if usuario.img %}
+                   <a href="#}"><img src="{{ usuario.img.url }}" alt=""></a> 
+                    {% else %}
+                    <a href="#"><img src="https://as1.ftcdn.net/v2/jpg/01/83/55/76/500_F_183557656_DRcvOesmfDl5BIyhPKrcWANFKy2964i9.jpg" alt=""></a>
+                    {% endif %}
+                  </div>
+                </div>                
+                {% endif %}
+                <div class="name text-center">{{ usuario.name |truncatechars:17 }}</div>
+                <div class="about text-center text-capitalize">{{ usuario.status }}</div>
+                <div class="social-icons">
+                Data Mudança: {{ usuario.date_joined |date:"d-m-Y" }} 
+                </div>
+                
+                <h5 class=" mt-4">Morador Status</h5>
+                <div class="social-icons">
+                  O morador está: 
+                  {% if is_authenticated.unidade == usuario.unidade %}
+                  <span class="text-success"> On-line</span>
+                  {% else %}
+                  <span class="text-danger"> Offline</span>
+                  {% endif %}
+                </div>
+                <div class="social-share">
+                  <div class="row">
+                    <i class="fas fa-home mr-2"></i>                   
+                    <span>{{ usuario.unidade }}</span>
+                  </div>
+                  <div class="row">
+                    <i class="fas fa-phone"></i>                   
+                    <span>{{ usuario.phone }}</span>
+                  </div>
+                  <div class="row">
+                    <i class="fas fa-calendar mr-2"></i>
+                    {% if usuario.is_active == True %}                    
+                   <span class="text-success">Ativo</span>
+                   {% else %}
+                   <span class="text-danger">Desativado</span>
+                   {% endif %} 
+                  </div>
+                </div>
+              </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-12 col-md-12 col-sm-12">                
+          <div class="card">
+            <div class="card-header">
+              <h4>Ops....</h4>
+            </div>
+            <div class="card-body">
+              <div class="empty-state" data-height="600">
+                <img class="img-fluid" width="400" src="{% static 'assets/img/drawkit/drawkit-full-stack-man-colour.svg' %}" alt="image">
+                <h2 class="mt-0">Não tem Morador cadastrado</h2>
+                <p class="lead">
+                  <strong>{{ user }}</strong> tem que cadastrar o <strong class="text-success"> novo Morador</strong>  no sistema para começar a usar o sistema.
+                </p>
+                <a href="{% url 'administration:adicionar_membros' %}" class="btn btn-warning mt-4">Cadastrar</a>                      
+              </div>
+            </div>
+          </div>
+      </div> 
+        {% endif %}        
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

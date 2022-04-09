@@ -1,0 +1,137 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+{% block dashboad %}
+<style>
+.helptext
+{
+    font-size: 11px;
+}
+
+.fa-reply-all
+{
+    font-size: 40px;
+    color: #000;
+}
+</style>
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Financeiro</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Taxas Ordinárias</h1>
+    <div class="section-header-breadcrumb">        
+        <i style="font-size: 70px; color: #000066;"  class="fas fa-server"></i>
+    </div>
+</div>
+<div class="col-md-12 mb-5 mt-5">
+    <div class="row">            
+        <div class="col-md-12">
+           <a href="{% url 'condominio:manager' %}"><div class=" float-left icon-top text-dark add-despesas" title="Voltar"><i class="fas fa-reply-all"></i></div></a> 
+        </div>
+    </div>  
+</div>
+<div class="section-body">
+    <h2 class="section-title">Adicionar Taxas Ordinárias</h2>
+    <p class="section-lead">
+        Taxas Ordinárias: manutenção e pequenos reparos de emergência. - Extraordinárias: benfeitorias para o prédio.
+    </p>
+    <form action="{% url 'condominio:taxas_ordinaria'%}" method="POST"  enctype="multipart/form-data" >
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <p><label for="id_administradores">Administradores:</label>
+                         <select class="form-control" name="administradores" required id="id_administradores">
+                        <option value="" selected>---------</option> 
+                        {% for administrador in administradores%}                     
+                        <option value="{{ administrador.id }}">{{ administrador.nome }}</option>
+                        {% endfor %}                      
+                      </select>
+                    </p>
+                </div>
+            </div>            
+            <div class="col-md-3">
+                <div class="form-group">
+                    <p><label for="id_condominio">Condominio:</label>
+                        <select class="form-control" name="condominio" required id="id_condominio">
+                            <option value="" selected>---------</option>
+                            {% for condominio in condominios %}              
+                            <option value="{{ condominio.id }}">{{ condominio.nome}}</option>              
+                            {% endfor %}
+                        </select>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <p><label for="id_taxa">Taxa:</label> <input class="form-control" type="number" name="taxa" value="0" step="0.01" id="id_taxa" placeholder="RS: 0,00"> <span class="helptext">Taxa Ordinária Condiminial Mensal</span></p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <p><label for="id_extra">Extra:</label> <input class="form-control" type="number" name="extra" value="0" step="0.01" id="id_extra" placeholder="RS: 0,00"> <span class="helptext">Taxa Extraordinária Condiminial Mensal</span></p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group"> 
+                <p><label for="id_fundo">Fundo:</label> <input class="form-control" type="number" name="fundo" value="0" step="0.01" id="id_fundo" placeholder="RS: 0,00"> <span class="helptext">Taxa para Fundo de Reserva</span></p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <p><label for="id_total">Total:</label> <input class="form-control total" type="number" name="total" value="0" step="0.01" id="id_total" placeholder="RS: 0,00"> <span class="helptext">Total das Taxas mensais</span></p>
+                </div>
+            </div> 
+            <div class="col-md-3">
+                <div class="form-group">
+                    <p><label for="id_multa_mes">Multa mes:</label> <input class="form-control" type="number" name="multa_mes" value="0" step="0.01" id="id_multa_mes"> <span class="helptext">Porcetagem do valor da multa mensal</span></p>
+                </div>
+            </div> 
+            <div class="col-md-3">
+                <div class="form-group">
+                    <p><label for="id_multa_diaria">Multa diaria:</label> <input class="form-control" type="number" name="multa_diaria" value="0" step="0.01" id="id_multa_diaria"> <span class="helptext">Porcetagem do valor da multa diaria</span></p>
+                </div>
+            </div>            
+            <div>
+                {% for key, value in form.errors.items %}
+                <span class="fieldWrapper">
+                    <div class="alert alert-danger">
+                        <b>Nota!</b> {{ key }}:{{ value }}
+                      </div>
+                    
+                </span>
+            {% endfor %}
+            </div><button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>             
+        </div>
+    </form>       
+        
+</div> 
+</div> 
+
+
+
+{% endblock %}
+
+<p><label for="id_administradores">Administradores:</label> <select name="administradores" required id="id_administradores">
+    <option value="" selected>---------</option>
+  
+    <option value="1">RICARDO LOPES PIRES</option>
+  
+  </select></p>
+  <p><label for="id_condominio">Condominio:</label> <select name="condominio" required id="id_condominio">
+    <option value="" selected>---------</option>
+  
+    <option value="1">Residencial Ônix</option>
+  
+  </select></p>
+  <p><label for="id_taxa">Taxa:</label> <input type="number" name="taxa" value="0" step="0.01" id="id_taxa"> <span class="helptext">Taxa Ordinária Condiminial Mensal</span></p>
+  <p><label for="id_extra">Extra:</label> <input type="number" name="extra" value="0" step="0.01" id="id_extra"> <span class="helptext">Taxa Extraordinária Condiminial Mensal</span></p>
+  <p><label for="id_fundo">Fundo:</label> <input type="number" name="fundo" value="0" step="0.01" id="id_fundo"> <span class="helptext">Taxa para Fundo de Reserva</span></p>
+  <p><label for="id_total">Total:</label> <input type="number" name="total" value="0" step="0.01" id="id_total"> <span class="helptext">Total das Taxas mensais</span></p>
+  <p><label for="id_multa_mes">Multa mes:</label> <input type="number" name="multa_mes" value="0" step="0.01" id="id_multa_mes"> <span class="helptext">Porcetagem do valor da multa mensal</span></p>
+  <p><label for="id_multa_diaria">Multa diaria:</label> <input type="number" name="multa_diaria" value="0" step="0.01" id="id_multa_diaria"> <span class="helptext">Porcetagem do valor da multa diaria</span></p>
+
+
+
+

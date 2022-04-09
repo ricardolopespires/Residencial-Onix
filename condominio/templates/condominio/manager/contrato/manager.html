@@ -1,0 +1,129 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+
+
+<style>
+
+.bagde-tipo
+{
+  font-size: 12px;
+  border: 1px solid #000;
+  border-radius: 19px;
+  padding: 5px 10px 5px 15px; 
+}
+
+
+.icon img
+{
+    width: 60px;
+    height: 60px;
+    background-color: #eee;
+    border-radius: 15px!important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 39px
+}
+
+.add-contratos i
+{
+  font-size: 40px!important;
+}
+
+.add-contratos i:hover
+{
+    color: #38ef7d!important;
+}
+
+
+</style>
+
+<link rel="stylesheet" href="{% static 'assets/css/advertencia.css' %}">
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Administrativo</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Contratos</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas fa-file-invoice-dollar"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Lista de Monitoramento dos Contratos</h2>
+        <p class="section-lead">
+          Lista dos contratos que estão vigente e sua quantidades parcelase e data de vencimentos .
+        </p>      
+        <div class="row mt-5">
+          <div class="col-md-12  mt-5">
+            <div class="row">            
+                <div class="col-md-12">
+                   <a href="{% url 'condominio:adicionar_contratos' %}"><div class=" float-right icon-top text-dark add-contratos" data-toggle="tooltip" data-placement="top" title="Adicionar Contratos"><i class="fas fa-plus"></i></div></a> 
+                </div>
+            </div>  
+            </div>
+            {% if contratos %}
+              {% for contrato in contratos %}
+              <div class="col-sm-6 col-md-6 col-lg-4 mb-4">
+                <div class="wrapper p-3 mb-2">
+                    <div class="row justify-content-between">
+                        <div class="col-sm-8 align-items-center">
+                            <div class="icon  float-left">
+                              {% if contrato.img %}
+                              <img src="{{ contrato.img.url }}" alt="">
+                              {% else %}
+                              <img src="https://www.kwalit.com/pt/wp-content/uploads/sites/2/2017/01/grenke-min.png" alt="">
+                              {% endif %}
+                              </div>
+                            <div class="ms-2 c-details float-right  mt-4 ml">
+                                <h6 class="mb-0">{{ contrato.empresa |truncatewords:2 }}</h6> <span>{{ contrato.inicio |date:"d/M/Y" }}</span>
+                            </div>
+                        </div>
+                        <div class ="col-sm-4 mt-2"> 
+                        <div class ="bagde-tipo">
+                          {{ contrato.tipo|title }}
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="mb-0 mt-5">Nº Contrato</h6>
+                  <p class="number"  ><small class="">Nº: {{ contrato.id }}</small></p>
+                    <h6 class="mb-0 mt-2">Descrição</h6>
+                    <a href="#!"><small class="text-danger">{{ contrato.descricao |truncatewords:7 }}</small></a>
+                    <div class="d-flex justify-content-between mt-4">
+                      <div>
+                        <h5 class="mb-0">Termino
+                          <small class="ml-1">{{ contrato.termino |date }}</small>
+                        </h5>
+                      </div>
+                      {% if contrato.status == 'vigente' %}
+                      <span class="text-danger font-weight-bold">Não Vigente</span>
+                      {% else %}
+                      <span class="text-success font-weight-bold">Vigente</span>
+                      {% endif %}
+                    </div>
+                    <h5 class=" mt-4 mb-4">Tempo Restante</h5>
+                    <div class="progress blue">
+                        <div class="progress-bar"  data-toggle="tooltip" data-placement="top" title="{{ percorrido }}%" style="width:{{ percorrido }}%; background:#1a4966;">
+                            <div class="progress-value"> {{ data_atual }} dias </div>
+                        </div>
+                    </div>
+                </div>
+             </div> 
+             {% endfor %}
+            {% endif %}
+        </div>       
+    </div> 
+
+
+
+
+{% endblock %}

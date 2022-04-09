@@ -1,0 +1,147 @@
+{% extends 'management/base.html' %}
+{% load static %}
+<div>Ícones feitos por <a href="https://www.flaticon.com/br/autores/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a></div>
+
+
+
+{% block dashboad %}
+
+<style>
+.helptext
+  {
+    font-size: 11px;
+    color: #85838396;
+  }
+    .card {
+    background-color: #fff;
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    margin-bottom: 30px;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
+}
+.l-bg-cherry {
+    background: linear-gradient(to right, #493240, #ff0000) !important;
+    color: #fff;
+}
+
+.l-bg-blue-dark {
+    background: linear-gradient(to right, #373b44, #4286f4) !important;
+    color: #fff;
+}
+
+.l-bg-green-dark {
+    background: linear-gradient(to right, #0a504a, #38ef7d) !important;
+    color: #fff;
+}
+
+.l-bg-orange-dark {
+    background: linear-gradient(to right, #a86008, #ffba56) !important;
+    color: #fff;
+}
+
+.card .card-statistic-3 .card-icon-large .fas, .card .card-statistic-3 .card-icon-large .far, .card .card-statistic-3 .card-icon-large .fab, .card .card-statistic-3 .card-icon-large .fal {
+    font-size: 110px;
+}
+
+.card .card-statistic-3 .card-icon {
+    text-align: center;
+    line-height: 50px;
+    margin-left: 15px;
+    color: #000;
+    position: absolute;
+    right: -5px;
+    top: 20px;
+    opacity: 0.1;
+}
+
+.l-bg-cyan {
+    background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+    color: #fff;
+}
+
+.l-bg-green {
+    background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
+    color: #fff;
+}
+
+.l-bg-orange {
+    background: linear-gradient(to right, #f9900e, #ffba56) !important;
+    color: #fff;
+}
+
+.l-bg-cyan {
+    background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+    color: #fff;
+}
+
+.text-right span
+{
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.icon-top i
+{
+    font-size: 40px;
+}
+
+.add-despesas:hover
+{
+    color: #38ef7d!important;
+}
+th,td
+{
+  text-align: center;
+}
+
+
+.nav-link:hover
+{
+
+  background: none!important;
+
+}
+
+.total:hover
+{
+  background: #fff!important;
+}
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Manutenção</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Agendamentos</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="far fa-clock-o"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Lista de Itens para manutenção do referente ao mês {{ data_atual }}</h2>
+        <p class="section-lead">
+            Lista de progressão dos itens de manutenção períodica.
+        </p>
+        <div class="row">
+            <p><label for="id_local">Local:</label> <select name="local" id="id_local">
+                <option value="topo" selected>Topo</option>
+              
+                <option value="andares">Andares</option>
+              
+                <option value="terreo">Terreo</option>
+              
+                <option value="subsolo">SubSolo</option>
+              
+              </select></p>
+              <p><label for="id_nome">Nome:</label> <input type="text" name="nome" maxlength="150" required id="id_nome"> <span class="helptext">Nome o Item de manutenção</span></p>
+              <p><label for="id_descricao">Descricao:</label> <textarea name="descricao" cols="40" rows="10" required id="id_descricao">
+              </textarea> <span class="helptext">Descrição do item da manutenção</span></p>
+        </div>
+       
+    </div> 
+
+
+
+
+{% endblock %}

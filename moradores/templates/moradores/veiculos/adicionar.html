@@ -1,0 +1,144 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+
+<style>
+  .helptext
+  {
+    font-size: 10px;
+    color: #ccc;
+  }
+</style>
+
+<div class="section-header ">
+    <div class="slider-outer">
+      <div class="slider-inner">
+          <div class="  manager fron active" data-slider="1">
+              <div class="manager-title">Veiculo<i class="fas fa-server"></i> </div>
+              <h2 class="title-manager-h2">Adicionar</h2>               
+          </div>
+      </div>
+  </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Adicionar Novo Veiculo</h2>
+    <p class="section-lead">
+      Adicionar um novo veiculo para ter permissão para estacionar na garragem do condomínio.
+    </p>
+
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">         
+        <div class="card">
+          <div class="card-header">
+            <h4>Formulário de adição</h4>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-danger">
+              <b>Nota!</b> Os dados devem ser verdadeiro.
+            </div>
+            <form action="." method="POST"  enctype="multipart/form-data" >
+            {% csrf_token %}              
+            <div class="row">  
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_id">Id:</label> <input class="form-control" type="text" name="id" maxlength="40" required id="id_id"> <span class="helptext">Numero da garagem</span></p>
+                    </div>
+                </div>                
+                <div class="col-md-4">
+                  <div class="form-group">                  
+                    <p><label for="id_morador">Morador:</label>
+                        <select class="form-control" name="morador" required id="id_morador">
+                            <option value="" selected>---------</option>
+                            {% for morador in moradores %}
+                            <option value="{{ morador.id }}">{{ morador.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                  </div>
+                </div> 
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_tipo">Tipo:</label>
+                            <select class="form-control" name="tipo" id="id_tipo">
+                                <option value="carro" selected>Carro</option>
+                                <option value="moto">Moto</option>
+                            </select> <span class="helptext">O tipo do Veiculo do Morador</span>
+                        </p>                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_status">Status:</label>
+                            <select class="form-control" name="status" id="id_status">
+                                <option value="autorizado">Autorizado</option>                
+                                <option value="não autorizado">Não Autorizado</option>                
+                                <option value="avaliação" selected>Avaliação</option>                
+                            </select> <span class="helptext">Status do Veiculo</span>
+                        </p>
+                    </div>
+                </div> 
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_marca">Marca:</label> <input class="form-control" type="text" name="marca" maxlength="150" id="id_marca"> <span class="helptext">A Marca do Veiculo</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_cor">Cor:</label> <input class="form-control" type="text" name="cor" maxlength="150" id="id_cor"> <span class="helptext">A Cor da Pintura do Veiculo</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_condicao">Condição:</label>
+                            <select class="form-control" name="condicao" id="id_condicao">
+                                <option value="proprietario" selected>Proprietário</option>                          
+                                <option value="aluguel">Aluguel</option>                          
+                          </select> <span class="helptext">Condição da Vaga de Garagem</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_modelo">Modelo:</label> <input class="form-control" type="text" name="modelo" maxlength="150" id="id_modelo"> <span class="helptext">A Modelo do Veiculo</span></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p><label for="id_placa">Placa:</label> <input class="form-control" type="text" name="placa" maxlength="150" id="id_placa"> <span class="helptext">A placa do Veiculo</span></p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <p><label for="id_img">Img:</label> <input class="form-control" type="file" name="img" accept="image/*" id="id_img"> <span class="helptext">Image do veiculo do Morador</span></p>
+                    </div>
+                </div>
+            <div class="card-footer text-left">
+            <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
+
+            <br><br>
+            {% for key, value in form.errors.items %}
+            <span class="fieldWrapper">
+                <div class="alert alert-danger">
+                    <b>Nota!</b> {{ key }}:{{ value }}
+                  </div>
+               {% endfor %} 
+            </span>
+            </form>
+            </div>
+            </div>            
+            </div>            
+          </div>         
+        </div>    
+  </div>    
+  </div>
+</div>
+
+
+
+{% endblock %}

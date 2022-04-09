@@ -1,0 +1,104 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+<link rel="stylesheet" href="{% static 'css/administration.css' %}">
+
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Administração</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Documentos</h1>
+    <div class="section-header-breadcrumb">        
+        <i style="font-size: 70px; color: #000066;"  class="fas fa-file-alt"></i>
+    </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Lista dos Documentos</h2>
+    <p class="section-lead">
+        O principais documentos administrativos de normas do condomínios para uma boa gestão condominial.
+    </p>
+    <div class="row">
+      <div class="col-12 col-md-12 col-sm-12">   
+        <div class="container">
+          <div class="row">             
+              <div class="col-lg-4 col-sm-6 ">
+                  <div class="card border-0 shadow rounded-xs pt-5">
+                      <div class="card-body"> <i class="far fa-file-alt icon-lg icon-primary icon-bg-primary icon-bg-circle mb-3"></i>
+                         <a href="{% url 'administration:regimento_interno' %}"><h4 class="mt-4 mb-3 card-title">Regimento Interno</h4></a> 
+                          <p>For what reason would it be advisable for me to think about business content?</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-sm-6 mb-4">
+                  <div class="card border-0 shadow rounded-xs pt-5">
+                      <div class="card-body"> <i class="far fa-file-alt icon-lg icon-cyan   icon-bg-yellow icon-bg-circle mb-3"></i>
+                          <h4 class="mt-4 mb-3">Convenção</h4>
+                          <p>For what reason would it be advisable for me to think about business content?</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-sm-6 mb-4">
+                  <div class="card border-0 shadow rounded-xs pt-5">
+                      <div class="card-body"> <i class="fas fa-file-signature icon-lg  icon-red icon-bg-purple icon-bg-circle mb-3"></i>
+                          <h4 class="mt-4 mb-3">Multa</h4>
+                          <p>For what reason would it be advisable for me to think about business content?</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-sm-6 mb-4">
+                  <div class="card border-0 shadow rounded-xs pt-5">
+                      <div class="card-body"> <i class="fas fa-bullhorn icon-lg icon-yellow icon-bg-cyan icon-bg-circle mb-3"></i>
+                          <h4 class="mt-4 mb-3">Advertência</h4>
+                          <p>For what reason would it be advisable for me to think about business content?</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-sm-6 mb-4">
+                  <div class="card border-0 shadow rounded-xs pt-5">
+                      <div class="card-body"> <i class="fa fa-comments icon-lg icon-purple icon-bg-red icon-bg-circle mb-3"></i>
+                          <h4 class="mt-4 mb-3">Consulting</h4>
+                          <p>For what reason would it be advisable for me to think about business content?</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-sm-6 mb-4">
+                  <div class="card border-0 shadow rounded-xs pt-5">
+                      <div class="card-body"> <i class="fa fa-search-plus icon-lg icon-green icon-bg-green icon-bg-circle mb-3"></i>
+                          <h4 class="mt-4 mb-3">SEO Optimization</h4>
+                          <p>For what reason would it be advisable for me to think about business content?</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-sm-6 mb-4">
+                  <div class="card border-0 shadow rounded-xs pt-5">
+                      <div class="card-body"> <i class="fa fa-user icon-lg icon-orange icon-bg-orange icon-bg-circle mb-3"></i>
+                          <h4 class="mt-4 mb-3">Usability Testing</h4>
+                          <p>For what reason would it be advisable for me to think about business content?</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-sm-6 mb-4">
+                  <div class="card border-0 shadow rounded-xs pt-5">
+                      <div class="card-body"> <i class="fa fa-envelope icon-lg icon-blue icon-bg-blue icon-bg-circle mb-3"></i>
+                          <h4 class="mt-4 mb-3">UX Prototyping</h4>
+                          <p>For what reason would it be advisable for me to think about business content?</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>      
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

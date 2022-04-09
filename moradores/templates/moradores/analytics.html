@@ -1,0 +1,322 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+<style>
+.graph_area
+{
+    padding: 2rem 0;
+}
+
+.user_name h2
+{
+    font-weight: 400;
+    color: #1a1a1a;
+}
+
+.btn-outline-secondary
+{
+    
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    text-transform: uppercase;
+    height: 50px;
+    font-size: 11px;
+    color: #1a1a1a;
+   
+}
+.btn-outline-secondary:hover
+{
+    border: 1px solid #1a1a1a!important;
+    background-color: #1a1a1a!important;
+    color: #fff;
+}
+
+.value_card_sec
+{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.value_card
+{
+    border-radius: 19px;
+    color: #fff;
+    background-color: #cccccc;
+    height: 115px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+    padding: 1.2rem;
+}
+
+.value_card p
+{
+    font-size: 14px;
+}
+
+.value_card h3
+{
+    font-weight: 600;
+}
+
+.l-bg-cherry {
+    background: linear-gradient(to right,  #004d4d,   #00ffff ) !important;
+    color: #fff;
+}
+
+.l-bg-blue-dark {
+    background: linear-gradient(to right, #373b44, #4286f4) !important;
+    color: #fff;
+}
+
+.l-bg-green-dark {
+    background: linear-gradient(to right, #0a504a, #38ef7d) !important;
+    color: #fff;
+}
+
+.l-bg-orange-dark {
+    background: linear-gradient(to right, #a86008, #ffba56) !important;
+    color: #fff;
+}
+
+.procetagem
+{
+    position: absolute;
+    float: right;
+}
+
+.graph_sec_2
+{
+    box-shadow: 0px 0px 12px;
+    padding: 1.2rem;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.graph_sec_2 p
+{
+    color: #2B2B2b;
+}
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Moradores</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Analytics</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas fa-chart-pie"></i>
+    </div>
+</div>
+<div class="section-body">
+<div class="graph_area">
+    <div class="container">
+        <div class="row">       
+        <div class="graph_sec mt-5">
+            <div class="row">             
+                  <div class="col-12 col-md-6 col-lg-4">
+                    <div style="height: 455px;" class="graph_sec_2">
+                        <p>Gráficos de Gastos</p>
+                        <canvas id="myChart5" height="180"></canvas>
+                    </div>
+                  </div>
+                <div class="col-lg-8">
+                    <div class="graph_sec_2">
+                        <p>Despesas vs Receitas</p>
+                        <canvas id="analytics" height="180"></canvas>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-lg-12 mt-5">
+                    <div class="graph_sec_2">                      
+                        <p class="ml-5">Estatisticas <span class="ml-5"><strong>Data:</strong> 07/2021</span><p>           
+                      <div class="card-body">
+                        <canvas id="myChart2" height="180"></canvas>
+                        <div class="statistic-details mt-1">
+                          <div class="statistic-details-item">
+                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 7%</div>
+                            <div class="detail-value">$243</div>
+                            <div class="detail-name">Today</div>
+                          </div>
+                          <div class="statistic-details-item">
+                            <div class="text-small text-muted"><span class="text-danger"><i class="fas fa-caret-down"></i></span> 23%</div>
+                            <div class="detail-value">$2,902</div>
+                            <div class="detail-name">This Week</div>
+                          </div>
+                          <div class="statistic-details-item">
+                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span>9%</div>
+                            <div class="detail-value">$12,821</div>
+                            <div class="detail-name">This Month</div>
+                          </div>
+                          <div class="statistic-details-item">
+                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 19%</div>
+                            <div class="detail-value">$92,142</div>
+                            <div class="detail-name">This Year</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>               
+                  </div>   
+                    
+            </div>
+        </div>      
+    </div>
+</div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
+<script src="{% static 'js/analytics.js' %}" ></script><!-- Custom Document Ready JS -->
+
+<script>
+  
+var ctx = document.getElementById("myChart5").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    datasets: [{
+      data: [
+        80,
+        50,
+        40,
+        30,
+        20,
+      ],
+      backgroundColor: [
+        '#191d21',
+        '#63ed7a',
+        '#ffa426',
+        '#fc544b',
+        '#6777ef',
+      ],
+      label: 'Dataset 1'
+    }],
+    labels: [
+      'Funcionário',
+      'Luz',
+      'Internet',
+      'Material de Limpeza',
+      'Água'
+    ],
+  },
+  options: {
+    responsive: true,
+    legend: {
+      position: 'bottom',
+    },
+  }
+});
+
+
+
+var ctx = document.getElementById("myChart2").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels:  ["Janeiro", "Fevereiro", "Março", "Abrir", "Maio", "Junho", "Julho","Agosto","Setembo","Outubro","Novembro","Dezembro"],
+    datasets: [{
+      label: 'Receitas',
+      data: [460, 458, 330, 502, 430, 610, 488, 556, 897, 345, 987, 434],
+      borderWidth: 2,
+      backgroundColor: '#6777ef',
+      borderColor: '#6777ef',
+      borderWidth: 2.5,
+      pointBackgroundColor: '#ffffff',
+      pointRadius: 4
+    },{
+    label: 'Despesas',
+      data: [460, 458, 330, 502, 430, 610, 488, 702, 992, 450, 810, 450],
+      borderWidth: 2,
+      backgroundColor: '#ff3333',
+      borderColor: '#ff3333',
+      borderWidth: 2.5,
+      pointBackgroundColor: '#ffffff',
+      pointRadius: 4
+    }]
+  },
+  options: {
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        gridLines: {
+          drawBorder: false,
+          color: '#f2f2f2',
+        },
+        ticks: {
+          beginAtZero: true,
+          stepSize: 150
+        }
+      }],
+      xAxes: [{
+        ticks: {
+          display: false
+        },
+        gridLines: {
+          display: false
+        }
+      }]
+    },
+  }
+});
+
+
+
+
+
+var ctx = document.getElementById("analytics").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels:  ["Janeiro", "Fevereiro", "Março", "Abrir", "Maio", "Junho", "Julho","Agosto","Setembo","Outubro","Novembro","Dezembro"],
+    datasets: [{
+      label: 'Receitas',
+      data: [460, 458, 330, 502, 430, 610, 488,556,897,345,987,434],
+      borderWidth: 2,
+      backgroundColor: '#6777ef',
+      borderColor: '#6777ef',
+      borderWidth: 2.5,
+      pointBackgroundColor: '#ffffff',
+      pointRadius: 4
+    },{
+    label: 'Despesas',
+      data: [660, 758, 130, 402, 930, 610, 488, 702, 992, 450, 810, 450],
+      borderWidth: 2,
+      backgroundColor: '#ff3333',
+      borderColor: '#ff3333',
+      borderWidth: 2.5,
+      pointBackgroundColor: '#ffffff',
+      pointRadius: 4
+    }
+  ]
+  },
+  options: {
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        gridLines: {
+          drawBorder: false,
+          color: '#f2f2f2',
+        },
+        ticks: {
+          beginAtZero: true,
+          stepSize: 150
+        }
+      }],
+      xAxes: [{
+        ticks: {
+          display: false
+        },
+        gridLines: {
+          display: false
+        }
+      }]
+    },
+  }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+<link rel="stylesheet" href="{% static 'css/administration.css' %}">
+
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Administração</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Checklist</h1>
+    <div class="section-header-breadcrumb">        
+        <i style="font-size: 70px; color: #000066;"  class="fas fa-tasks"></i>
+    </div>
+</div>
+<div class="section-body">   
+    <h2 class="section-title section-title-modificado">Gerenciamento</h2>
+    <p class="section-lead">O relatório  Analytics é uma ferramenta de análise para monitorar com eficiência sua atuação online e traçar estratégias consistentes para o seu negócio.</p>      
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <h4>{{ checklist.titulo }}</h4>
+              <div class="card-header-action"> 
+                <a href="{% url 'administration:adicionar_itens' %}" class="btn btn-outline-secondary">Criar Itens</a>                
+              </div>             
+            </div>
+            <div class="card-body">
+              <div class="media">               
+                <img class="mr-4" src="https://img.icons8.com/carbon-copy/100/000000/document.png"/>              
+                <div class="media-body">
+                  <h5 class="mt-0">Descrição</h5>
+                  <p class="mb-0">{{ checklist.descricao }}.</p>                      
+                </div>                   
+              </div>
+              <br>      
+              {% if checklist.complete_per <= 28 %}
+              <div class="progress mb-3" >
+                <div class="progress-bar bg-danger"  role="progressbar" data-width="{{ checklist.complete_per }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: {{ checklist.complete_per }}%;"><span style="text-align: center;" >{{ project.complete_per }}%</span></div>
+              </div>
+              {% elif checklist.complete_per <= 60 %}
+              <div class="progress mb-3">
+                <div class="progress-bar bg-warning" role="progressbar" data-width="{{ checklist.complete_per }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: {{ checklist.complete_per }}%;"><span style="text-align: center;" >{{ project.complete_per }}%</span></div>
+              </div>            
+              {% else %}
+              <div class="progress mb-3">
+                <div class="progress-bar bg-success"  role="progressbar" data-width="{{ checklist.complete_per }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: {{ checklist.complete_per }}%;"><span style="text-align: center;" >{{ project.complete_per }}%</span></div>
+              </div>
+              {% endif %}                 
+        </div>                
+    </div> 
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Tabela de Tarefas</h4>
+            <div class="card-header-action">
+              <form>
+                <div class="input-group">
+                  <div class="buttons"></div>
+                  <a href="#" class="btn btn-icon icon-left btn-outline-secondary"><i class="fas fa-calendar-alt"></i>Time Line</a>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-striped" id="sortable-table">
+                <thead>
+                  <tr>                    
+                    <th>Nome</th>
+                    <th>Progresso</th>
+                    <th>decsrição</th>
+                    <th>Data da Enterga</th>
+                    <th class="text-center">Data que entregou</th>
+                    <th>Status</th>
+                    <th>Tarefa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in items %}
+                  <tr>
+                    <td>
+                      <div class="sort-handler">
+                       {{ item.titulo  }}
+                      </div>
+                    </td>                    
+                    <td class="align-middle">                     
+                      <div class="progress mb-3" data-height="5" data-toggle="tooltip" title="{{ checklist.complete_per }}%">
+                        <div class="progress-bar" role="progressbar" data-width="{{ tarefa.complete_per }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" ></div>
+                      </div>
+                    </td>
+                    <td>{{ item.descricao }}</td>
+                    <td>{{ item.data_entrega | date:"d-m-Y" }}</td>
+                    <td>{{ item.data_entregou | date:"d-m-Y"}}</td>
+                    {% if item.status == '0' %}
+                    <td><div class="badge badge-light">Aberto</div></td>
+                    {% elif item.status == '1' %}
+                    <td><div class="badge badge-danger">Trabalhando</div></td>
+                    {% elif item.status == '2' %}
+                    <td><div class="badge badge-warning">Pausada</div></td>
+                    {% else %}
+                    <td><div class="badge badge-success">Concluído</div></td>
+                    {% endif %}
+                    <td><a href="#" class="btn btn-outline-info">Entrar</a></td>
+                  </tr>
+                  {% endfor %}                     
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>            
+          </div>            
+      </div>
+
+
+
+
+
+
+{% endblock %}

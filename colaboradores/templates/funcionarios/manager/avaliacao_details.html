@@ -1,0 +1,159 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboad %}
+
+<link rel="stylesheet" href="{% static 'css/colaboradores.css' %}">
+<script src="js/ie-emulation-modes-warning.js"></script>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Funcionário</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Avaliação</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas fa-tasks"></i>
+    </div>
+</div>
+<div class="section-body">
+     <div class="col-md-12">
+        <div class="wrapper">         
+           <div class="row">
+            <div class="col-12 col-md-12 col-sm-12">
+                <div class="name info-basic">Avaliações</div>                 
+                <div class="about mb-5">Avalição aos Funcionários até a data: <span id="data-atual"></span> </div>  
+                <a href="#" class="list-group-item" style="background: transparent!important; border: transparent;"  >
+                    <div class="row" >
+                    <div class="media col-md-3">
+                        <div class="img-area">
+                            <div class="inner-area">
+                                {%if funcionario.img %}
+                                <img src="{{ funcionario.img.url }}" alt="">
+                                {% else %}
+                                <img src="http://ibaseminario.com.br/novo/wp-content/uploads/2013/09/default-avatar.png" alt="">
+                                {% endif %}
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="name ">{{ funcionario.nome }}</div>
+                        <div class="about mb-2">Data Admissão: {{ funcionario.admitido |date}} </div>
+                        <div class="about mb-2">Data Demissão: {{ funcionario.demitido |date}} </div>
+                        <div class="about mb-2">Status 
+                        {% if funcionario.status == 'experiencia' %}
+                        <span class="text-info">Experiência</span>
+                        {% elif funcionario.status == 'trabalhando' %}
+                        <span class="text-success">Trabalhando</span>
+                        {% elif funcionario.status == 'afastado' %}
+                        <span class="text-warning">Afastado</span>
+                        {% elif funcionario.status == 'aviso' %}
+                        <span class="text-warning">Aviso Prévio</span>
+                        {% else %}
+                        <span class="text-danger">Demitido</span>
+                        {% endif %} </div>                 
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h2 class="name"> 12424 <small> votos </small></h2>
+                        <button type="button" class="btn-warning btn-lg btn-block">Regular</button>
+                        <div class="stars text-warning">
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                        </div>
+                        <p class="about"> Média 3.9 <small> / </small> 5 </p>
+                    </div>
+                    </div>
+              </a>
+              </div>   
+              <br><br>
+              <div class="col-12 col-md-12 col-sm-12 mt-5">
+                 <div class="name info-basic mb-5">Avaliação Anual</div>
+                 <div class="row justify-content-left d-flex">
+                    <div class="col-md-4 d-flex flex-column">
+                        <div class="rating-box">
+                            <h1 class="pt-4">4.0</h1>
+                            <p class=" text-white">avaliação 0/5</p>
+                        </div>
+                        <div> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-inactive mx-1"></span> </div>
+                    </div>
+                    <div class="col-md-8 justify-content-center">
+                        <div class="rating-bar0 justify-content-center">
+                            <table class="text-left mx-auto">
+                                <tr>
+                                    <td class="rating-label">Excelente</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                            <div class="bar-5"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">123</td>
+                                </tr>
+                                <tr>
+                                    <td class="rating-label">Bom</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                            <div class="bar-4"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">23</td>
+                                </tr>
+                                <tr>
+                                    <td class="rating-label">Média</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                            <div class="bar-3"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">10</td>
+                                </tr>
+                                <tr>
+                                    <td class="rating-label">Ruim</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                            <div class="bar-2"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">3</td>
+                                </tr>
+                                <tr>
+                                    <td class="rating-label">Terrível</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                            <div class="bar-1"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">0</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>                     
+              </div>
+              
+           
+            
+            
+           </div>        
+         </div>
+     </div> 
+</div>
+<script>
+  var data = new Date();
+
+   var dia = String(data.getDate()).padStart(2, '0');
+
+   var mes = String(data.getMonth() + 1).padStart(2, '0');
+
+   var ano = data.getFullYear();
+
+   data_Atual = dia + '/' + mes + '/' + ano;
+
+   document.getElementById("data-atual").innerHTML = data_Atual;
+</script>
+{% endblock %}
+

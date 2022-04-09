@@ -1,0 +1,112 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+
+<style>
+
+.helptext
+{
+    font-size: 11px;
+    color: #cccccc;
+}
+
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Conta</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Depósito</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas  fa-server"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Depositar um novo valor Conta</h2>
+        <p class="section-lead">
+          Adicionar novos valores na conta do condomino.
+        </p>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">         
+                <div class="card">
+              <div class="card-header">
+                <h4>Formulário de adição de dados</h4>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-danger">
+                  <b>Nota!</b> Os dados devem ser verdadeiro.
+                </div>
+                <form action="." method="POST"  enctype="multipart/form-data" >
+                {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <p><label for="id_valor">Valor:</label> <input class="form-control" type="number" name="valor" step="0.01" required id="id_valor" placeholder="R$:"> <span class="helptext">Valor do depósito</span></p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <p><label for="id_titular_da_conta">Depositario:</label>
+                                    <select class="form-control" name="sindico" required id="id_titular_da_conta">
+                                    <option value="" selected>---------</option> 
+                                    {% for administrador in administradores %}                             
+                                    <option value="{{ administrador.id}}">{{ administrador.nome }}</option>                              
+                                    {% endfor %}
+                                  </select></p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <p><label for="id_tipo">Tipo:</label>
+                                    <select class="form-control" name="tipo" id="id_tipo">
+                                    <option value="conta corrente" selected>Conta Corrente</option>                
+                                    <option value="poupança">Poupança</option>                
+                                    </select> 
+                                    <span class="helptext">A conta é corrente ou poupança</span>
+                                </p>
+                            </div>
+                        </div>
+                       
+                    </div>
+                {% for key, value in form.errors.items %}
+                <span class="fieldWrapper">
+                        <div class="alert alert-danger">
+                            <b>Nota!</b> {{ key }}:{{ value }}
+                          </div>
+                        
+                </span>
+                {% endfor %}
+                </div>         
+                <div class="card-footer text-left">
+                <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+                <button class="btn btn-danger" type="reset">Cancelar</button>
+                </form>
+                </div>
+                </div>            
+            </div>            
+        </div>         
+    </div> 
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'administration/base.html' %}
+{% load static %}
+
+
+{% block dashboad %}
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Configurações Gerais</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Adicionar Dados</h1>
+    <div class="section-header-breadcrumb">        
+        <i style="font-size: 70px; color: #000066;"  class="fas fa-server"></i>
+    </div>
+</div>
+<div class="section-body">
+    <h2 class="section-title">Adicionar Novo Funcionário</h2>
+    <p class="section-lead">
+        O novo  processo de rotinas de trabalho de funcionários se refere à integração e adaptação de novos colaboradores nas empresas. .
+    </p>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">         
+            <div class="card">
+          <div class="card-header">
+            <h4>Formulário de adição de dados</h4>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-danger">
+              <b>Nota!</b> Os dados devem ser verdadeiro.
+            </div>
+            <form action="{% url 'colaboradores:adicionar' %}" method="POST"  enctype="multipart/form-data" >
+            {% csrf_token %}
+           <div class="row">
+
+
+            
+           </div>
+
+            <div>
+                {% for key, value in form.errors.items %}
+                <span class="fieldWrapper">
+                    <div class="alert alert-danger">
+                        <b>Nota!</b> {{ key }}:{{ value }}
+                      </div>
+                    
+                </span>
+            {% endfor %}
+            </div>         
+            <div class="card-footer text-left">
+            <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+            <button class="btn btn-danger" type="reset">Cancelar</button>
+            </form>
+            </div>
+            </div>            
+        </div>            
+    </div>         
+</div> 
+{% endblock %}
+
+
+
+
+
+

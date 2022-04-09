@@ -1,0 +1,179 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+<style>
+  .add-despesas i
+  {
+    font-size: 40px;
+  }
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Financeiro</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Acordos</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="far fa-handshake"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Lista de Acordos referente ao mês {{ data_atual }}</h2>
+        <p class="section-lead">
+          Lista dos moradores que fizeram acordos de pagamento para contas pendentes.
+        </p>
+        <div class="row mb-5">
+          <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+            <div class="row">
+              <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0"><link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">Valor total</h5>
+              <span class="h2 font-weight-bold mb-0">R$ {{ valor_total }}</span>
+              </div>
+              <div class="col-auto">
+              <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                <i class="fa fa-dollar"></i>
+              </div>
+              </div>
+            </div>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{ porcetagem_total }}%</span>
+              <span class="text-nowrap">O último mês</span>
+            </p>
+            </div>
+          </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+            <div class="row">
+              <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">Total Acordos</h5>
+              <span class="h2 font-weight-bold mb-0">{{ total_de_acordos }}</span>
+              </div>
+              <div class="col-auto">
+              <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                <i class="fas fa-home"></i>
+              </div>
+              </div>
+            </div>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> {{ porcentagem_unidade_atual }}%</span>
+              <span class="text-nowrap"> O último mês</span>
+            </p>
+            </div>
+          </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+            <div class="row">
+              <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">Juros</h5>
+              <span class="h2 font-weight-bold mb-0">R$ {{ juros_mes_atual }}</span>
+              </div>
+              <div class="col-auto">
+              <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              </div>
+            </div>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> {{ porcetagem_juros }}%</span>
+              <span class="text-nowrap">O último mês</span>
+            </p>
+            </div>
+          </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+            <div class="row">
+              <div class="col">
+              <h5 class="card-title text-uppercase text-muted mb-0">Porcentagem</h5>
+              <span class="h2 font-weight-bold mb-0">{{ porcentagem_mensal }}%</span>
+              </div>
+              <div class="col-auto">
+              <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                <i class="fas fa-percent"></i>
+              </div>
+              </div>
+            </div>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> {{porcentagem_unidade_mes_total }}%</span>
+              <span class="text-nowrap">O último mês</span>
+            </p>
+            </div>
+          </div>
+          </div>         
+		   </div>
+       <div class="row mt-5 mb-5">
+                 
+          <div class="col-md-12">
+             <a href="{% url 'financeiro:created_acordo' %}"><div class=" float-right icon-top text-dark add-despesas " aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="Acordo"><i class="fas fa-plus"></i></div></a> 
+          </div>
+   
+        <div class="col-md-12">
+          <div class="row mt-5">             
+              <div class="col-md-12">
+               
+                  <div class="card">
+                    <div class="card-header">
+                      <h4>Acordos</h4>                     
+                    </div>
+                    <div class="card-body p-0">
+                      <div class="table-responsive table-invoice">
+                        <table class="table table-striped">
+                          
+                          <tr>
+                            <th>Morador</th>
+                            <th>Vencimento</th>
+                            <th>Referente</th>
+                            <th>dia</th>
+                            <th>Boleto</th>
+                            <th>Juros</th>
+                            <th>Multas</th>
+                            <th>Atualização</th>
+                            <th>Honorários</th>
+                            <th>Total</th>
+                          </tr>
+                          {% if acordos_mes_atual %}
+                          {% for acordo in acordos_mes_atual %}
+                          <tr class="text-center">
+                            <td><a href="#">{{ acordo.morador |truncatechars:11 }}</a></td>
+                            <td class="font-weight-600">{{ acordo.vencimento |date:'d-m-Y' }}</td>                          
+                            <td>{{ acordo.referente |date:'m-Y' }}</td>                         
+                            <td> {{ acordo.dias }}</td>
+                            <td>{{ acordo.boleto }}</td>
+                            <td>{{ acordo.juros }}</td>
+                            <td>{{ acordo.multa }}</td>
+                            <td>{{ acordo.atualizacao }}</td>
+                            <td>{{ acordo.honorarios }}</td>
+                            <td>{{ acordo.valor_total }}</td>
+                          </tr> 
+                          {% endfor %}
+                          {% else %}
+
+                          {% endif %}
+                        </table>
+                      </div>
+                    </div>
+                  </div>                 
+                </div>          
+            </div>
+      </div>
+       </div>
+       
+       
+    </div> 
+
+
+
+
+{% endblock %}

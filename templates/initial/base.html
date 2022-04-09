@@ -1,0 +1,71 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+
+    <title>Residencial ônix Gama | O melhor condomínio para você morar  </title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbar-fixed/">
+     <!--using FontAwesome---------------->
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+{% include 'include/navbar.html' %}
+{% block index %}
+
+
+
+{% endblock %}
+{% include 'include/footer.html' %}
+<script type="text/javascript">
+	
+	$(window).scroll(function(){
+		var top = $(window).scrollTop();
+		if(top >= 10){
+			$(".navbar").addClass(".active");
+		}
+		else
+			if($('.navbar').hasClass('.active')){
+				$(".navbar").removeClass(".active");
+			}
+
+
+	});
+
+
+    window.addEventListener("scroll", function(){
+	var header = document.querySelector(".navbar");
+	header.classList.toggle('active', window.scrollY > 0)
+
+
+})
+</script>
+
+<script src="{% static  'js/mean.js' %}"></script>
+<!-- Required Framework JavaScript -->
+<script src="{% static 'js/libs/jquery-3.3.1.min.js' %}"></script><!-- jQuery -->
+<script src="{% static 'js/libs/popper.min.js' %}" defer></script><!-- Bootstrap Popper/Extras JS -->
+<script src="{% static 'js/libs/bootstrap.min.js' %}" defer></script><!-- Bootstrap Main JS -->
+<!-- All JavaScript in Footer -->
+<!-- Additional Plugins and JavaScript -->
+<script src="{% static 'js/navigation.js' %}" defer></script><!-- Header Navigation JS Plugin -->
+<script src="{% static 'js/jquery.flexslider-min.js' %}" defer></script><!-- FlexSlider JS Plugin -->		
+<script src="{% static 'js/script.js' %}" defer></script><!-- Custom Document Ready JS -->
+    
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>      </body>
+</html>
+    

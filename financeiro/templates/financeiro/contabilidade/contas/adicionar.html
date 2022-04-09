@@ -1,0 +1,187 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Financeiro</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Adicionar Despesas</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas  fa-server"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Adicionar Nova Despesa</h2>
+        <p class="section-lead">
+          Adicionar os dados da nova despesa, todos os dados devem ser legitimo para o calculo correto na contabilidade.
+        </p>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">         
+                <div class="card">
+              <div class="card-header">
+                <h4>Formulário de adição de dados</h4>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-danger">
+                  <b>Nota!</b> Os dados devem ser verdadeiro.
+                </div>
+                <form action="." method="POST"  enctype="multipart/form-data" >
+                {% csrf_token %}
+                <div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<p><label for="id_id">Id:</label> <input class="form-control" type="text" name="id" maxlength="150" id="id_id"> <span class="helptext">Numero da nota ou RG se for pessoa fisica</span></p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<p><label for="id_sindico">Síndico:</label>
+								<select class="form-control" name="sindico" required id="id_sindico">
+									{% for sindico in sindicos %}
+								<option value="{{ sindico.id }}" selected>{{ sindico.nome }}</option>
+								{% endfor %}
+								</select>
+								<span class="helptext">Nome do Síndico em mnadato</span></p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+						<p><label for="id_categorie">Categorias:</label> 
+							<select class="form-control" name="categoria" required id="id_categoria">															
+								{% for categoria in categorias %}
+								<option value="{{ categoria.id }}" selected>{{ categoria.title }}</option>
+								{% endfor %}
+							</select> <span class="helptext">Categoria da Prestação de Serviços</span>
+						</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+                    		<p><label for="id_servico">Servico:</label> 
+								<select class="form-control" name="servico" required id="id_servico">
+									{% for atividade in atividades %}
+									<option value="{{ atividade.id }}" selected>{{ atividade.title }}</option>
+									{% endfor %}									
+								</select> <span class="helptext">Serviço Prestado</span>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+                    		<p><label for="id_beneficiario">Beneficiario:</label> <input  class="form-control" type="text" name="beneficiario" maxlength="150" required id="id_beneficiario"> <span class="helptext">O Nome do Benefiçiario </span></p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<p><label for="id_tipo">Tipo:</label> 
+								<select class="form-control" name="tipo" id="id_tipo">
+									<option value="pessoa juridica">Pessoa Juridica</option>
+									<option value="pessoa fisica">Pessoas Fisica</option>
+								</select>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<p><label for="id_status">Status:</label> 
+								<select class="form-control" name="status" id="id_status">
+									<option value="aberta">Aberto</option>
+									<option value="paga">Paga</option>
+									<option value="atrasada">Atrasada</option>
+								</select> <span class="helptext">O status da conta</span>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<p><label for="id_despesas">Despesas:</label> 
+								<select class="form-control" name="despesas" id="id_despesas">
+									<option value="funcionario">Funcionario</option>							  
+									<option value="manutencao">Manutencao</option>							  
+									<option value="consumo" selected>Consumo</option>							  
+									<option value="outros">Outros</option>							  
+							  </select> <span class="helptext">Tipo de despesa mensal</span></p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<p><label for="id_descricao">Descricao:</label> <textarea class="form-control" name="descricao" cols="40" rows="10" required id="id_descricao">
+                    			</textarea> <span class="helptext">Descrição do documento</span>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+                    		<p><label for="id_vencimento">Vencimento:</label> <input class="form-control" type="date" name="vencimento" required id="id_vencimento"> <span class="helptext">Data do Vencimento do documento</span></p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+                    		<p><label for="id_pagamento">Pagamento:</label> <input class="form-control" type="date" name="pagamento" id="id_pagamento"> <span class="helptext">Data que foi Pago o Documento</span></p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+                    		<p><label for="id_valor">Valor:</label> <input class="form-control" type="number" name="valor" step="0.01" required id="valor" onfocus="  calculadora()"> <span class="helptext">valor total do documento</span></p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+                    		<p><label for="id_desconto">Desconto:</label> <input class="form-control" type="number" name="desconto" step="0.01" required id="desconto" onfocus="calculadora()"> <span class="helptext">Valor do Desconto</span></p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+                    		<p><label for="id_multa">Multa:</label> <input class="form-control" type="number" name="multa" step="0.01" required id="multa" onfocus="calculadora()"> <span class="helptext">Valor da Multa</span></p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+                    		<p><label for="id_valor_total">Valor total:</label> <input class="form-control" type="number" name="valor_total" step="0.01" required id="result"> <span class="helptext">O valor Total do documento</span></p>
+						</div>
+					</div>
+                </div> 
+               
+
+			             
+                <div>
+                    {% for key, value in form.errors.items %}
+                    <span class="fieldWrapper">
+                        <div class="alert alert-danger">
+                            <b>Nota!</b> {{ key }}:{{ value }}
+                          </div>
+                        
+                    </span>
+                {% endfor %}
+                </div>         
+                <div class="card-footer text-left">
+                <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+                <button class="btn btn-danger" type="reset">Cancelar</button>
+                </form>
+                </div>
+                </div>            
+            </div>            
+        </div>         
+    </div> 
+
+<script type="text/javascript">
+	
+	function calculadora(){
+    var valor1 = parseInt(document.getElementById('valor').value, 10);
+    var valor2 = parseInt(document.getElementById('desconto').value, 10);
+    var valor3 = parseInt(document.getElementById('multa').value, 10);
+ 
+    document.getElementById('result').value =  valor1 - valor2 + valor3;
+}
+</script>
+
+
+
+
+{% endblock %}

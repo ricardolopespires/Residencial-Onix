@@ -1,0 +1,91 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Adicionar</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Pessoas Juridícas</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas  fa-server"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Adicionar Novo Fornecedor</h2>
+        <p class="section-lead">
+          Adicionar os dados do novo Fornecedor para o proximo mandato, todos os dados devem ser legitimo para a outorga do mandato.
+        </p>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">         
+                <div class="card">
+              <div class="card-header">
+                <h4>Formulário de adição de dados</h4>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-danger">
+                  <b>Nota!</b> Os dados devem ser verdadeiro.
+                </div>
+                <form action="." method="POST"  enctype="multipart/form-data" >
+                {% csrf_token %}
+                <div class="row">
+                    <p><label for="id_id">Id:</label> <input type="text" name="id" maxlength="150" required id="id_id"> <span class="helptext">Numero da nota ou RG se for pessoa fisica</span></p>
+                    <p><label for="id_categorie">Categorie:</label> <select name="categorie" required id="id_categorie">
+                    <option value="" selected>---------</option>
+
+                    <option value="1">Administração</option>  
+                    <option value="64">Saneamento Ambiental</option>
+
+                    </select> <span class="helptext">Categoria da Prestação de Serviços</span></p>
+                    <p><label for="id_servico">Servico:</label> <select name="servico" required id="id_servico">
+                    <option value="" selected>---------</option>
+                    <option value="1">Administradoras de condomínios</option>
+                    </select> <span class="helptext">Serviço Prestado</span></p>
+                    <p><label for="id_beneficario">Beneficario:</label> <input type="text" name="beneficario" maxlength="150" required id="id_beneficario"> <span class="helptext">O Nome do Benefiçiario </span></p>
+                    <p><label for="id_tipo">Tipo:</label> <select name="tipo" id="id_tipo">
+                    <option value="pessoa juridica">Pessoa Juridica</option>
+                    <option value="pessoa fisica">Pessoas Fisica</option>
+                    </select></p>
+                    <p><label for="id_status">Status:</label> <select name="status" id="id_status">
+                    <option value="aberto">Aberto</option>
+                    <option value="paga">Paga</option>
+                    <option value="atrasada">Atrasada</option>
+
+                    </select> <span class="helptext">O status da conta</span></p>
+                    <p><label for="id_descricao">Descricao:</label> <textarea name="descricao" cols="40" rows="10" required id="id_descricao">
+                    </textarea> <span class="helptext">Descrição do documento</span></p>
+                    <p><label for="id_vencimento">Vencimento:</label> <input type="text" name="vencimento" required id="id_vencimento"> <span class="helptext">Data do Vencimento do documento</span></p>
+                    <p><label for="id_pagamento">Pagamento:</label> <input type="text" name="pagamento" required id="id_pagamento"> <span class="helptext">Data que foi Pago o Documento</span></p>
+                    <p><label for="id_valor">Valor:</label> <input type="number" name="valor" step="0.01" required id="id_valor"> <span class="helptext">valor total do documento</span></p>
+                    <p><label for="id_desconto">Desconto:</label> <input type="number" name="desconto" step="0.01" required id="id_desconto"> <span class="helptext">Valor do Desconto</span></p>
+                    <p><label for="id_multa">Multa:</label> <input type="number" name="multa" step="0.01" required id="id_multa"> <span class="helptext">Valor da Multa</span></p>
+                    <p><label for="id_valor_total">Valor total:</label> <input type="number" name="valor_total" step="0.01" required id="id_valor_total"> <span class="helptext">O valor Total do documento</span></p>
+                </div>               
+                <div>
+                    {% for key, value in form.errors.items %}
+                    <span class="fieldWrapper">
+                        <div class="alert alert-danger">
+                            <b>Nota!</b> {{ key }}:{{ value }}
+                          </div>
+                        
+                    </span>
+                {% endfor %}
+                </div>         
+                <div class="card-footer text-left">
+                <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+                <button class="btn btn-danger" type="reset">Cancelar</button>
+                </form>
+                </div>
+                </div>            
+            </div>            
+        </div>         
+    </div> 
+
+
+
+{% endblock %}

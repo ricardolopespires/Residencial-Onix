@@ -1,0 +1,175 @@
+{% extends 'management/base.html' %}
+{% load static %}
+
+
+
+
+{% block dashboad %}
+
+<style>
+
+.helptext
+{
+    font-size: 11px;
+    color: #cccccc;
+}
+
+</style>
+
+<div style="height: 110px!important;" class="section-header">
+    <h5 style="margin-top: -28px; color:#cccccc;" class="position-absolute ml-2 mb-4">Adicionar</h5>
+    <br>
+    <h1 style="color: #8898aa; font-size: 40px;" class="mt-4 ml-2">Contas</h1>
+    <div class="section-header-breadcrumb">       
+        <i style="font-size: 70px; color: #000066;" class="fas  fa-server"></i>
+    </div>
+    </div>
+
+    <div class="section-body">
+        <h2 class="section-title">Adicionar Nova Conta</h2>
+        <p class="section-lead">
+          Adicionar os dados para nova conta para o usar todos os recurso do sistema <strong ><span style="color: #000066;">Bancários</span></strong> condominial. Todos os dados devem ser corretos.
+        </p>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">         
+                <div class="card">
+              <div class="card-header">
+                <h4>Formulário de adição de dados</h4>
+              </div>
+              <div class="card-body">
+                <div class="alert alert-danger">
+                  <b>Nota!</b> Os dados devem ser verdadeiro.
+                </div>
+                <form action="." method="POST"  enctype="multipart/form-data" >
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <p><label for="id_id">Id:</label> <input class="form-control" type="text" name="id" maxlength="150" required id="id_id"> <span class="helptext">O numero da conta</span></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <p><label for="id_agencia">Agencia:</label>
+                                <select class="form-control" name="agencia" required id="id_agencia">
+                                <option value="" selected>---------</option>
+                                {% for banco in bancos %}
+                                <option value="{{ banco.id }}">{{ banco.nome }}</option>
+                                {% endfor%}
+                              </select></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <p><label for="id_titular_da_conta">Titular da conta:</label>
+                                <select class="form-control" name="titular_da_conta" required id="id_titular_da_conta">
+                                <option value="" selected>---------</option> 
+                                {% for condominio in condominios %}                             
+                                <option value="{{ condominio.id}}">{{ condominio.nome }}</option>                              
+                                {% endfor %}
+                              </select></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <p><label for="id_titular_da_conta">Síndico:</label>
+                                <select class="form-control" name="sindico" required id="id_titular_da_conta">
+                                <option value="" selected>---------</option> 
+                                {% for administrador in administradores %}                             
+                                <option value="{{ administrador.id}}">{{ administrador.nome }}</option>                              
+                                {% endfor %}
+                              </select></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <p><label for="id_tipo">Tipo:</label>
+                                <select class="form-control" name="tipo" id="id_tipo">
+                                <option value="conta corrente" selected>Conta Corrente</option>                
+                                <option value="poupança">Poupança</option>                
+                                </select> 
+                                <span class="helptext">A conta é corrente ou poupança</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <p><label for="id_estilo">Estilo:</label>
+                                <select class="form-control" name="estilo" id="id_estilo">
+                                <option value="pessoa jurídica" selected>Pessoa Jurídica</option>                
+                                <option value="pessoa fisíca">Pessoa Fisíca</option>                
+                                </select>
+                                <span class="helptext">A conta é de pessoa juridica ou</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <p><label for="id_criada">Criada:</label> <input class="form-control" type="date" name="criada" id="id_criada"> <span class="helptext">Data em que foi aberta a conta</span></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <p><label for="id_fechada">Fechada:</label> <input class="form-control" type="date" name="fechada" id="id_fechada"> <span class="helptext">Data do fechamento da conta</span></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <p><label for="id_saldo">Saldo:</label> <input class="form-control" type="number" name="saldo" min="0" id="id_saldo"> <span class="helptext">O valor do saldo da conta</span></p>
+                        </div>
+                    </div>       
+                </div>
+                {% for key, value in form.errors.items %}
+                <span class="fieldWrapper">
+                        <div class="alert alert-danger">
+                            <b>Nota!</b> {{ key }}:{{ value }}
+                          </div>
+                        
+                </span>
+                {% endfor %}
+                </div>         
+                <div class="card-footer text-left">
+                <button class="btn btn-success mr-1" type="submit">Cadastrar</button>
+                <button class="btn btn-danger" type="reset">Cancelar</button>
+                </form>
+                </div>
+                </div>            
+            </div>            
+        </div>         
+    </div> 
+
+
+
+{% endblock %}
+
+
+<p><label for="id_id">Id:</label> <input type="text" name="id" maxlength="150" required id="id_id"> <span class="helptext">O numero da conta</span></p>
+<p><label for="id_titular_da_conta">Titular da conta:</label> <select name="titular_da_conta" required id="id_titular_da_conta">
+  <option value="" selected>---------</option>
+
+  <option value="1">Residencial Ônix</option>
+
+</select></p>
+<p><label for="id_agencia">Agencia:</label> <select name="agencia" required id="id_agencia">
+  <option value="" selected>---------</option>
+
+  <option value="104">Caixa Econômica Federal</option>
+
+</select></p>
+<p><label for="id_tipo">Tipo:</label> <select name="tipo" id="id_tipo">
+  <option value="conta corrente" selected>Conta Corrente</option>
+
+  <option value="poupança">Poupança</option>
+
+</select> <span class="helptext">A conta é corrente ou poupança</span></p>
+<p><label for="id_estilo">Estilo:</label> <select name="estilo" id="id_estilo">
+  <option value="pessoa jurídica" selected>Pessoa Jurídica</option>
+
+  <option value="pessoa fisíca">Pessoa Fisíca</option>
+
+</select> <span class="helptext">A conta é de pessoa juridica ou</span></p>
+<p><label for="id_criada">Criada:</label> <input type="text" name="criada" id="id_criada"> <span class="helptext">Data em que foi aberta a conta</span></p>
+<p><label for="id_fechada">Fechada:</label> <input type="text" name="fechada" id="id_fechada"> <span class="helptext">Data do fechamento da conta</span></p>
+<p><label for="id_creditos">Creditos:</label> <input type="number" name="creditos" value="0" step="0.01" id="id_creditos"> <span class="helptext">O valores creditados na conta</span></p>
+<p><label for="id_debitos">Debitos:</label> <input type="number" name="debitos" value="0" step="0.01" id="id_debitos"> <span class="helptext">O valores debitados da conta</span></p>
+<p><label for="id_saldo">Saldo:</label> <input type="number" name="saldo" value="0" step="0.01" id="id_saldo"> <span class="helptext">O valor do saldo da conta</span></p>
